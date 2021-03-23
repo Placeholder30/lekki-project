@@ -18,6 +18,9 @@ function Navbar() {
               <a href="/">WOMEN</a>
             </li>
             <li>
+              <a href="/">MEN</a>
+            </li>
+            <li>
               <a href="/">CART</a>
             </li>
           </ul>
