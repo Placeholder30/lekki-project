@@ -1,6 +1,8 @@
 import Navbar from "./components/home/Navbar";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import Collection from "./components/home/Collection";
+import Grids from "./components/home/Grid";
 
 function App() {
   return (
@@ -8,6 +10,9 @@ function App() {
       <GlobalStyle />
       <Container>
         <Navbar />
+        <Collection photo={"firstPhoto"} />
+        <Grids />
+        <Collection />
       </Container>
     </>
   );
