@@ -1,18 +1,13 @@
-import Navbar from "./components/home/Navbar";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import Collection from "./components/home/Collection";
-import Grids from "./components/home/Grid";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <Container>
-        <Navbar />
-        <Collection photo={"firstPhoto"} />
-        <Grids />
-        <Collection />
+        <Home />
       </Container>
     </>
   );
@@ -26,12 +21,12 @@ const Container = styled.div`
 `;
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
     *, html {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-size: 10px
+      font-size: 10px;
+      font-weight: 300;
     }
     body{
       border: 10px solid #ccc;

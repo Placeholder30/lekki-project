@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import shoe from "../assets/shoe1.jpg";
 import bag from "../assets/bag.jpg";
+
 function Collection({ photo }) {
   return (
     <Container>
