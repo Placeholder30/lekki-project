@@ -36,11 +36,12 @@ const Container = styled.div`
 
 const Grid = styled.div`
   border: 1px solid #ccc;
-  padding: 2rem 6rem;
+  padding: 2rem 4rem;
   line-height: 1.4;
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
   h5 {
     font-size: 1.5rem;
     text-transform: uppercase;
@@ -51,7 +52,7 @@ const Grid = styled.div`
     margin-top: 1.3rem;
   }
   img {
-    width: 17rem;
+    width: 13rem;
   }
 `;
 export default Grids;
