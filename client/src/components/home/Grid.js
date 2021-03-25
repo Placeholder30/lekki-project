@@ -32,6 +32,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 3rem;
+  @media screen and (max-width: 769px) {
+    flex-direction: column;
+    margin-top: 0.3rem;
+  }
 `;
 
 const Grid = styled.div`

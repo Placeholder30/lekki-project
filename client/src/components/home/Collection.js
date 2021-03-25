@@ -6,7 +6,14 @@ import bag from "../assets/bag.jpg";
 function Collection({ photo }) {
   return (
     <Container>
-      <img src={photo ? shoe : bag} alt="shoe" />
+      <div className="text">
+        <div>Men's Shoes</div>
+        <div>Collection</div>
+        <p>Street Style New Fashion</p>
+      </div>
+      <div className="pic">
+        <img src={photo ? shoe : bag} alt="shoe" />
+      </div>
     </Container>
   );
 }
@@ -17,9 +24,13 @@ const Container = styled.div`
   height: 50rem;
   display: flex;
   justify-content: center;
+
+  .pic {
+    width: 70rem;
+  }
   img {
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
   }
 `;
 

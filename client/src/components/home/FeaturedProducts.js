@@ -55,6 +55,11 @@ const ProductContainer = styled.section`
     display: flex;
     justify-content: space-around;
   }
+  @media screen and (max-width: 769px) {
+    .cards {
+      flex-direction: column;
+    }
+  }
 `;
 
 const CardContainer = styled.div`
@@ -84,6 +89,9 @@ const CardContainer = styled.div`
   }
   p {
     margin: 0.5rem 0;
+  }
+  @media screen and (max-width: 769px) {
+    margin-top: 0.3rem;
   }
 `;
 

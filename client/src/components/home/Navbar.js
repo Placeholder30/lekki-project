@@ -23,6 +23,12 @@ function Navbar() {
             <li>
               <a href="/">CART</a>
             </li>
+            <li>
+              <a href="/">Register</a>
+            </li>
+            <li>
+              <a href="/">Login</a>
+            </li>
           </ul>
         </nav>
       </Header>
@@ -61,7 +67,17 @@ const Header = styled.header`
       color: black;
       &:hover {
         color: #ea5f5f;
+        padding-bottom: 0.3rem;
+        border-bottom: 2px solid #ccc;
       }
+    }
+  }
+  @media screen and (max-width: 769px) {
+    li {
+      border: none;
+    }
+    h1 {
+      margin-bottom: 2rem;
     }
   }
 `;

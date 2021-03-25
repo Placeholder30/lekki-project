@@ -15,11 +15,6 @@ function App() {
 
 export default App;
 
-const Container = styled.div`
-  max-width: 80vw;
-  margin: 0 auto;
-`;
-
 const GlobalStyle = createGlobalStyle`
     *, html {
       box-sizing: border-box;
@@ -29,10 +24,13 @@ const GlobalStyle = createGlobalStyle`
       font-weight: 300;
     }
     body{
-      border: 10px solid #ccc;
-      min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-
+     font-family: 'Poppins', sans-serif;
+     border: 1rem solid #ccc;
+     min-height:100vh
     }
     
   `;
+const Container = styled.div`
+  width: 80vw;
+  margin: 0 auto;
+`;
