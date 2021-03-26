@@ -16,6 +16,5 @@ app.listen(process.env.PORT || port, async () => {
   console.log(` App is listening on port ${port} `);
   await User.sync({ alter: true });
   await sequelize.authenticate();
-  console.log(User);
   console.log("database connected");
 });
