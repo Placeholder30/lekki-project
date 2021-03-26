@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const router = require("./router");
-const { sequelize } = require("../models/index");
+const { sequelize, User } = require("./models/index");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -14,6 +14,8 @@ app.use(router);
 const port = 5000;
 app.listen(process.env.PORT || port, async () => {
   console.log(` App is listening on port ${port} `);
+  await User.sync({ alter: true });
   await sequelize.authenticate();
+  console.log(User);
   console.log("database connected");
 });
