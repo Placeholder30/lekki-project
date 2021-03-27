@@ -19,29 +19,35 @@ exports.register = async function (req, res) {
       .status(200)
       .json({ message: `You've successfully registered ${user.firstName}` });
   } catch (err) {
+    //handle registration errors
     console.log(err);
-    res.status(400).json({ message: err });
+    res.status(400).json({ message: err.errors });
   }
 };
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
-    console.log("i ran", user);
+    //check if user doesn't exist in db
+    //render register page
     if (user === null)
       res.status(400).json({ message: "create an account first" });
-    const result = await bcrypt.compare(password, user.password);
 
+    // if user exists, check password matches hashed password
+    const result = await bcrypt.compare(password, user.password);
     if (result) {
       res
         .status(200)
         .json({ message: `You've logged in sucessfully ${user.firstName}` });
     } else {
+      //handle invalid password error
       res
         .status(403)
         .json({ message: "invalid username, or password or both, heh" });
     }
   } catch (error) {
-    res.status(500).json({ message: "an internal server error occured" });
+    //handle login errors, send a nice message to user
+    console.log(error);
+    res.status(400).json({ message: "Please fill the required fields" });
   }
 };
