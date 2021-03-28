@@ -46,9 +46,9 @@ exports.login = async function (req, res) {
         .status(400)
         .json({ message: "invalid username, or password or both, heh" });
     }
-  } catch (error) {
+  } catch (err) {
     //handle login errors, send a nice message to user
-    console.log(error);
+    console.log(err);
     res.status(400).json({ message: "Please fill the required fields" });
   }
 };

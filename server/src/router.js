@@ -1,25 +1,24 @@
 const express = require("express");
-const {
-  allProducts,
-  menProducts,
-  womenProducts,
-} = require("./controllers/productsController");
-const { login, register } = require("./controllers/userController");
 const router = express.Router();
-
-router.get("/", async (req, res) => {
-  res.status(200).json({
-    message: "Welcome to the home endpoint",
-  });
-});
+const { login, register } = require("./controllers/userController");
+const {
+  getAllProducts,
+  getAProduct,
+  getAllMenProducts,
+  getAllWomenProducts,
+  addProduct,
+} = require("./controllers/productsController");
 
 //user login and registration routes
 router.post("/api/register", register);
 router.post("/api/login", login);
 
 //get products routes
-router.get("/api/products/all", allProducts);
-router.get("/api/products/men", menProducts);
-router.get("/api/products/women", womenProducts);
+router.get("/api/products/all", getAllProducts);
+router.get("/api/products/women", getAllWomenProducts);
+router.get("/api/products/men", getAllMenProducts);
+router.get("/api/products/product/:id", getAProduct);
 
+//add products
+router.post("/api/products/add", addProduct);
 module.exports = router;
