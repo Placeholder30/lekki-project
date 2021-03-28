@@ -9,6 +9,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Welcome to the home endpoint",
+  });
+});
 app.use(router);
 
 const port = 5000;

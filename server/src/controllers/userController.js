@@ -1,9 +1,9 @@
-const { sequelize, User } = require("../models/index");
+const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
 
 exports.register = async function (req, res) {
   let { firstName, lastName, email, password, address } = req.body;
-
+  //do validation before database request
   let salt = bcrypt.genSaltSync(10);
   password = bcrypt.hashSync(password, salt);
 
@@ -24,14 +24,15 @@ exports.register = async function (req, res) {
     res.status(400).json({ message: err.errors });
   }
 };
-exports.login = async (req, res) => {
+exports.login = async function (req, res) {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
     //check if user doesn't exist in db
     //render register page
-    if (user === null)
+    if (user === null) {
       res.status(400).json({ message: "create an account first" });
+    }
 
     // if user exists, check password matches hashed password
     const result = await bcrypt.compare(password, user.password);
@@ -42,7 +43,7 @@ exports.login = async (req, res) => {
     } else {
       //handle invalid password error
       res
-        .status(403)
+        .status(400)
         .json({ message: "invalid username, or password or both, heh" });
     }
   } catch (error) {
