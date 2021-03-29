@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Navbar() {
@@ -9,25 +10,25 @@ function Navbar() {
         <nav>
           <ul>
             <li>
-              <a href="/">HOME</a>
+              <Link to="/">HOME</Link>
             </li>
             <li>
-              <a href="/">ALL</a>
+              <Link to="/products/all">ALL</Link>
             </li>
             <li>
-              <a href="/">WOMEN</a>
+              <Link to="/products/women">WOMEN</Link>
             </li>
             <li>
-              <a href="/">MEN</a>
+              <Link to="/men">MEN</Link>
             </li>
             <li>
-              <a href="/">CART</a>
+              <Link to="/cart">CART</Link>
             </li>
             <li>
-              <a href="/">REGISTER</a>
+              <Link to="/register">REGISTER</Link>
             </li>
             <li>
-              <a href="/">LOGIN</a>
+              <Link to="/login">LOGIN</Link>
             </li>
           </ul>
         </nav>

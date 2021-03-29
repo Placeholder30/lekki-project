@@ -1,13 +1,27 @@
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import Home from "./pages/Home";
-
+import HomePage from "./pages/HomePage";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 function App() {
   return (
     <>
       <GlobalStyle />
       <Container>
-        <Home />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route exact path="/login">
+              <LoginPage />
+            </Route>
+            <Route exact path="/register">
+              <RegisterPage />
+            </Route>
+          </Switch>
+        </Router>
       </Container>
     </>
   );
@@ -25,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body{
      font-family: 'Poppins', sans-serif;
-     border: 1rem solid #ccc;
+     border: 0.8rem solid #ccc;
      min-height:100vh
     }
     

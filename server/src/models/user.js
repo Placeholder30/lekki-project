@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       address: {
         type: DataTypes.STRING,
+        defaultValue: "Homeless",
+      },
+      lastLogin: {
+        type: DataTypes.DATE,
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       },
     },
     {

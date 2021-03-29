@@ -5,7 +5,7 @@ import Footer from "../components/home/Footer";
 import Grids from "../components/home/Grid";
 import Navbar from "../components/home/Navbar";
 
-function Home() {
+function HomePage() {
   return (
     <>
       <Navbar />
@@ -18,4 +18,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
