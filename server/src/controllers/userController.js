@@ -2,7 +2,7 @@ const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
 
 exports.register = async function (req, res) {
-  let { firstName, lastName, email, password, address } = req.body;
+  let { firstName, lastName, email, password } = req.body;
   //do validation before database request
   let salt = bcrypt.genSaltSync(10);
   password = bcrypt.hashSync(password, salt);
@@ -10,10 +10,9 @@ exports.register = async function (req, res) {
   try {
     const user = await User.create({
       firstName,
-      email,
       lastName,
+      email,
       password,
-      address,
     });
     res
       .status(200)
@@ -25,6 +24,7 @@ exports.register = async function (req, res) {
   }
 };
 exports.login = async function (req, res) {
+  console.log(req.body);
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
