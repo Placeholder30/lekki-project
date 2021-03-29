@@ -57,6 +57,10 @@ const Container = styled.div`
     li {
       margin-left: 4rem;
     }
+    input,
+    label {
+      margin-left: 2rem;
+    }
   }
 `;
 export default Footer;
