@@ -21,12 +21,12 @@ function Collection({ photo }) {
 const Container = styled.div`
   margin-top: 2rem;
   width: 100%;
-  height: 50rem;
   display: flex;
   justify-content: center;
 
   .pic {
     width: 70rem;
+    margin-bottom: 2rem;
   }
   img {
     max-width: 100%;

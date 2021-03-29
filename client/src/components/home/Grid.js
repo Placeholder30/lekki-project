@@ -29,12 +29,16 @@ function Grids() {
 }
 const Container = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
   margin-top: 3rem;
   @media screen and (max-width: 769px) {
-    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
     margin-top: 0.3rem;
+  }
+  @media screen and (max-width: 550px) {
+    grid-template-columns: 1fr;
   }
 `;
 

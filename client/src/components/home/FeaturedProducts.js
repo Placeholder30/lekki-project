@@ -55,6 +55,10 @@ const ProductContainer = styled.section`
     display: flex;
     justify-content: space-around;
   }
+  .view-prod:hover {
+    background-color: #383131;
+    color: white;
+  }
   @media screen and (max-width: 769px) {
     .cards {
       flex-direction: column;
@@ -69,8 +73,10 @@ const CardContainer = styled.div`
   border: 1px solid #ccc;
   border-radius: 2rem;
   margin-top: 2rem;
+  /* margin-left: 2rem; */
   font-size: 1.4rem;
-  padding: 2rem;
+  padding: 1rem;
+
   .price {
     font-size: inherit;
     color: red;
@@ -91,7 +97,7 @@ const CardContainer = styled.div`
     margin: 0.5rem 0;
   }
   @media screen and (max-width: 769px) {
-    margin-top: 0.3rem;
+    margin-top: 2rem;
   }
 `;
 

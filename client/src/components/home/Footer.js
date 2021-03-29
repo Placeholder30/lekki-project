@@ -29,11 +29,10 @@ function Footer() {
 const Container = styled.div`
   margin-top: 4rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 
   ul {
     list-style: none;
-    width: 33.333%;
     margin-bottom: 2rem;
   }
   li {
@@ -46,11 +45,18 @@ const Container = styled.div`
   }
   label {
     font-size: 1.5rem;
+    margin-left: 8rem;
   }
   input {
     display: block;
     width: 65%;
     height: 2rem;
+    margin-left: 8rem;
+  }
+  @media screen and (max-width: 650px) {
+    li {
+      margin-left: 4rem;
+    }
   }
 `;
 export default Footer;

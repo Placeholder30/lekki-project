@@ -24,10 +24,10 @@ function Navbar() {
               <a href="/">CART</a>
             </li>
             <li>
-              <a href="/">Register</a>
+              <a href="/">REGISTER</a>
             </li>
             <li>
-              <a href="/">Login</a>
+              <a href="/">LOGIN</a>
             </li>
           </ul>
         </nav>
@@ -75,9 +75,19 @@ const Header = styled.header`
   @media screen and (max-width: 769px) {
     li {
       border: none;
+      padding: 0 1rem;
     }
     h1 {
       margin-bottom: 2rem;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    li {
+      padding: 0.3rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
     }
   }
 `;
