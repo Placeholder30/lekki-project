@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { postData } from "../../helpers/fetch";
 
-function Login() {
+function Login({ setUserData, userData }) {
+  console.log(setUserData);
   const [input, setInput] = useState({});
+  const history = useHistory();
 
-  const handleSubmit = () => {
-    fetch("/login", {
+  const handleSubmit = async () => {
+    const apiCall = await fetch("/login", {
       ...postData,
       body: JSON.stringify(input),
     });
+    if (apiCall.status === 200) {
+      const result = await apiCall.json();
+      setUserData(result);
+      history.push("/");
+    }
   };
 
   return (
@@ -29,7 +36,6 @@ function Login() {
           type="email"
           name="email"
           required
-          value={input.email}
           onChange={(e) =>
             setInput((state) => ({ ...state, email: e.target.value }))
           }
@@ -41,12 +47,12 @@ function Login() {
           type="password"
           name="password"
           required
-          value={input.password}
           onChange={(e) =>
             setInput((state) => ({ ...state, password: e.target.value }))
           }
         />
       </label>
+      <span className="error-msg">{}</span>
       <button type="submit">Login</button>
       <Link to="/">
         <div className="back">Back</div>

@@ -1,10 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import HomePage from "./pages/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+
 function App() {
+  const [userData, setUserData] = useState({});
   return (
     <>
       <GlobalStyle />
@@ -12,13 +15,13 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <HomePage />
+              <HomePage userData={userData} />
             </Route>
             <Route exact path="/login">
-              <LoginPage />
+              <LoginPage setUserData={setUserData} userData={userData} />
             </Route>
             <Route exact path="/register">
-              <RegisterPage />
+              <RegisterPage setUserData={setUserData} userData={userData} />
             </Route>
           </Switch>
         </Router>

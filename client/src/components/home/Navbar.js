@@ -1,12 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { postData } from "../../helpers/fetch";
+function Navbar({ userData, setUserData }) {
+  const history = useHistory();
+  let linkTo;
+  const handleClick = () => {
+    !userData.message ? (linkTo = "/login") : (linkTo = "/logout");
+  };
 
-function Navbar() {
+  const handleFetch = async () => {
+    postData.headers.Authorization = `${userData.token}`;
+    const apiCall = await fetch("/cart", postData);
+    if (apiCall.status === 200) {
+      const result = await apiCall.json();
+      console.log(result);
+      history.push("/cart");
+    }
+  };
   return (
     <>
       <Header>
         <h1>Lekki Store</h1>
+        {userData.message && (
+          <div className="user-message">{userData.message}</div>
+        )}
         <nav>
           <ul>
             <li>
@@ -19,16 +37,16 @@ function Navbar() {
               <Link to="/products/women">WOMEN</Link>
             </li>
             <li>
-              <Link to="/men">MEN</Link>
+              <Link to="/products/men">MEN</Link>
             </li>
-            <li>
-              <Link to="/cart">CART</Link>
+            <li onClick={handleFetch}>
+              <Link to="">CART</Link>
             </li>
             <li>
               <Link to="/register">REGISTER</Link>
             </li>
-            <li>
-              <Link to="/login">LOGIN</Link>
+            <li onClick={handleClick()}>
+              <Link to={linkTo}>{!userData.message ? "LOGIN" : "LOGOUT"}</Link>
             </li>
           </ul>
         </nav>
@@ -38,6 +56,9 @@ function Navbar() {
 }
 
 const Header = styled.header`
+  /* .user-message {
+    margin-left: 14vw;
+  } */
   h1 {
     text-align: center;
     margin-top: 5.3rem;
@@ -53,7 +74,6 @@ const Header = styled.header`
   ul {
     list-style: none;
     display: flex;
-    width: 33.333%;
     margin: 0 auto;
     justify-content: center;
   }

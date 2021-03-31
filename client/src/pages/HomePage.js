@@ -5,10 +5,10 @@ import Footer from "../components/home/Footer";
 import Grids from "../components/home/Grid";
 import Navbar from "../components/home/Navbar";
 
-function HomePage() {
+function HomePage({ userData, setUserData }) {
   return (
     <>
-      <Navbar />
+      <Navbar userData={userData} />
       <Collection photo={"firstPhoto"} />
       <Grids />
       <Collection />
