@@ -17,14 +17,14 @@ function FeaturedProducts() {
     </ProductContainer>
   );
 }
-function ProductCard({ id }) {
+export function ProductCard({ id }) {
   return (
     <CardContainer>
       <div className="prod-image">
         <img src={id === 1 ? prod1 : id === 2 ? prod2 : prod3} alt="watch" />
       </div>
       <p className="prod-name">Desi Avramovitz</p>
-      <p className="price">50.88</p>
+      <p className="price">$50.88</p>
       <div className="view-prod">View Item {">"} </div>
     </CardContainer>
   );
@@ -66,7 +66,7 @@ const ProductContainer = styled.section`
   }
 `;
 
-const CardContainer = styled.div`
+export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

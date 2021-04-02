@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { postData } from "../../helpers/fetch";
 
 function Login({ setUserData, userData }) {
-  console.log(setUserData);
   const [input, setInput] = useState({});
   const history = useHistory();
 
@@ -16,7 +15,7 @@ function Login({ setUserData, userData }) {
     if (apiCall.status === 200) {
       const result = await apiCall.json();
       setUserData(result);
-      history.push("/");
+      history.goBack();
     }
   };
 

@@ -1,13 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import HomePage from "./pages/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import Products from "./components/products/Products";
 
 function App() {
   const [userData, setUserData] = useState({});
+  const [productsData, setProductsData] = useState([]);
+
+  // postData.headers.Authorization = `${userData.token}`;
+  useEffect(() => {
+    (async () => {
+      try {
+        const apiCall = await fetch("/products/all");
+        if (apiCall.status === 200) {
+          const result = await apiCall.json();
+          setProductsData(result);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
@@ -15,13 +33,22 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <HomePage userData={userData} />
+              <HomePage userData={userData} setUserData={setUserData} />
             </Route>
             <Route exact path="/login">
-              <LoginPage setUserData={setUserData} userData={userData} />
+              <LoginPage userData={userData} setUserData={setUserData} />
             </Route>
             <Route exact path="/register">
-              <RegisterPage setUserData={setUserData} userData={userData} />
+              <RegisterPage userData={userData} setUserData={setUserData} />
+            </Route>
+            <Route path="/products/all">
+              <Products productsData={productsData} userData={userData} />
+            </Route>
+            <Route path="/products/men">
+              <Products productsData={productsData} userData={userData} />
+            </Route>
+            <Route path="/products/women">
+              <Products productsData={productsData} userData={userData} />
             </Route>
           </Switch>
         </Router>
@@ -44,6 +71,10 @@ const GlobalStyle = createGlobalStyle`
      font-family: 'Poppins', sans-serif;
      border: 0.8rem solid #ccc;
      min-height:100vh
+    }
+    a{
+      text-decoration: none;
+      color: inherit
     }
     
   `;

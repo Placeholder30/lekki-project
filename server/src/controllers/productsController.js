@@ -1,7 +1,8 @@
+const products = require("../data/products");
 const { Product } = require("../models/index");
 
 exports.getAllProducts = async function (req, res) {
-  res.send("You'll find it all here");
+  res.status(200).json(products);
 };
 exports.getAllMenProducts = async function (req, res) {
   res.send("Welcome to the male section");

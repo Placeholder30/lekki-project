@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { postData } from "../../helpers/fetch";
 import { Form } from "./Login";
 
-function Register() {
+function Register({ setUserData }) {
   const [input, setInput] = useState({});
+  const history = useHistory();
 
-  const handleSubmit = () => {
-    fetch("/register", {
+  const handleSubmit = async () => {
+    const apiCall = await fetch("/register", {
       ...postData,
       body: JSON.stringify(input),
     });
+    if (apiCall.status === 200) {
+      const result = await apiCall.json();
+      setUserData(result);
+      history.goBack();
+    }
   };
   return (
     <Form

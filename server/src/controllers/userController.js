@@ -58,5 +58,5 @@ exports.login = async function (req, res) {
   }
 };
 exports.logout = function (req, res) {
-  res.status(200).json({ message: "you are currently logged out" });
+  res.status(200).json({ authenticated: false });
 };

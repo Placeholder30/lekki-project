@@ -8,7 +8,7 @@ import Navbar from "../components/home/Navbar";
 function HomePage({ userData, setUserData }) {
   return (
     <>
-      <Navbar userData={userData} />
+      <Navbar userData={userData} setUserData={setUserData} />
       <Collection photo={"firstPhoto"} />
       <Grids />
       <Collection />

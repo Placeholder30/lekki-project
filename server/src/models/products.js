@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { message: "Please enter a relavant category" },
         },
       },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { message: "Please enter a price to proceed." },
+        },
+      },
 
       imageUrl: {
         type: DataTypes.STRING,

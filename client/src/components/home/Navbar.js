@@ -1,23 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { postData } from "../../helpers/fetch";
+// import { postData } from "../../helpers/fetch";
 function Navbar({ userData, setUserData }) {
   const history = useHistory();
-  let linkTo;
-  const handleClick = () => {
-    !userData.message ? (linkTo = "/login") : (linkTo = "/logout");
-  };
 
-  const handleFetch = async () => {
-    postData.headers.Authorization = `${userData.token}`;
-    const apiCall = await fetch("/cart", postData);
-    if (apiCall.status === 200) {
-      const result = await apiCall.json();
-      console.log(result);
-      history.push("/cart");
-    }
-  };
   return (
     <>
       <Header>
@@ -39,14 +26,16 @@ function Navbar({ userData, setUserData }) {
             <li>
               <Link to="/products/men">MEN</Link>
             </li>
-            <li onClick={handleFetch}>
+            <li>
               <Link to="">CART</Link>
             </li>
             <li>
               <Link to="/register">REGISTER</Link>
             </li>
-            <li onClick={handleClick()}>
-              <Link to={linkTo}>{!userData.message ? "LOGIN" : "LOGOUT"}</Link>
+            <li>
+              <Link to={!userData.message ? "/login" : "/logout"}>
+                {!userData.message ? "LOGIN" : "LOGOUT"}
+              </Link>
             </li>
           </ul>
         </nav>

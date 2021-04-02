@@ -36,13 +36,15 @@ module.exports = (sequelize, DataTypes) => {
           len: { message: "password is too short", args: [5] },
         },
       },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+      },
       address: {
         type: DataTypes.STRING,
         defaultValue: "Homeless",
       },
       lastLogin: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       },
     },
     {
