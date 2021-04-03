@@ -16,7 +16,7 @@ function Products({ userData, setUserData, productsData }) {
             ? productsData.map((prod) => (
                 <CardContainer key={prod.id}>
                   <div className="prod-image">
-                    <img src={prod.url} alt="" />
+                    <img src={prod.imageUrl} alt="" />
                   </div>
                   <p className="prod-name">{prod.name}</p>
                   <p className="price">${prod.price}</p>
@@ -29,7 +29,7 @@ function Products({ userData, setUserData, productsData }) {
                 .map((prod) => (
                   <CardContainer key={prod.id}>
                     <div className="prod-image">
-                      <img src={prod.url} alt="" />
+                      <img src={prod.imageUrl} alt="" />
                     </div>
                     <p className="prod-name">{prod.name}</p>
                     <p className="price">${prod.price}</p>
@@ -42,10 +42,7 @@ function Products({ userData, setUserData, productsData }) {
                 .map((prod) => (
                   <CardContainer key={prod.id}>
                     <div className="prod-image">
-                      <img
-                        src="http://res.cloudinary.com/placeholder30/image/upload/v1617395366/lekki-store/frontend-assets/products/women/5.jpg"
-                        alt=""
-                      />
+                      <img src={prod.imageUrl} alt="" />
                     </div>
                     <p className="prod-name">{prod.name}</p>
                     <p className="price">${prod.price}</p>

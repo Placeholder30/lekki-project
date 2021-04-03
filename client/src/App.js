@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Products from "./components/products/Products";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
-
   // postData.headers.Authorization = `${userData.token}`;
   useEffect(() => {
     (async () => {
@@ -41,15 +41,16 @@ function App() {
             <Route exact path="/register">
               <RegisterPage userData={userData} setUserData={setUserData} />
             </Route>
-            <Route path="/products/all">
+            <Route exact path="/products/all">
               <Products productsData={productsData} userData={userData} />
             </Route>
-            <Route path="/products/men">
+            <Route exact path="/products/men">
               <Products productsData={productsData} userData={userData} />
             </Route>
-            <Route path="/products/women">
+            <Route exact path="/products/women">
               <Products productsData={productsData} userData={userData} />
             </Route>
+            <Route component={NotFound} path="*" />
           </Switch>
         </Router>
       </Container>
