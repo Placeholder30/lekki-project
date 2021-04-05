@@ -30,7 +30,7 @@ function NotFound() {
             marginTop: "1.5rem",
           }}
         >
-          go back
+          home
         </div>
       </Link>
     </div>
