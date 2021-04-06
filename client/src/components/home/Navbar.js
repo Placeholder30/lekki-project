@@ -1,15 +1,13 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import { postData } from "../../helpers/fetch";
-function Navbar({ userData, setUserData }) {
-  const history = useHistory();
 
+function Navbar({ userData, setUserData }) {
   return (
     <>
       <Header>
         <h1>Lekki Store</h1>
-        {userData.message && (
+        {userData.authenticated && (
           <div className="user-message">{userData.message}</div>
         )}
         <nav>
@@ -18,13 +16,13 @@ function Navbar({ userData, setUserData }) {
               <Link to="/">HOME</Link>
             </li>
             <li>
-              <Link to="/products/all">ALL</Link>
+              <Link to="/all">ALL</Link>
             </li>
             <li>
-              <Link to="/products/women">WOMEN</Link>
+              <Link to="/women">WOMEN</Link>
             </li>
             <li>
-              <Link to="/products/men">MEN</Link>
+              <Link to="/men">MEN</Link>
             </li>
             <li>
               <Link to="">CART</Link>
@@ -33,8 +31,8 @@ function Navbar({ userData, setUserData }) {
               <Link to="/register">REGISTER</Link>
             </li>
             <li>
-              <Link to={!userData.message ? "/login" : "/logout"}>
-                {!userData.message ? "LOGIN" : "LOGOUT"}
+              <Link to={userData.authenticated ? "/logout" : "/login"}>
+                {userData.authenticated ? "LOGOUT" : "LOGIN"}
               </Link>
             </li>
           </ul>
@@ -45,9 +43,6 @@ function Navbar({ userData, setUserData }) {
 }
 
 const Header = styled.header`
-  /* .user-message {
-    margin-left: 14vw;
-  } */
   h1 {
     text-align: center;
     margin-top: 5.3rem;

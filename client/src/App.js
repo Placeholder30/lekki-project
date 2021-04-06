@@ -11,19 +11,20 @@ import NotFound from "./pages/NotFound";
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
-  // postData.headers.Authorization = `${userData.token}`;
+
   useEffect(() => {
-    (async () => {
+    const fetchProducts = async () => {
       try {
-        const apiCall = await fetch("/products/all");
-        if (apiCall.status === 200) {
-          const result = await apiCall.json();
+        const products = await fetch("/products");
+        if (products.status === 200) {
+          const result = await products.json();
           setProductsData(result);
         }
       } catch (error) {
         console.log(error);
       }
-    })();
+    };
+    fetchProducts();
   }, []);
 
   return (
@@ -41,13 +42,13 @@ function App() {
             <Route exact path="/register">
               <RegisterPage userData={userData} setUserData={setUserData} />
             </Route>
-            <Route exact path="/products/all">
+            <Route exact path="/all">
               <Products productsData={productsData} userData={userData} />
             </Route>
-            <Route exact path="/products/men">
+            <Route exact path="/men">
               <Products productsData={productsData} userData={userData} />
             </Route>
-            <Route exact path="/products/women">
+            <Route exact path="/women">
               <Products productsData={productsData} userData={userData} />
             </Route>
             <Route component={NotFound} path="*" />

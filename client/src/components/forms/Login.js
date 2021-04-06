@@ -6,16 +6,20 @@ import { postData } from "../../helpers/fetch";
 function Login({ setUserData, userData }) {
   const [input, setInput] = useState({});
   const history = useHistory();
+  const [errMsg, setErrMsg] = useState(null);
 
-  const handleSubmit = async () => {
-    const apiCall = await fetch("/login", {
+  const handleLogin = async () => {
+    const login = await fetch("/login", {
       ...postData,
       body: JSON.stringify(input),
     });
-    if (apiCall.status === 200) {
-      const result = await apiCall.json();
+    if (login.status === 200) {
+      const result = await login.json();
       setUserData(result);
-      history.goBack();
+      history.push("/");
+    } else {
+      const result = await login.json();
+      setErrMsg(result);
     }
   };
 
@@ -23,7 +27,7 @@ function Login({ setUserData, userData }) {
     <Form
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit();
+        handleLogin();
       }}
     >
       <Link to="/">
@@ -51,7 +55,9 @@ function Login({ setUserData, userData }) {
           }
         />
       </label>
-      <span className="error-msg">{}</span>
+
+      {errMsg && <span className="err-msg">{errMsg.message}</span>}
+
       <button type="submit">Login</button>
       <Link to="/">
         <div className="back">Back</div>
@@ -110,6 +116,9 @@ export const Form = styled.form`
     &:hover {
       font-size: 1.2rem;
     }
+  }
+  .err-msg {
+    color: red;
   }
   @media screen and (max-width: 500px) {
     width: 30rem;

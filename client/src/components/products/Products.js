@@ -5,6 +5,18 @@ import { CardContainer } from "../home/FeaturedProducts";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 
+function Card({ product }) {
+  return (
+    <CardContainer>
+      <div className="prod-image">
+        <img src={product.imageUrl} alt="" />
+      </div>
+      <p className="prod-name">{product.name}</p>
+      <p className="price">${product.price}</p>
+      <div className="view-prod">View Item {">"} </div>
+    </CardContainer>
+  );
+}
 function Products({ userData, setUserData, productsData }) {
   const location = useLocation();
   return (
@@ -12,44 +24,17 @@ function Products({ userData, setUserData, productsData }) {
       <Navbar userData={userData} setUserData={setUserData} />
       <ProductsMain>
         <div className="products">
-          {location.pathname === "/products/all"
-            ? productsData.map((prod) => (
-                <CardContainer key={prod.id}>
-                  <div className="prod-image">
-                    <img src={prod.imageUrl} alt="" />
-                  </div>
-                  <p className="prod-name">{prod.name}</p>
-                  <p className="price">${prod.price}</p>
-                  <div className="view-prod">View Item {">"} </div>
-                </CardContainer>
+          {location.pathname === "/all"
+            ? productsData.map((product) => (
+                <Card key={product.id} product={product} />
               ))
-            : location.pathname === "/products/men"
+            : location.pathname === "/men"
             ? productsData
-                .filter((prod) => prod.category === "men")
-                .map((prod) => (
-                  <CardContainer key={prod.id}>
-                    <div className="prod-image">
-                      <img src={prod.imageUrl} alt="" />
-                    </div>
-                    <p className="prod-name">{prod.name}</p>
-                    <p className="price">${prod.price}</p>
-                    <div className="view-prod">View Item {">"} </div>
-                  </CardContainer>
-                ))
-            : location.pathname === "/products/women"
-            ? productsData
-                .filter((prod) => prod.category === "women")
-                .map((prod) => (
-                  <CardContainer key={prod.id}>
-                    <div className="prod-image">
-                      <img src={prod.imageUrl} alt="" />
-                    </div>
-                    <p className="prod-name">{prod.name}</p>
-                    <p className="price">${prod.price}</p>
-                    <div className="view-prod">View Item {">"} </div>
-                  </CardContainer>
-                ))
-            : null}
+                .filter((product) => product.category === "men")
+                .map((product) => <Card key={product.id} product={product} />)
+            : productsData
+                .filter((product) => product.category === "women")
+                .map((product) => <Card key={product.id} product={product} />)}
         </div>
         <div className="sale">
           <h2>Special Sale</h2>

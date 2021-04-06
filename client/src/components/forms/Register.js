@@ -6,16 +6,20 @@ import { Form } from "./Login";
 function Register({ setUserData }) {
   const [input, setInput] = useState({});
   const history = useHistory();
+  const [errMsg, setErrMsg] = useState(null);
 
   const handleSubmit = async () => {
-    const apiCall = await fetch("/register", {
+    const register = await fetch("/register", {
       ...postData,
       body: JSON.stringify(input),
     });
-    if (apiCall.status === 200) {
-      const result = await apiCall.json();
+    if (register.status === 200) {
+      const result = await register.json();
       setUserData(result);
-      history.goBack();
+      history.push("/");
+    } else {
+      const result = await register.json();
+      setErrMsg(result);
     }
   };
   return (
@@ -82,6 +86,7 @@ function Register({ setUserData }) {
           }
         />
       </label>
+      {errMsg && <span className="err-msg">{errMsg.message}</span>}
       <button type="submit">Create your account</button>
       <Link to="/">
         <div className="back">Back</div>
