@@ -8,11 +8,13 @@ import RegisterPage from "./pages/RegisterPage";
 import Products from "./components/products/Products";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./components/products/ProductDetails";
+import Cart from "./components/cart/Cart";
 
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
   const [product, setProduct] = useState({});
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -66,7 +68,14 @@ function App() {
               />
             </Route>
             <Route exact path="/details">
-              <ProductDetails userData={userData} product={product} />
+              <ProductDetails
+                userData={userData}
+                product={product}
+                setCart={setCart}
+              />
+            </Route>
+            <Route exact path="/cart">
+              <Cart />
             </Route>
             <Route component={NotFound} path="*" />
           </Switch>

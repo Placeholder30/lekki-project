@@ -3,7 +3,7 @@ import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-function ProductDetails({ userData, product }) {
+function ProductDetails({ userData, product, setCart }) {
   const [count, setCount] = useState(0);
   return (
     <>
@@ -30,13 +30,19 @@ function ProductDetails({ userData, product }) {
               <input
                 type="number"
                 name=""
+                min="0"
                 value={count}
                 onChange={(e) => {
                   setCount(Number(e.target.value));
                 }}
               />
               <button onClick={() => setCount(count + 1)}>+</button>
-              <button className="add-cart">Add to Cart</button>
+              <button
+                className="add-cart"
+                onClick={() => setCart((state) => [...state, product])}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
