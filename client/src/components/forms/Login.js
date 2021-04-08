@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-import { postData } from "../../helpers/fetch";
+import { requestOptions } from "../../helpers/fetch";
 
 function Login({ setUserData, userData }) {
   const [input, setInput] = useState({});
@@ -10,7 +10,7 @@ function Login({ setUserData, userData }) {
 
   const handleLogin = async () => {
     const login = await fetch("/login", {
-      ...postData,
+      ...requestOptions,
       body: JSON.stringify(input),
     });
     if (login.status === 200) {

@@ -1,11 +1,12 @@
 import React from "react";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CardContainer } from "../home/FeaturedProducts";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 
-function Card({ product }) {
+function Card({ product, setProduct }) {
   return (
     <CardContainer>
       <div className="prod-image">
@@ -13,11 +14,19 @@ function Card({ product }) {
       </div>
       <p className="prod-name">{product.name}</p>
       <p className="price">${product.price}</p>
-      <div className="view-prod">View Item {">"} </div>
+      <Link
+        to="/details"
+        className="view-prod"
+        onClick={() => {
+          setProduct(product);
+        }}
+      >
+        View Item {">"}
+      </Link>
     </CardContainer>
   );
 }
-function Products({ userData, setUserData, productsData }) {
+function Products({ userData, setUserData, productsData, setProduct }) {
   const location = useLocation();
   return (
     <>
@@ -26,15 +35,31 @@ function Products({ userData, setUserData, productsData }) {
         <div className="products">
           {location.pathname === "/all"
             ? productsData.map((product) => (
-                <Card key={product.id} product={product} />
+                <Card
+                  key={product.id}
+                  product={product}
+                  setProduct={setProduct}
+                />
               ))
             : location.pathname === "/men"
             ? productsData
                 .filter((product) => product.category === "men")
-                .map((product) => <Card key={product.id} product={product} />)
+                .map((product) => (
+                  <Card
+                    key={product.id}
+                    product={product}
+                    setProduct={setProduct}
+                  />
+                ))
             : productsData
                 .filter((product) => product.category === "women")
-                .map((product) => <Card key={product.id} product={product} />)}
+                .map((product) => (
+                  <Card
+                    key={product.id}
+                    product={product}
+                    setProduct={setProduct}
+                  />
+                ))}
         </div>
         <div className="sale">
           <h2>Special Sale</h2>

@@ -7,10 +7,12 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Products from "./components/products/Products";
 import NotFound from "./pages/NotFound";
+import ProductDetails from "./components/products/ProductDetails";
 
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -43,13 +45,28 @@ function App() {
               <RegisterPage userData={userData} setUserData={setUserData} />
             </Route>
             <Route exact path="/all">
-              <Products productsData={productsData} userData={userData} />
+              <Products
+                productsData={productsData}
+                userData={userData}
+                setProduct={setProduct}
+              />
             </Route>
             <Route exact path="/men">
-              <Products productsData={productsData} userData={userData} />
+              <Products
+                productsData={productsData}
+                userData={userData}
+                setProduct={setProduct}
+              />
             </Route>
             <Route exact path="/women">
-              <Products productsData={productsData} userData={userData} />
+              <Products
+                productsData={productsData}
+                userData={userData}
+                setProduct={setProduct}
+              />
+            </Route>
+            <Route exact path="/details">
+              <ProductDetails userData={userData} product={product} />
             </Route>
             <Route component={NotFound} path="*" />
           </Switch>

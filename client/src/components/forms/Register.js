@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { postData } from "../../helpers/fetch";
+import { requestOptions } from "../../helpers/fetch";
 import { Form } from "./Login";
 
 function Register({ setUserData }) {
@@ -10,7 +10,7 @@ function Register({ setUserData }) {
 
   const handleSubmit = async () => {
     const register = await fetch("/register", {
-      ...postData,
+      ...requestOptions,
       body: JSON.stringify(input),
     });
     if (register.status === 200) {

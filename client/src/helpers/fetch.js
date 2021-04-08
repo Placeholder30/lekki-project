@@ -1,4 +1,4 @@
-export const postData = {
+export const requestOptions = {
   method: "POST",
   mode: "cors",
   cache: "no-cache",

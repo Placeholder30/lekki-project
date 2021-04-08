@@ -7,7 +7,7 @@ function Collection({ photo }) {
   return (
     <Container>
       <div className="text">
-        <div>Men's Shoes</div>
+        <div>Men&apos;s Shoes</div>
         <div>Collection</div>
         <p>Street Style New Fashion</p>
       </div>
