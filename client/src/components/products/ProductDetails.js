@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../home/Navbar";
 import styled from "styled-components";
+import Footer from "../home/Footer";
+import FeaturedProducts from "../home/FeaturedProducts";
 function ProductDetails({ userData, product }) {
   const [count, setCount] = useState(0);
   return (
@@ -30,7 +32,7 @@ function ProductDetails({ userData, product }) {
                 name=""
                 value={count}
                 onChange={(e) => {
-                  setCount(e.target.value);
+                  setCount(Number(e.target.value));
                 }}
               />
               <button onClick={() => setCount(count + 1)}>+</button>
@@ -39,6 +41,8 @@ function ProductDetails({ userData, product }) {
           </div>
         </div>
       </ProductContainer>
+      <FeaturedProducts />
+      <Footer />
     </>
   );
 }
@@ -46,6 +50,7 @@ function ProductDetails({ userData, product }) {
 const ProductContainer = styled.main`
   margin-top: 2rem;
   display: flex;
+  margin-bottom: 4rem;
   .content {
     max-width: 60vw;
   }
@@ -58,6 +63,11 @@ const ProductContainer = styled.main`
   p {
     font-size: 1.4rem;
     margin-bottom: 2rem;
+  }
+  .price {
+    font-size: 2rem;
+    color: red;
+    font-weight: 500;
   }
   .buttons button {
     font-size: 1.4rem;
