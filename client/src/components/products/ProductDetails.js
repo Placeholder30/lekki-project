@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../home/Navbar";
 import styled from "styled-components";
 function ProductDetails({ userData, product }) {
+  const [count, setCount] = useState(0);
   return (
     <>
       <Navbar userData={userData} />
@@ -23,9 +24,16 @@ function ProductDetails({ userData, product }) {
               blanditiis, illum incidunt impedit.
             </p>
             <div className="buttons">
-              <button>-</button>
-              <input type="number" name="" />
-              <button>+</button>
+              <button onClick={() => count && setCount(count - 1)}>-</button>
+              <input
+                type="number"
+                name=""
+                value={count}
+                onChange={(e) => {
+                  setCount(e.target.value);
+                }}
+              />
+              <button onClick={() => setCount(count + 1)}>+</button>
               <button className="add-cart">Add to Cart</button>
             </div>
           </div>
@@ -63,7 +71,7 @@ const ProductContainer = styled.main`
   .buttons input {
     margin: 0 0.3rem;
     width: 5rem;
-    height: 4.3rem;
+    height: 4rem;
     text-align: center;
     outline: none;
     font-size: 1.4rem;
@@ -73,7 +81,7 @@ const ProductContainer = styled.main`
     width: 10rem;
     background-color: #d96528;
     border: none;
-    margin-top: 2rem;
+    margin: 2rem 3rem 0;
   }
 `;
 export default ProductDetails;
