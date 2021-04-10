@@ -25,7 +25,7 @@ function Navbar({ userData, setUserData }) {
               <Link to="/men">MEN</Link>
             </li>
             <li>
-              <Link to="">CART</Link>
+              <Link to="/cart">CART</Link>
             </li>
             <li>
               <Link to="/register">REGISTER</Link>

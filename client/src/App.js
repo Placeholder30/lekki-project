@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import HomePage from "./pages/HomePage";
+import HomePage from "./components/home/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./components/forms/LoginPage";
+import RegisterPage from "./components/forms/RegisterPage";
 import Products from "./components/products/Products";
-import NotFound from "./pages/NotFound";
+import NotFound from "./components/notfound/NotFound";
 import ProductDetails from "./components/products/ProductDetails";
-import Cart from "./components/cart/Cart";
+import CartPage from "./components/cart/CartPage";
 
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({}); //product passed to product details
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ function App() {
               />
             </Route>
             <Route exact path="/cart">
-              <Cart />
+              <CartPage userData={userData} cart={cart} />
             </Route>
             <Route component={NotFound} path="*" />
           </Switch>

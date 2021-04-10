@@ -1,31 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CardContainer } from "../home/FeaturedProducts";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
-
-function Card({ product, setProduct }) {
-  return (
-    <CardContainer>
-      <div className="prod-image">
-        <img src={product.imageUrl} alt="" />
-      </div>
-      <p className="prod-name">{product.name}</p>
-      <p className="price">${product.price}</p>
-      <Link
-        to="/details"
-        className="view-prod"
-        onClick={() => {
-          setProduct(product);
-        }}
-      >
-        View Item {">"}
-      </Link>
-    </CardContainer>
-  );
-}
+import Card from "./Card";
 function Products({ userData, setUserData, productsData, setProduct }) {
   const location = useLocation();
   return (
@@ -37,8 +15,8 @@ function Products({ userData, setUserData, productsData, setProduct }) {
             ? productsData.map((product) => (
                 <Card
                   key={product.id}
-                  product={product}
-                  setProduct={setProduct}
+                  product={product} //local mapped product variable that you shoud rename but will you?
+                  setProduct={setProduct} //App.js hook
                 />
               ))
             : location.pathname === "/men"
@@ -47,7 +25,7 @@ function Products({ userData, setUserData, productsData, setProduct }) {
                 .map((product) => (
                   <Card
                     key={product.id}
-                    product={product}
+                    product={product} //local product variable
                     setProduct={setProduct}
                   />
                 ))
@@ -56,7 +34,7 @@ function Products({ userData, setUserData, productsData, setProduct }) {
                 .map((product) => (
                   <Card
                     key={product.id}
-                    product={product}
+                    product={product} //local product variable
                     setProduct={setProduct}
                   />
                 ))}

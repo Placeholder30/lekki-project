@@ -1,5 +1,5 @@
 import React from "react";
-import Register from "../components/forms/Register";
+import Register from "./Register";
 function RegisterPage({ setUserData }) {
   return <Register setUserData={setUserData} />;
 }
