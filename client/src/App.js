@@ -72,10 +72,11 @@ function App() {
                 userData={userData}
                 product={product}
                 setCart={setCart}
+                cart={cart}
               />
             </Route>
             <Route exact path="/cart">
-              <CartPage userData={userData} cart={cart} />
+              <CartPage userData={userData} cart={cart} setCart={setCart} />
             </Route>
             <Route component={NotFound} path="*" />
           </Switch>

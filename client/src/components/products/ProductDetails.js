@@ -3,8 +3,9 @@ import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-function ProductDetails({ userData, product, setCart }) {
-  const [count, setCount] = useState(0);
+function ProductDetails({ userData, product, setCart, cart }) {
+  const [productNo, setProductNo] = useState(1);
+
   return (
     <>
       <Navbar userData={userData} />
@@ -26,20 +27,30 @@ function ProductDetails({ userData, product, setCart }) {
               blanditiis, illum incidunt impedit.
             </p>
             <div className="buttons">
-              <button onClick={() => count && setCount(count - 1)}>-</button>
+              <button onClick={() => productNo && setProductNo(productNo - 1)}>
+                -
+              </button>
               <input
                 type="number"
                 name=""
                 min="0"
-                value={count}
+                value={productNo}
                 onChange={(e) => {
-                  setCount(Number(e.target.value));
+                  setProductNo(Number(e.target.value));
                 }}
               />
-              <button onClick={() => setCount(count + 1)}>+</button>
+              <button onClick={() => setProductNo(productNo + 1)}>+</button>
               <button
                 className="add-cart"
-                onClick={() => setCart((state) => [...state, product])}
+                onClick={() => {
+                  let addToCart = true;
+                  cart.forEach((cartItem) => {
+                    if (cartItem.name === product.name) {
+                      addToCart = false;
+                    }
+                  });
+                  addToCart && setCart((state) => [...state, product]);
+                }}
               >
                 Add to Cart
               </button>

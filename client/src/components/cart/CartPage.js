@@ -4,12 +4,12 @@ import Navbar from "../home/Navbar";
 import CartLogos from "./CartLogos";
 import CartTable from "./CartTable";
 
-function CartPage({ userData, cart }) {
+function CartPage({ userData, cart, setCart }) {
   return (
     <>
       <Navbar userData={userData} />
       <CartLogos />
-      <CartTable cart={cart} />
+      <CartTable cart={cart} setCart={setCart} />
       <Grids />
       <Footer />
     </>

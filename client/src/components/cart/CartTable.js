@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-function CartTable({ cart }) {
-  const [cartItems, setCartItems] = useState(cart);
+function CartTable({ cart, setCart }) {
   const [quantity, setQuantity] = useState({});
+
   const toggleItemQuantity = (itemName, subtract) => {
     if (quantity[itemName]) {
       const newState = {};
@@ -20,8 +20,8 @@ function CartTable({ cart }) {
     }
   };
   const handleDelete = (name) => {
-    const filteredCart = cartItems.filter((item) => item.name != name);
-    setCartItems(filteredCart);
+    const filteredCart = cart.filter((item) => item.name != name);
+    setCart(filteredCart);
     const newQuantity = quantity;
     delete newQuantity[name];
     setQuantity(newQuantity);
@@ -39,7 +39,7 @@ function CartTable({ cart }) {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item, index) => (
+          {cart.map((item, index) => (
             <tr key={index}>
               <td className="flex">
                 <img src={item.imageUrl} alt="" />
@@ -48,7 +48,7 @@ function CartTable({ cart }) {
               <td>{item.price}</td>
               <td>
                 <span
-                  onClick={() => toggleItemQuantity(item.name, 2)}
+                  onClick={() => toggleItemQuantity(item.name, "subtract")}
                   className="minus"
                 >
                   -
@@ -61,13 +61,17 @@ function CartTable({ cart }) {
                   +
                 </span>
               </td>
-              <td>{quantity[item.name] * item.price || item.price}</td>
-              <td
-                onClick={() => {
-                  handleDelete(item.name);
-                }}
-              >
-                X
+              <td>
+                {(quantity[item.name] * item.price).toFixed(2) || item.price}
+              </td>
+              <td className="delete">
+                <div
+                  onClick={() => {
+                    handleDelete(item.name);
+                  }}
+                >
+                  X
+                </div>
               </td>
             </tr>
           ))}
@@ -100,6 +104,19 @@ const TableContainer = styled.section`
     text-align: center;
     border-bottom: 1px solid #ccc;
   }
+  td.delete div {
+    background-color: red;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
   .flex {
     padding: 0.6rem;
     display: flex;
@@ -126,6 +143,7 @@ const TableContainer = styled.section`
     &:hover {
       background-color: black;
       cursor: pointer;
+      color: white;
     }
   }
 `;
