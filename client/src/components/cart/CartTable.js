@@ -1,7 +1,31 @@
 import { useState } from "react";
 import styled from "styled-components";
 function CartTable({ cart }) {
-  const [quantity, setQuantity] = useState(0);
+  const [cartItems, setCartItems] = useState(cart);
+  const [quantity, setQuantity] = useState({});
+  const toggleItemQuantity = (itemName, subtract) => {
+    if (quantity[itemName]) {
+      const newState = {};
+      if (subtract) {
+        newState[itemName] = quantity[itemName] - 1;
+        setQuantity((state) => ({ ...state, ...newState }));
+      } else {
+        newState[itemName] = quantity[itemName] + 1;
+        setQuantity((state) => ({ ...state, ...newState }));
+      }
+    } else {
+      const newState = {};
+      newState[itemName] = 1;
+      setQuantity((state) => ({ ...state, ...newState }));
+    }
+  };
+  const handleDelete = (name) => {
+    const filteredCart = cartItems.filter((item) => item.name != name);
+    setCartItems(filteredCart);
+    const newQuantity = quantity;
+    delete newQuantity[name];
+    setQuantity(newQuantity);
+  };
   return (
     <TableContainer>
       <h2>Your Cart</h2>
@@ -15,8 +39,8 @@ function CartTable({ cart }) {
           </tr>
         </thead>
         <tbody>
-          {cart.map((item) => (
-            <tr key={item.id}>
+          {cartItems.map((item, index) => (
+            <tr key={index}>
               <td className="flex">
                 <img src={item.imageUrl} alt="" />
                 <h4>{item.name}</h4>
@@ -24,20 +48,27 @@ function CartTable({ cart }) {
               <td>{item.price}</td>
               <td>
                 <span
+                  onClick={() => toggleItemQuantity(item.name, 2)}
                   className="minus"
-                  onClick={() => setQuantity(quantity - 1)}
                 >
                   -
                 </span>
-                <span className="qty">{quantity}</span>
+                <span className="qty">{quantity[item.name] || 1}</span>
                 <span
                   className="plus"
-                  onClick={() => setQuantity(quantity + 1)}
+                  onClick={() => toggleItemQuantity(item.name)}
                 >
                   +
                 </span>
               </td>
-              <td>{quantity * item.price}</td>
+              <td>{quantity[item.name] * item.price || item.price}</td>
+              <td
+                onClick={() => {
+                  handleDelete(item.name);
+                }}
+              >
+                X
+              </td>
             </tr>
           ))}
         </tbody>
