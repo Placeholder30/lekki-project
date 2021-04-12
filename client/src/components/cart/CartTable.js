@@ -1,23 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 function CartTable({ cart, setCart }) {
-  const [quantity, setQuantity] = useState({});
+  const [quantity, setQuantity] = useState(cart);
 
   const toggleItemQuantity = (itemName, subtract) => {
-    if (quantity[itemName]) {
-      const newState = {};
-      if (subtract) {
-        newState[itemName] = quantity[itemName] - 1;
-        setQuantity((state) => ({ ...state, ...newState }));
-      } else {
-        newState[itemName] = quantity[itemName] + 1;
-        setQuantity((state) => ({ ...state, ...newState }));
-      }
+    let newState = {};
+    if (subtract) {
+      newState = cart.map((item) => item.name === itemName && item.quantity--);
     } else {
-      const newState = {};
-      newState[itemName] = 1;
-      setQuantity((state) => ({ ...state, ...newState }));
+      newState = cart.map((item) => item.name === itemName && item.quantity++);
     }
+    setQuantity(newState);
   };
   const handleDelete = (name) => {
     const filteredCart = cart.filter((item) => item.name != name);
@@ -48,12 +41,15 @@ function CartTable({ cart, setCart }) {
               <td>{item.price}</td>
               <td>
                 <span
-                  onClick={() => toggleItemQuantity(item.name, "subtract")}
+                  onClick={() =>
+                    item.quantity > 1 &&
+                    toggleItemQuantity(item.name, "subtract", item.quantity)
+                  }
                   className="minus"
                 >
                   -
                 </span>
-                <span className="qty">{quantity[item.name] || 1}</span>
+                <span className="qty">{item.quantity}</span>
                 <span
                   className="plus"
                   onClick={() => toggleItemQuantity(item.name)}
@@ -61,9 +57,7 @@ function CartTable({ cart, setCart }) {
                   +
                 </span>
               </td>
-              <td>
-                {(quantity[item.name] * item.price).toFixed(2) || item.price}
-              </td>
+              <td>{(item.quantity * item.price).toFixed(2)}</td>
               <td className="delete">
                 <div
                   onClick={() => {

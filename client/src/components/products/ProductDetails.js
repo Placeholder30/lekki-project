@@ -49,7 +49,16 @@ function ProductDetails({ userData, product, setCart, cart }) {
                       addToCart = false;
                     }
                   });
-                  addToCart && setCart((state) => [...state, product]);
+                  addToCart &&
+                    setCart((state) => [
+                      ...state,
+                      {
+                        name: product.name,
+                        price: product.price,
+                        imageUrl: product.imageUrl,
+                        quantity: productNo,
+                      },
+                    ]);
                 }}
               >
                 Add to Cart
