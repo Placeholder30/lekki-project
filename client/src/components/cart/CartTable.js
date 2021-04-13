@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Payment from "../forms/Payment";
 function CartTable({ cart, setCart }) {
   const toggleItemQuantity = (itemName, subtract) => {
     let newState;
@@ -71,6 +72,7 @@ function CartTable({ cart, setCart }) {
           ))}
         </tbody>
       </table>
+      <Payment />
     </TableContainer>
   );
 }
