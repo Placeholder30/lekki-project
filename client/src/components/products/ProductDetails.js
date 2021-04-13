@@ -118,6 +118,9 @@ const ProductContainer = styled.main`
     background-color: #d96528;
     border: none;
     margin: 2rem 3rem 0;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 export default ProductDetails;

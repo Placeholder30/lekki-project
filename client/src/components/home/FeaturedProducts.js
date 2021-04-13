@@ -90,6 +90,8 @@ export const CardContainer = styled.div`
     padding: 0.5rem;
     &:hover {
       cursor: pointer;
+      background-color: #000;
+      color: white;
     }
   }
   p {

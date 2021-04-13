@@ -55,12 +55,13 @@ const ProductsMain = styled.section`
   display: flex;
   justify-content: space-between;
   .products {
+    flex: 2.8;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
   .sale {
-    max-width: 35rem;
+    flex: 1.2;
     h2 {
       margin-top: 1.8rem;
     }
@@ -70,6 +71,16 @@ const ProductsMain = styled.section`
     img {
       width: 100%;
       height: auto;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 530px) {
+    .products {
+      grid-template-columns: 1fr;
     }
   }
 `;

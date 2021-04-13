@@ -72,7 +72,7 @@ function CartTable({ cart, setCart }) {
           ))}
         </tbody>
       </table>
-      <Payment />
+      <Payment cart={cart} />
     </TableContainer>
   );
 }
@@ -101,7 +101,7 @@ const TableContainer = styled.section`
     border-bottom: 1px solid #ccc;
   }
   td.delete div {
-    background-color: red;
+    background-color: #f7922d;
     height: 2rem;
     width: 2rem;
     border-radius: 1rem;

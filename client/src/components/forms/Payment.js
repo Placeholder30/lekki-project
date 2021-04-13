@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-function Payment() {
+function Payment({ cart }) {
   return (
     <PaymentContainer>
       <form action="">
