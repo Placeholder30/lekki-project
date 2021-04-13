@@ -1,23 +1,23 @@
-import { useState } from "react";
 import styled from "styled-components";
 function CartTable({ cart, setCart }) {
-  const [quantity, setQuantity] = useState(cart);
-
   const toggleItemQuantity = (itemName, subtract) => {
-    let newState = {};
+    let newState;
     if (subtract) {
-      newState = cart.map((item) => item.name === itemName && item.quantity--);
+      newState = cart.map((item) => {
+        item.name === itemName && item.quantity--;
+        return item;
+      });
     } else {
-      newState = cart.map((item) => item.name === itemName && item.quantity++);
+      newState = cart.map((item) => {
+        item.name === itemName && item.quantity++;
+        return item;
+      });
     }
-    setQuantity(newState);
+    setCart(newState);
   };
   const handleDelete = (name) => {
     const filteredCart = cart.filter((item) => item.name != name);
     setCart(filteredCart);
-    const newQuantity = quantity;
-    delete newQuantity[name];
-    setQuantity(newQuantity);
   };
   return (
     <TableContainer>

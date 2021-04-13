@@ -15,7 +15,6 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [product, setProduct] = useState({}); //product passed to product details
   const [cart, setCart] = useState([]);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
