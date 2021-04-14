@@ -1,12 +1,10 @@
-const products = require("../data/products");
 const { Product } = require("../models/index");
 
 exports.getProducts = async function (req, res) {
+  const products = await Product.findAll({
+    attributes: { exclude: ["UUID", "createdAt", "updatedAt"] },
+  });
   res.status(200).json(products);
-};
-
-exports.getAProduct = async function (req, res) {
-  res.send(`it appears you want to buy a ${req.params.id}`);
 };
 
 exports.addProduct = async function (req, res) {

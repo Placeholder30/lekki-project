@@ -4,7 +4,7 @@ module.exports = [
     name: "Nico Robin",
     category: "women",
     imageUrl:
-      "http://res.cloudinary.com/placeholder30/image/upload/v1617395366/lekki-store/frontend-assets/products/women/5.jpg",
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617395366/lekki-store/frontend-assets/products/women/5.jpg",
     price: 12.88,
   },
 
