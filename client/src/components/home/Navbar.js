@@ -1,9 +1,11 @@
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-function Navbar({ userData, setUserData, cart }) {
+import { CartContext } from "../context/Context";
+function Navbar({ userData, setUserData }) {
+  const [cart] = useContext(CartContext);
   console.log(cart);
+
   return (
     <>
       <Header>
@@ -26,7 +28,9 @@ function Navbar({ userData, setUserData, cart }) {
               <Link to="/men">MEN</Link>
             </li>
             <li className="cart">
-              {cart && <span className="no-in-cart">{cart.length}</span>}
+              {cart.length ? (
+                <span className="no-in-cart">{cart.length}</span>
+              ) : null}
               <Link to="/cart">CART</Link>
             </li>
             <li>

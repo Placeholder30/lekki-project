@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-function ProductDetails({ userData, product, setCart, cart }) {
+import { CartContext } from "../context/Context";
+function ProductDetails({ userData, product }) {
   const [productNo, setProductNo] = useState(1);
+  const [cart, setCart] = useContext(CartContext);
 
   return (
     <>
-      <Navbar userData={userData} cart={cart} />
+      <Navbar userData={userData} />
       <ProductContainer>
         <div className="product">
           <img src={product.imageUrl} alt="" />

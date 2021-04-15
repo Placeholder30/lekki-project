@@ -1,5 +1,6 @@
 import styled from "styled-components";
-function CartLogos({ cart }) {
+
+function CartLogos() {
   return (
     <CartMain>
       <div className="shopping-cart square">

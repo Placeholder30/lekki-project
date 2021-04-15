@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import Payment from "../forms/Payment";
 import { Link } from "react-router-dom";
-function CartTable({ cart, setCart }) {
-  console.log(cart);
+import { CartContext } from "../context/Context";
+function CartTable() {
+  const [cart, setCart] = useContext(CartContext);
   const toggleItemQuantity = (itemName, subtract) => {
     let newState;
     if (subtract) {

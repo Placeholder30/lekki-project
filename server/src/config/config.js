@@ -14,6 +14,7 @@ module.exports = {
     database: DEVDATABASE,
     host: "localhost",
     dialect: "postgres",
+    logging: false,
   },
   production: {
     username: USERNAME,

@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CartContext } from "../context/Context";
+function Payment() {
+  const [cart] = useContext(CartContext);
 
-function Payment({ cart }) {
   const total = cart
     .map((item) => {
       return item.price * item.quantity;
