@@ -1,7 +1,14 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 function Payment({ cart }) {
+  const total = cart
+    .map((item) => {
+      return item.price * item.quantity;
+    })
+    .reduce((acc, curVal) => {
+      return acc + curVal;
+    })
+    .toFixed(2);
   return (
     <PaymentContainer>
       <form action="">
@@ -25,7 +32,7 @@ function Payment({ cart }) {
       <div className="total-container">
         <div className="subtotal flexx">
           <div>Subtotal</div>
-          <div>$34.55</div>
+          <div>${total}</div>
         </div>
         <div className="shipping flexx">
           <div>Shipping</div>
@@ -33,7 +40,7 @@ function Payment({ cart }) {
         </div>
         <div className="total flexx">
           <div>Total</div>
-          <div>$32.55</div>
+          <div>${total}</div>
         </div>
       </div>
     </PaymentContainer>

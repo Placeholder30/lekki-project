@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Navbar({ userData, setUserData }) {
+function Navbar({ userData, setUserData, cart }) {
+  console.log(cart);
   return (
     <>
       <Header>
@@ -24,7 +25,8 @@ function Navbar({ userData, setUserData }) {
             <li>
               <Link to="/men">MEN</Link>
             </li>
-            <li>
+            <li className="cart">
+              {cart && <span className="no-in-cart">{cart.length}</span>}
               <Link to="/cart">CART</Link>
             </li>
             <li>
@@ -61,6 +63,9 @@ const Header = styled.header`
     margin: 0 auto;
     justify-content: center;
   }
+  li.cart {
+    position: relative;
+  }
   li {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
@@ -76,6 +81,19 @@ const Header = styled.header`
         border-bottom: 2px solid #ccc;
       }
     }
+  }
+  .no-in-cart {
+    text-align: center;
+    padding-top: 0.3rem;
+    font-weight: 500;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    border-radius: 1.5rem;
+    background-color: black;
+    bottom: 1.7rem;
+    left: 60%;
+    color: white;
   }
   @media screen and (max-width: 769px) {
     li {

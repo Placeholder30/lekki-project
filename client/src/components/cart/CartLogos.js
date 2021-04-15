@@ -1,5 +1,5 @@
 import styled from "styled-components";
-function CartLogos() {
+function CartLogos({ cart }) {
   return (
     <CartMain>
       <div className="shopping-cart square">
@@ -46,7 +46,6 @@ const CartMain = styled.main`
     background-color: white;
     margin: 2rem auto;
     text-align: center;
-    /* background-color: #d96528; */
     p {
       font-size: 1.7rem;
       margin: 4rem auto;

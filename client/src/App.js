@@ -37,7 +37,11 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <HomePage userData={userData} setUserData={setUserData} />
+              <HomePage
+                userData={userData}
+                setUserData={setUserData}
+                cart={cart}
+              />
             </Route>
             <Route exact path="/login">
               <LoginPage userData={userData} setUserData={setUserData} />
@@ -50,6 +54,7 @@ function App() {
                 productsData={productsData}
                 userData={userData}
                 setProduct={setProduct}
+                cart={cart}
               />
             </Route>
             <Route exact path="/men">
@@ -57,6 +62,7 @@ function App() {
                 productsData={productsData}
                 userData={userData}
                 setProduct={setProduct}
+                cart={cart}
               />
             </Route>
             <Route exact path="/women">
@@ -64,6 +70,7 @@ function App() {
                 productsData={productsData}
                 userData={userData}
                 setProduct={setProduct}
+                cart={cart}
               />
             </Route>
             <Route exact path="/details">

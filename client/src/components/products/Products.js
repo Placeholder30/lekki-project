@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 import Card from "./Card";
-function Products({ userData, setUserData, productsData, setProduct }) {
+function Products({ userData, setUserData, productsData, setProduct, cart }) {
   const location = useLocation();
   return (
     <>
-      <Navbar userData={userData} setUserData={setUserData} />
+      <Navbar userData={userData} setUserData={setUserData} cart={cart} />
       <ProductsMain>
         <div className="products">
           {location.pathname === "/all"

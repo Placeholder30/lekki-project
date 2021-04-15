@@ -7,8 +7,8 @@ import CartTable from "./CartTable";
 function CartPage({ userData, cart, setCart }) {
   return (
     <>
-      <Navbar userData={userData} />
-      <CartLogos />
+      <Navbar userData={userData} cart={cart} />
+      <CartLogos cart={cart} />
       <CartTable cart={cart} setCart={setCart} />
       <Grids />
       <Footer />

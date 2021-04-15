@@ -8,7 +8,7 @@ function ProductDetails({ userData, product, setCart, cart }) {
 
   return (
     <>
-      <Navbar userData={userData} />
+      <Navbar userData={userData} cart={cart} />
       <ProductContainer>
         <div className="product">
           <img src={product.imageUrl} alt="" />
@@ -120,6 +120,7 @@ const ProductContainer = styled.main`
     margin: 2rem 3rem 0;
     &:hover {
       cursor: pointer;
+      opacity: 0.9;
     }
   }
 `;
