@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CardContainer } from "../home/FeaturedProducts";
 
-function Card({ product, setProduct }) {
+function Card({ product }) {
   return (
     <CardContainer>
       <div className="prod-image">
@@ -9,13 +9,7 @@ function Card({ product, setProduct }) {
       </div>
       <p className="prod-name">{product.name}</p>
       <p className="price">${product.price}</p>
-      <Link
-        to="/details"
-        className="view-prod"
-        onClick={() => {
-          setProduct(product);
-        }}
-      >
+      <Link to={`products/${product.id}`} className="view-prod">
         View Item {">"}
       </Link>
     </CardContainer>

@@ -3,73 +3,90 @@ import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-import { CartContext } from "../context/Context";
-function ProductDetails({ userData, product, setProduct }) {
+import { CartContext, ProductsContext } from "../context/Context";
+import { useParams } from "react-router";
+function ProductDetails({ userData }) {
   const [productNo, setProductNo] = useState(1);
   const [cart, setCart] = useContext(CartContext);
-
+  const productsData = useContext(ProductsContext);
+  const { id } = useParams();
+  const [product] = productsData.filter((item) => {
+    if (item.id == id) {
+      return item;
+    }
+  });
+  let renderLoading;
+  !product ? (renderLoading = true) : false;
   return (
     <>
       <Navbar userData={userData} />
       <ProductContainer>
-        <div className="product">
-          <img src={product.imageUrl} alt="" />
-        </div>
-        <div className="content">
-          <h2>{product.name}</h2>
-          <div className="price">${product.price}</div>
-          <div className="story">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              odit placeat fuga.
-            </p>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-              voluptatibus expedita omnis molestias magnam molestiae quia
-              blanditiis, illum incidunt impedit.
-            </p>
-            <div className="buttons">
-              <button onClick={() => productNo && setProductNo(productNo - 1)}>
-                -
-              </button>
-              <input
-                type="number"
-                name=""
-                min="0"
-                value={productNo}
-                onChange={(e) => {
-                  setProductNo(Number(e.target.value));
-                }}
-              />
-              <button onClick={() => setProductNo(productNo + 1)}>+</button>
-              <button
-                className="add-cart"
-                onClick={() => {
-                  let addToCart = true;
-                  cart.forEach((cartItem) => {
-                    if (cartItem.name === product.name) {
-                      addToCart = false;
-                    }
-                  });
-                  addToCart &&
-                    setCart((state) => [
-                      ...state,
-                      {
-                        imageUrl: product.imageUrl,
-                        name: product.name,
-                        price: product.price,
-                        quantity: productNo,
-                      },
-                    ]);
-                }}
-              >
-                Add to Cart
-              </button>
+        {renderLoading ? (
+          <div>Loading....</div>
+        ) : (
+          <>
+            <div className="product">
+              <img src={product.imageUrl} alt="" />
             </div>
-          </div>
-        </div>
+            <div className="content">
+              <h2>{product.name}</h2>
+              <div className="price">${product.price}</div>
+              <div className="story">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Beatae odit placeat fuga.
+                </p>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Libero voluptatibus expedita omnis molestias magnam molestiae
+                  quia blanditiis, illum incidunt impedit.
+                </p>
+                <div className="buttons">
+                  <button
+                    onClick={() => productNo && setProductNo(productNo - 1)}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    name=""
+                    min="0"
+                    value={productNo}
+                    onChange={(e) => {
+                      setProductNo(Number(e.target.value));
+                    }}
+                  />
+                  <button onClick={() => setProductNo(productNo + 1)}>+</button>
+                  <button
+                    className="add-cart"
+                    onClick={() => {
+                      let addToCart = true;
+                      cart.forEach((cartItem) => {
+                        if (cartItem.name === product.name) {
+                          addToCart = false;
+                        }
+                      });
+                      addToCart &&
+                        setCart((state) => [
+                          ...state,
+                          {
+                            imageUrl: product.imageUrl,
+                            name: product.name,
+                            price: product.price,
+                            quantity: productNo,
+                          },
+                        ]);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </ProductContainer>
-      <FeaturedProducts setProduct={setProduct} />
+      <FeaturedProducts />
       <Footer />
     </>
   );

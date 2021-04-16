@@ -16,7 +16,6 @@ function Products({ userData, setUserData, productsData, setProduct }) {
                 <Card
                   key={product.id}
                   product={product} //local mapped product variable that you shoud rename but will you?
-                  setProduct={setProduct} //App.js hook
                 />
               ))
             : location.pathname === "/men"

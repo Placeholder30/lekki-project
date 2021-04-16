@@ -14,7 +14,6 @@ import { ProductsContext } from "./components/context/Context";
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
-  const [product, setProduct] = useState({}); //product passed to product details
   const [cart, setCart] = useState(getCartFromLocalStorage());
   useEffect(() => {
     const fetchProducts = async () => {
@@ -52,11 +51,7 @@ function App() {
             <CartContext.Provider value={[cart, setCart]}>
               <ProductsContext.Provider value={productsData}>
                 <Route exact path="/">
-                  <HomePage
-                    userData={userData}
-                    setUserData={setUserData}
-                    setProduct={setProduct}
-                  />
+                  <HomePage userData={userData} setUserData={setUserData} />
                 </Route>
                 <Route exact path="/login">
                   <LoginPage userData={userData} setUserData={setUserData} />
@@ -65,32 +60,16 @@ function App() {
                   <RegisterPage userData={userData} setUserData={setUserData} />
                 </Route>
                 <Route exact path="/all">
-                  <Products
-                    productsData={productsData}
-                    userData={userData}
-                    setProduct={setProduct}
-                  />
+                  <Products productsData={productsData} userData={userData} />
                 </Route>
                 <Route exact path="/men">
-                  <Products
-                    productsData={productsData}
-                    userData={userData}
-                    setProduct={setProduct}
-                  />
+                  <Products productsData={productsData} userData={userData} />
                 </Route>
                 <Route exact path="/women">
-                  <Products
-                    productsData={productsData}
-                    userData={userData}
-                    setProduct={setProduct}
-                  />
+                  <Products productsData={productsData} userData={userData} />
                 </Route>
-                <Route exact path="/details">
-                  <ProductDetails
-                    userData={userData}
-                    product={product}
-                    setProduct={setProduct}
-                  />
+                <Route path="/products/:id">
+                  <ProductDetails userData={userData} />
                 </Route>
                 <Route exact path="/cart">
                   <CartPage userData={userData} />

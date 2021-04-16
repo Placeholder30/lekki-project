@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ProductsContext } from "../context/Context";
-function FeaturedProducts({ setProduct }) {
+function FeaturedProducts() {
   const productsData = useContext(ProductsContext);
-
   return (
     <ProductContainer>
       <h2>
@@ -20,14 +19,9 @@ function FeaturedProducts({ setProduct }) {
               </div>
               <p className="prod-name">{product.name}</p>
               <p className="price">${product.price}</p>
-              <div
-                className="view-prod"
-                onClick={() => {
-                  setProduct(product);
-                }}
-              >
-                <Link to="/details">View Item </Link>
-                {">"}{" "}
+              <div className="view-prod" onClick={() => {}}>
+                <Link to={`/products/${product.id}`}>View Item </Link>
+                {">"}
               </div>
             </CardContainer>
           ))}
