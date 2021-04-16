@@ -24,9 +24,9 @@ function Payment() {
         />
         <p>
           This is a functional payment gateway, you can send me money if
-          you&apos;re feeling my concept. However, you won&apos;t be getting
-          anything in return. You will be donating to open source. Hopefully,
-          this holds up in court.
+          you&apos;re feeling my concept. However, you
+          <strong> WILL NOT </strong> be getting anything in return. You will be
+          donating to open source. Hopefully, this holds up in court.
         </p>
         <label htmlFor="card">Credit Card</label>
         <input type="text" name="" id="card" />
@@ -71,6 +71,9 @@ const PaymentContainer = styled.div`
   }
   input:focus {
     outline: none;
+  }
+  strong {
+    font-weight: 500;
   }
   button {
     margin-top: 1.3rem;

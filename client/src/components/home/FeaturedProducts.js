@@ -1,34 +1,41 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import prod1 from "../assets/products/1.jpg";
-import prod2 from "../assets/products/2.jpg";
-import prod3 from "../assets/products/3.jpg";
-function FeaturedProducts() {
+import { ProductsContext } from "../context/Context";
+function FeaturedProducts({ setProduct }) {
+  const productsData = useContext(ProductsContext);
+
   return (
     <ProductContainer>
       <h2>
         <span>Featured </span>
       </h2>
       <div className="cards">
-        <ProductCard id={1} />
-        <ProductCard id={2} />
-        <ProductCard id={3} />
+        {productsData
+          .filter((product) => product.id < 4)
+          .map((product, index) => (
+            <CardContainer key={index}>
+              <div className="prod-image">
+                <img src={product.imageUrl} alt="watch" />
+              </div>
+              <p className="prod-name">{product.name}</p>
+              <p className="price">${product.price}</p>
+              <div
+                className="view-prod"
+                onClick={() => {
+                  setProduct(product);
+                }}
+              >
+                <Link to="/details">View Item </Link>
+                {">"}{" "}
+              </div>
+            </CardContainer>
+          ))}
       </div>
     </ProductContainer>
   );
 }
-export function ProductCard({ id }) {
-  return (
-    <CardContainer>
-      <div className="prod-image">
-        <img src={id === 1 ? prod1 : id === 2 ? prod2 : prod3} alt="watch" />
-      </div>
-      <p className="prod-name">Desi Avramovitz</p>
-      <p className="price">$50.88</p>
-      <div className="view-prod">View Item {">"} </div>
-    </CardContainer>
-  );
-}
+
 const ProductContainer = styled.section`
   width: 100%;
 

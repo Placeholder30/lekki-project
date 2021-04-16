@@ -10,12 +10,12 @@ import NotFound from "./components/notfound/NotFound";
 import ProductDetails from "./components/products/ProductDetails";
 import CartPage from "./components/cart/CartPage";
 import { CartContext } from "./components/context/Context";
-
+import { ProductsContext } from "./components/context/Context";
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
   const [product, setProduct] = useState({}); //product passed to product details
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(getCartFromLocalStorage());
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -31,6 +31,18 @@ function App() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const saveCartToLocalStorage = () => {
+      const items = JSON.stringify(cart);
+      localStorage.setItem("cart", items);
+    };
+    saveCartToLocalStorage();
+  }, [cart]);
+
+  function getCartFromLocalStorage() {
+    const items = JSON.parse(localStorage.getItem("cart"));
+    return !items ? [] : items;
+  }
   return (
     <>
       <GlobalStyle />
@@ -38,43 +50,53 @@ function App() {
         <Router>
           <Switch>
             <CartContext.Provider value={[cart, setCart]}>
-              <Route exact path="/">
-                <HomePage userData={userData} setUserData={setUserData} />
-              </Route>
-              <Route exact path="/login">
-                <LoginPage userData={userData} setUserData={setUserData} />
-              </Route>
-              <Route exact path="/register">
-                <RegisterPage userData={userData} setUserData={setUserData} />
-              </Route>
-              <Route exact path="/all">
-                <Products
-                  productsData={productsData}
-                  userData={userData}
-                  setProduct={setProduct}
-                />
-              </Route>
-              <Route exact path="/men">
-                <Products
-                  productsData={productsData}
-                  userData={userData}
-                  setProduct={setProduct}
-                />
-              </Route>
-              <Route exact path="/women">
-                <Products
-                  productsData={productsData}
-                  userData={userData}
-                  setProduct={setProduct}
-                />
-              </Route>
-              <Route exact path="/details">
-                <ProductDetails userData={userData} product={product} />
-              </Route>
-              <Route exact path="/cart">
-                <CartPage userData={userData} />
-              </Route>
-              {/* <Route component={NotFound} /> */}
+              <ProductsContext.Provider value={productsData}>
+                <Route exact path="/">
+                  <HomePage
+                    userData={userData}
+                    setUserData={setUserData}
+                    setProduct={setProduct}
+                  />
+                </Route>
+                <Route exact path="/login">
+                  <LoginPage userData={userData} setUserData={setUserData} />
+                </Route>
+                <Route exact path="/register">
+                  <RegisterPage userData={userData} setUserData={setUserData} />
+                </Route>
+                <Route exact path="/all">
+                  <Products
+                    productsData={productsData}
+                    userData={userData}
+                    setProduct={setProduct}
+                  />
+                </Route>
+                <Route exact path="/men">
+                  <Products
+                    productsData={productsData}
+                    userData={userData}
+                    setProduct={setProduct}
+                  />
+                </Route>
+                <Route exact path="/women">
+                  <Products
+                    productsData={productsData}
+                    userData={userData}
+                    setProduct={setProduct}
+                  />
+                </Route>
+                <Route exact path="/details">
+                  <ProductDetails
+                    userData={userData}
+                    product={product}
+                    setProduct={setProduct}
+                  />
+                </Route>
+                <Route exact path="/cart">
+                  <CartPage userData={userData} />
+                </Route>
+                {/* <Route component={NotFound} /> */}
+              </ProductsContext.Provider>
             </CartContext.Provider>
           </Switch>
         </Router>
@@ -82,8 +104,6 @@ function App() {
     </>
   );
 }
-
-export default App;
 
 const GlobalStyle = createGlobalStyle`
     *, html {
@@ -108,3 +128,5 @@ const Container = styled.div`
   width: 80vw;
   margin: 0 auto;
 `;
+
+export default App;

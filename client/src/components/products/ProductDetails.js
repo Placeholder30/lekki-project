@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
 import { CartContext } from "../context/Context";
-function ProductDetails({ userData, product }) {
+function ProductDetails({ userData, product, setProduct }) {
   const [productNo, setProductNo] = useState(1);
   const [cart, setCart] = useContext(CartContext);
 
@@ -69,7 +69,7 @@ function ProductDetails({ userData, product }) {
           </div>
         </div>
       </ProductContainer>
-      <FeaturedProducts />
+      <FeaturedProducts setProduct={setProduct} />
       <Footer />
     </>
   );

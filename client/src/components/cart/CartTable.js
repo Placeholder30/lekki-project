@@ -78,12 +78,15 @@ function CartTable() {
               ))}
             </tbody>
           </table>
-          <Payment cart={cart} />
+          <Payment />
         </>
       ) : (
-        <button className="back-home">
-          <Link to="/">Back Home</Link>
-        </button>
+        <>
+          <span className="is-empty">Is empty</span>
+          <button className="back-home">
+            <Link to="/">Back Home</Link>
+          </button>
+        </>
       )}
     </TableContainer>
   );
@@ -154,6 +157,15 @@ const TableContainer = styled.section`
       cursor: pointer;
       color: white;
     }
+  }
+  span.is-empty {
+    display: block;
+    margin: 0 auto;
+    width: 12rem;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 300;
   }
   button.back-home {
     display: block;
