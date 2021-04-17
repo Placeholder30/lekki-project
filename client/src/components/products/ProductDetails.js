@@ -49,7 +49,6 @@ function ProductDetails({ userData }) {
                   </button>
                   <input
                     type="number"
-                    name=""
                     min="0"
                     value={productNo}
                     onChange={(e) => {
@@ -70,6 +69,7 @@ function ProductDetails({ userData }) {
                         setCart((state) => [
                           ...state,
                           {
+                            id: product.id,
                             imageUrl: product.imageUrl,
                             name: product.name,
                             price: product.price,

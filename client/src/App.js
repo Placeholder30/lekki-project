@@ -47,22 +47,22 @@ function App() {
       <GlobalStyle />
       <Container>
         <Router>
-          <Switch>
-            <CartContext.Provider value={[cart, setCart]}>
-              <ProductsContext.Provider value={productsData}>
+          <CartContext.Provider value={[cart, setCart]}>
+            <ProductsContext.Provider value={productsData}>
+              <Switch>
                 <Route exact path="/">
                   <HomePage userData={userData} setUserData={setUserData} />
                 </Route>
-                <Route exact path="/login">
+                <Route path="/login">
                   <LoginPage userData={userData} setUserData={setUserData} />
                 </Route>
-                <Route exact path="/register">
+                <Route path="/register">
                   <RegisterPage userData={userData} setUserData={setUserData} />
                 </Route>
-                <Route exact path="/all">
+                <Route path="/all">
                   <Products productsData={productsData} userData={userData} />
                 </Route>
-                <Route exact path="/men">
+                <Route path="/men">
                   <Products productsData={productsData} userData={userData} />
                 </Route>
                 <Route exact path="/women">
@@ -71,13 +71,13 @@ function App() {
                 <Route path="/products/:id">
                   <ProductDetails userData={userData} />
                 </Route>
-                <Route exact path="/cart">
+                <Route path="/cart">
                   <CartPage userData={userData} />
                 </Route>
-                {/* <Route component={NotFound} /> */}
-              </ProductsContext.Provider>
-            </CartContext.Provider>
-          </Switch>
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </ProductsContext.Provider>
+          </CartContext.Provider>
         </Router>
       </Container>
     </>
