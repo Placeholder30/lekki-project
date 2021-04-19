@@ -1,15 +1,15 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import { postData } from "../../helpers/fetch";
-function Navbar({ userData, setUserData }) {
-  const history = useHistory();
+import { CartContext } from "../context/Context";
+function Navbar({ userData }) {
+  const [cart] = useContext(CartContext);
 
   return (
     <>
       <Header>
         <h1>Lekki Store</h1>
-        {userData.message && (
+        {userData.authenticated && (
           <div className="user-message">{userData.message}</div>
         )}
         <nav>
@@ -18,23 +18,26 @@ function Navbar({ userData, setUserData }) {
               <Link to="/">HOME</Link>
             </li>
             <li>
-              <Link to="/products/all">ALL</Link>
+              <Link to="/all">ALL</Link>
             </li>
             <li>
-              <Link to="/products/women">WOMEN</Link>
+              <Link to="/women">WOMEN</Link>
             </li>
             <li>
-              <Link to="/products/men">MEN</Link>
+              <Link to="/men">MEN</Link>
             </li>
-            <li>
-              <Link to="">CART</Link>
+            <li className="cart">
+              {cart.length ? (
+                <span className="no-in-cart">{cart.length}</span>
+              ) : null}
+              <Link to="/cart">CART</Link>
             </li>
             <li>
               <Link to="/register">REGISTER</Link>
             </li>
             <li>
-              <Link to={!userData.message ? "/login" : "/logout"}>
-                {!userData.message ? "LOGIN" : "LOGOUT"}
+              <Link to={userData.authenticated ? "/logout" : "/login"}>
+                {userData.authenticated ? "LOGOUT" : "LOGIN"}
               </Link>
             </li>
           </ul>
@@ -45,9 +48,6 @@ function Navbar({ userData, setUserData }) {
 }
 
 const Header = styled.header`
-  /* .user-message {
-    margin-left: 14vw;
-  } */
   h1 {
     text-align: center;
     margin-top: 5.3rem;
@@ -66,6 +66,9 @@ const Header = styled.header`
     margin: 0 auto;
     justify-content: center;
   }
+  li.cart {
+    position: relative;
+  }
   li {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
@@ -81,6 +84,19 @@ const Header = styled.header`
         border-bottom: 2px solid #ccc;
       }
     }
+  }
+  .no-in-cart {
+    text-align: center;
+    padding-top: 0.3rem;
+    font-weight: 500;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    border-radius: 1.5rem;
+    background-color: black;
+    bottom: 1.7rem;
+    left: 60%;
+    color: white;
   }
   @media screen and (max-width: 769px) {
     li {

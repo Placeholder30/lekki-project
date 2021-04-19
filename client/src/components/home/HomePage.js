@@ -1,9 +1,9 @@
 import React from "react";
-import Collection from "../components/home/Collection";
-import FeaturedProducts from "../components/home/FeaturedProducts";
-import Footer from "../components/home/Footer";
-import Grids from "../components/home/Grid";
-import Navbar from "../components/home/Navbar";
+import Collection from "./Collection";
+import FeaturedProducts from "./FeaturedProducts";
+import Footer from "./Footer";
+import Grids from "./Grid";
+import Navbar from "./Navbar";
 
 function HomePage({ userData, setUserData }) {
   return (

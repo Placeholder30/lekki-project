@@ -1,58 +1,42 @@
 import React from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
-import { CardContainer } from "../home/FeaturedProducts";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
-
-function Products({ userData, setUserData, productsData }) {
+import Card from "./Card";
+function Products({ userData, setUserData, productsData, setProduct }) {
   const location = useLocation();
   return (
     <>
       <Navbar userData={userData} setUserData={setUserData} />
       <ProductsMain>
         <div className="products">
-          {location.pathname === "/products/all"
-            ? productsData.map((prod) => (
-                <CardContainer key={prod.id}>
-                  <div className="prod-image">
-                    <img src={prod.url} alt="" />
-                  </div>
-                  <p className="prod-name">{prod.name}</p>
-                  <p className="price">${prod.price}</p>
-                  <div className="view-prod">View Item {">"} </div>
-                </CardContainer>
+          {location.pathname === "/all"
+            ? productsData.map((product) => (
+                <Card
+                  key={product.id}
+                  product={product} //local mapped product variable that you shoud rename but will you?
+                />
               ))
-            : location.pathname === "/products/men"
+            : location.pathname === "/men"
             ? productsData
-                .filter((prod) => prod.category === "men")
-                .map((prod) => (
-                  <CardContainer key={prod.id}>
-                    <div className="prod-image">
-                      <img src={prod.url} alt="" />
-                    </div>
-                    <p className="prod-name">{prod.name}</p>
-                    <p className="price">${prod.price}</p>
-                    <div className="view-prod">View Item {">"} </div>
-                  </CardContainer>
+                .filter((product) => product.category === "men")
+                .map((product) => (
+                  <Card
+                    key={product.id}
+                    product={product} //local product variable
+                    setProduct={setProduct}
+                  />
                 ))
-            : location.pathname === "/products/women"
-            ? productsData
-                .filter((prod) => prod.category === "women")
-                .map((prod) => (
-                  <CardContainer key={prod.id}>
-                    <div className="prod-image">
-                      <img
-                        src="http://res.cloudinary.com/placeholder30/image/upload/v1617395366/lekki-store/frontend-assets/products/women/5.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <p className="prod-name">{prod.name}</p>
-                    <p className="price">${prod.price}</p>
-                    <div className="view-prod">View Item {">"} </div>
-                  </CardContainer>
-                ))
-            : null}
+            : productsData
+                .filter((product) => product.category === "women")
+                .map((product) => (
+                  <Card
+                    key={product.id}
+                    product={product} //local product variable
+                    setProduct={setProduct}
+                  />
+                ))}
         </div>
         <div className="sale">
           <h2>Special Sale</h2>
@@ -70,12 +54,13 @@ const ProductsMain = styled.section`
   display: flex;
   justify-content: space-between;
   .products {
+    flex: 2.8;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
   .sale {
-    max-width: 35rem;
+    flex: 1.2;
     h2 {
       margin-top: 1.8rem;
     }
@@ -85,6 +70,16 @@ const ProductsMain = styled.section`
     img {
       width: 100%;
       height: auto;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 530px) {
+    .products {
+      grid-template-columns: 1fr;
     }
   }
 `;

@@ -1,4 +1,4 @@
-const { User } = require("../models/index");
+ const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const { createToken } = require("../middlewares/authentication");
 
@@ -15,13 +15,16 @@ exports.register = async function (req, res) {
       email,
       password,
     });
+    const UUID = user;
+    const token = createToken(UUID);
     res.status(200).json({
-      message: `You've successfully registered ${user.firstName}`,
-      name: user.firstName,
+      message: `Hi, ${firstName}`,
+      token,
+      authenticated: true,
     });
   } catch (err) {
     //handle registration errors
-    res.status(400).json({ message: err.errors });
+    res.status(400).json({ message: err.errors[0].message });
   }
 };
 exports.login = async function (req, res) {
@@ -31,7 +34,7 @@ exports.login = async function (req, res) {
     const { UUID, firstName } = user;
     //check if user doesn't exist in db
     //render register page
-    if (user === null) {
+    if (!user) {
       res.status(400).json({ message: "create an account first" });
     }
 
@@ -41,7 +44,6 @@ exports.login = async function (req, res) {
       const token = createToken(UUID);
       res.status(200).json({
         message: `Hi, ${firstName}`,
-        // name: firstName,
         token,
         authenticated: true,
       });

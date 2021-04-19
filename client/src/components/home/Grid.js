@@ -13,13 +13,13 @@ function Grids() {
         <p>Call us anytime</p>
       </Grid>
 
-      <Grid>
+      <Grid className="mid">
         <img src={iconService} alt="laptop " />
         <h5> Easy online returns </h5>
         <p>Send Within 30 Days</p>
       </Grid>
 
-      <Grid>
+      <Grid className="last">
         <img src={iconPackage} alt="delivery truck" />
         <h5>Free Shipping Globally</h5>
         <p>Delivery in 4 Days</p>
@@ -28,23 +28,25 @@ function Grids() {
   );
 }
 const Container = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 3rem;
-  margin-top: 3rem;
-  @media screen and (max-width: 769px) {
-    grid-template-columns: 1fr 1fr;
-    margin-top: 0.3rem;
-  }
-  @media screen and (max-width: 550px) {
-    grid-template-columns: 1fr;
+  display: flex;
+  width: 85%;
+  justify-content: space-around;
+  margin: 3rem auto;
+
+  @media screen and (max-width: 680px) {
+    flex-wrap: wrap;
+    .last,
+    .mid {
+      margin-top: 2rem;
+    }
   }
 `;
 
 const Grid = styled.div`
+  flex: 1;
   border: 1px solid #ccc;
   padding: 2rem 4rem;
+  margin-right: 2rem;
   line-height: 1.4;
   display: flex;
   flex-direction: column;

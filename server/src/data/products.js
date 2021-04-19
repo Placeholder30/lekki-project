@@ -1,10 +1,10 @@
 module.exports = [
   {
     id: 1,
-    name: "Angelina Ferera",
+    name: "Nico Robin",
     category: "women",
     imageUrl:
-      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/4.jpg",
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617395366/lekki-store/frontend-assets/products/women/5.jpg",
     price: 12.88,
   },
 
@@ -12,15 +12,17 @@ module.exports = [
     id: 2,
     name: "Nonso Diobi",
     category: "men",
-    imageUrl: "",
+    imageUrl:
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617466591/lekki-store/frontend-assets/products/men/1.jpg",
     price: 6.33,
   },
 
   {
     id: 3,
-    name: "Valencia Nagasaki",
+    name: "Hinata Shoyo",
     category: "men",
-    imageUrl: "",
+    imageUrl:
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617466591/lekki-store/frontend-assets/products/men/2.jpg",
     price: 7.99,
   },
 
@@ -28,7 +30,8 @@ module.exports = [
     id: 4,
     name: "Haruno Sakura",
     category: "women",
-    imageUrl: "",
+    imageUrl:
+      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/6.jpg",
     price: 10.99,
   },
 
@@ -36,7 +39,8 @@ module.exports = [
     id: 5,
     name: "Hatake Kakashi",
     category: "men",
-    imageUrl: "",
+    imageUrl:
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617466591/lekki-store/frontend-assets/products/men/3.jpg",
     price: 7.73,
   },
 
@@ -44,6 +48,8 @@ module.exports = [
     id: 6,
     name: "Eren Yeager",
     category: "men",
+    imageUrl:
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617466591/lekki-store/frontend-assets/products/men/4.jpg",
     price: 19.99,
   },
 
@@ -51,7 +57,8 @@ module.exports = [
     id: 7,
     name: "Historia Reiss",
     category: "women",
-    imageUrl: "",
+    imageUrl:
+      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/7.jpg",
     price: 10.99,
   },
 
@@ -60,7 +67,7 @@ module.exports = [
     name: "Mikasa Ackerman",
     category: "women",
     imageUrl:
-      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/7.jpg",
+      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/8.jpg",
     price: 19.99,
   },
 
@@ -69,7 +76,7 @@ module.exports = [
     name: "Hanji Zoë",
     category: "women",
     imageUrl:
-      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/8.jpg",
+      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/9.jpg",
     price: 12.99,
   },
 
@@ -78,7 +85,7 @@ module.exports = [
     name: "Annie Leonhart",
     category: "women",
     imageUrl:
-      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/9.jpg",
+      "http://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395391/lekki-store/frontend-assets/products/women/10.jpg",
     price: 14.99,
   },
 ];
