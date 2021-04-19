@@ -12,7 +12,10 @@ function Collection({ photo }) {
         <p>Street Style New Fashion</p>
       </div>
       <div className="pic">
-        <img src={photo ? shoe : bag} alt="shoe" />
+        <img
+          src={photo ? shoe : bag}
+          alt={photo ? "a large shoe" : "a large bag"}
+        />
       </div>
     </Container>
   );
