@@ -68,6 +68,7 @@ function ProductDetails({ userData }) {
                           ...state,
                           {
                             id: product.id,
+                            UUID: product.UUID,
                             imageUrl: product.imageUrl,
                             name: product.name,
                             price: product.price,

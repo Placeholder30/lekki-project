@@ -3,7 +3,7 @@ const productsJson = require("../data/products");
 
 exports.getProducts = async function (req, res) {
   const products = await Product.findAll({
-    attributes: { exclude: ["UUID", "createdAt", "updatedAt"] },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
   });
   res.status(200).json(products);
 };
@@ -21,7 +21,7 @@ exports.addProduct = async function (req, res) {
   }
 };
 
-//secure this end point with some sort of auth
+// secure this end point with some sort of auth
 exports.populateDb = function (req, res) {
   productsJson.forEach(async ({ name, id, imageUrl, alt, category, price }) => {
     try {

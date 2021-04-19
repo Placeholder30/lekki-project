@@ -49,6 +49,7 @@ exports.login = async function (req, res) {
         token,
         authenticated: true,
         email,
+        UUID,
       });
     } else {
       //handle invalid password error

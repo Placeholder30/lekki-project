@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import Payment from "../forms/Payment";
+import Payment from "./Payment";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/Context";
 import CartItem from "./CartItem";

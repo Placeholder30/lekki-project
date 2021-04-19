@@ -10,7 +10,8 @@ exports.createToken = function (id) {
 exports.verifyToken = function (req, res, next) {
   try {
     const payload = req.headers.authorization;
-    const verifiedPayload = jwt.verify(payload, process.env.JWT_SECRET);
+    const token = payload.split(" ");
+    const verifiedPayload = jwt.verify(token[1], process.env.JWT_SECRET);
     res.status(200).json({ message: "authenticated" });
     next();
   } catch (err) {
