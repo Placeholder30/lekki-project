@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       address: {
         type: DataTypes.STRING,
@@ -46,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       lastLogin: {
         type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       },
     },
     {

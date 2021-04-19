@@ -10,7 +10,7 @@ function Navbar({ userData }) {
       <Header>
         <h1>Lekki Store</h1>
         {userData.authenticated && (
-          <div className="user-message">{userData.message}</div>
+          <div className="user-message">Hi, {userData.firstName}</div>
         )}
         <nav>
           <ul>
@@ -27,7 +27,7 @@ function Navbar({ userData }) {
               <Link to="/men">MEN</Link>
             </li>
             <li className="cart">
-              {cart.length ? (
+              {cart && cart.length ? (
                 <span className="no-in-cart">{cart.length}</span>
               ) : null}
               <Link to="/cart">CART</Link>

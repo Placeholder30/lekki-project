@@ -15,18 +15,17 @@ function ProductDetails({ userData }) {
       return item;
     }
   });
-  let renderLoading;
-  !product ? (renderLoading = true) : false;
+
   return (
     <>
       <Navbar userData={userData} />
       <ProductContainer>
-        {renderLoading ? (
+        {!product ? (
           <div>Loading....</div>
         ) : (
           <>
             <div className="product">
-              <img src={product.imageUrl} alt="" />
+              <img src={product.imageUrl} alt={product.alt} />
             </div>
             <div className="content">
               <h2>{product.name}</h2>
@@ -49,7 +48,6 @@ function ProductDetails({ userData }) {
                   </button>
                   <input
                     type="number"
-                    min="0"
                     value={productNo}
                     onChange={(e) => {
                       setProductNo(Number(e.target.value));

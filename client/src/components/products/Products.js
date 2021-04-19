@@ -1,11 +1,13 @@
-import React from "react";
+import { useContext } from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
+import { ProductsContext } from "../context/Context";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 import Card from "./Card";
-function Products({ userData, setUserData, productsData, setProduct }) {
+function Products({ userData, setUserData }) {
   const location = useLocation();
+  const productsData = useContext(ProductsContext);
   return (
     <>
       <Navbar userData={userData} setUserData={setUserData} />
@@ -13,30 +15,15 @@ function Products({ userData, setUserData, productsData, setProduct }) {
         <div className="products">
           {location.pathname === "/all"
             ? productsData.map((product) => (
-                <Card
-                  key={product.id}
-                  product={product} //local mapped product variable that you shoud rename but will you?
-                />
+                <Card key={product.id} product={product} />
               ))
             : location.pathname === "/men"
             ? productsData
                 .filter((product) => product.category === "men")
-                .map((product) => (
-                  <Card
-                    key={product.id}
-                    product={product} //local product variable
-                    setProduct={setProduct}
-                  />
-                ))
+                .map((product) => <Card key={product.id} product={product} />)
             : productsData
                 .filter((product) => product.category === "women")
-                .map((product) => (
-                  <Card
-                    key={product.id}
-                    product={product} //local product variable
-                    setProduct={setProduct}
-                  />
-                ))}
+                .map((product) => <Card key={product.id} product={product} />)}
         </div>
         <div className="sale">
           <h2>Special Sale</h2>

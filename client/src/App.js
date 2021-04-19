@@ -60,13 +60,13 @@ function App() {
                   <RegisterPage userData={userData} setUserData={setUserData} />
                 </Route>
                 <Route path="/all">
-                  <Products productsData={productsData} userData={userData} />
+                  <Products userData={userData} />
                 </Route>
                 <Route path="/men">
-                  <Products productsData={productsData} userData={userData} />
+                  <Products userData={userData} />
                 </Route>
                 <Route exact path="/women">
-                  <Products productsData={productsData} userData={userData} />
+                  <Products userData={userData} />
                 </Route>
                 <Route path="/products/:id">
                   <ProductDetails userData={userData} />

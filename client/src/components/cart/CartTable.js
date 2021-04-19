@@ -3,80 +3,17 @@ import styled from "styled-components";
 import Payment from "../forms/Payment";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/Context";
+import CartItem from "./CartItem";
 function CartTable() {
-  const [cart, setCart] = useContext(CartContext);
-  const toggleItemQuantity = (itemName, subtract) => {
-    let newState;
-    if (subtract) {
-      newState = cart.map((item) => {
-        item.name === itemName && item.quantity--;
-        return item;
-      });
-    } else {
-      newState = cart.map((item) => {
-        item.name === itemName && item.quantity++;
-        return item;
-      });
-    }
-    setCart(newState);
-  };
-  const handleDelete = (name) => {
-    const filteredCart = cart.filter((item) => item.name != name);
-    setCart(filteredCart);
-  };
+  const [cart] = useContext(CartContext);
+
   return (
     <TableContainer>
       <h2>Your Cart</h2>
-      {cart.length ? (
+      {cart && cart.length ? (
         <>
           <table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item, index) => (
-                <tr key={index}>
-                  <td className="flex">
-                    <img src={item.imageUrl} alt="" />
-                    <h4>{item.name}</h4>
-                  </td>
-                  <td>{item.price}</td>
-                  <td>
-                    <span
-                      onClick={() =>
-                        item.quantity > 1 &&
-                        toggleItemQuantity(item.name, "subtract", item.quantity)
-                      }
-                      className="minus"
-                    >
-                      -
-                    </span>
-                    <span className="qty">{item.quantity}</span>
-                    <span
-                      className="plus"
-                      onClick={() => toggleItemQuantity(item.name)}
-                    >
-                      +
-                    </span>
-                  </td>
-                  <td>{(item.quantity * item.price).toFixed(2)}</td>
-                  <td className="delete">
-                    <div
-                      onClick={() => {
-                        handleDelete(item.name);
-                      }}
-                    >
-                      X
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            <CartItem />
           </table>
           <Payment />
         </>

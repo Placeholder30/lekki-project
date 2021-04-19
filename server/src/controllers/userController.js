@@ -1,4 +1,4 @@
- const { User } = require("../models/index");
+const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const { createToken } = require("../middlewares/authentication");
 
@@ -18,9 +18,10 @@ exports.register = async function (req, res) {
     const UUID = user;
     const token = createToken(UUID);
     res.status(200).json({
-      message: `Hi, ${firstName}`,
+      firstName,
       token,
       authenticated: true,
+      email,
     });
   } catch (err) {
     //handle registration errors
@@ -31,21 +32,23 @@ exports.login = async function (req, res) {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
-    const { UUID, firstName } = user;
     //check if user doesn't exist in db
     //render register page
     if (!user) {
       res.status(400).json({ message: "create an account first" });
     }
+    const { UUID, firstName } = user;
 
     // if user exists, check password matches hashed password
     const result = await bcrypt.compare(password, user.password);
     if (result) {
+      User.update({ lastLogin: Date.now() }, { where: { UUID } });
       const token = createToken(UUID);
       res.status(200).json({
-        message: `Hi, ${firstName}`,
+        firstName,
         token,
         authenticated: true,
+        email,
       });
     } else {
       //handle invalid password error

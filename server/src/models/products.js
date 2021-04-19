@@ -48,6 +48,13 @@ module.exports = (sequelize, DataTypes) => {
           isUrl: { message: "Please enter a valid url" },
         },
       },
+      alt: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
     },
     {
       sequelize,

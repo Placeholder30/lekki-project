@@ -8,19 +8,19 @@ function Payment() {
     .map((item) => {
       return item.price * item.quantity;
     })
-    .reduce((acc, curVal) => {
-      return acc + curVal;
+    .reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
     })
     .toFixed(2);
   return (
     <PaymentContainer>
       <form action="">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="address">Address</label>
         <input
-          type="email"
+          type="address"
           name=""
-          id="email"
-          placeholder="example@youremail.com"
+          id="address"
+          placeholder="1/3 pound road Aba"
         />
         <p>
           This is a functional payment gateway, you can send me money if

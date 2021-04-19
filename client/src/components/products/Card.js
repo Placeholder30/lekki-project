@@ -5,7 +5,7 @@ function Card({ product }) {
   return (
     <CardContainer>
       <div className="prod-image">
-        <img src={product.imageUrl} alt="" />
+        <img src={product.imageUrl} alt={product.alt} />
       </div>
       <p className="prod-name">{product.name}</p>
       <p className="price">${product.price}</p>
