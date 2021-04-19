@@ -4,5 +4,6 @@
   "description": "an eCommerce app",
   "main": "index.js",
   "repository": "https://github.com/Placeholder30/lekki-project.git",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {}
 }

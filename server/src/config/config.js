@@ -14,6 +14,7 @@ module.exports = {
     database: DEVDATABASE,
     host: "localhost",
     dialect: "postgres",
+    logging: false,
   },
   production: {
     username: USERNAME,
@@ -21,5 +22,10 @@ module.exports = {
     database: DATABASE,
     host: HOST,
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    },
   },
 };

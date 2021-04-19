@@ -8,7 +8,6 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-
 app.get("/api", (req, res) => {
   res.status(200).json({
     message: "Welcome to the home endpoint",

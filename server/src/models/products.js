@@ -27,7 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: { message: "Please enter a relavant category" },
+          notEmpty: { message: "Please enter a relevant category" },
+        },
+      },
+      price: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+          notNull: { message: "Please enter a price to proceed." },
         },
       },
 

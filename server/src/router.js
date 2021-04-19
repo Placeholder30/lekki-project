@@ -1,24 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { login, register } = require("./controllers/userController");
+const { login, logout, register } = require("./controllers/userController");
 const {
-  getAllProducts,
+  getProducts,
   getAProduct,
-  getAllMenProducts,
-  getAllWomenProducts,
+
   addProduct,
 } = require("./controllers/productsController");
+const { pay } = require("./controllers/paymentController");
+const { verifyToken } = require("./middlewares/authentication");
 
 //user login and registration routes
 router.post("/api/register", register);
 router.post("/api/login", login);
-
+router.get("/api/logout", logout);
 //get products routes
-router.get("/api/products/all", getAllProducts);
-router.get("/api/products/women", getAllWomenProducts);
-router.get("/api/products/men", getAllMenProducts);
-router.get("/api/products/product/:id", getAProduct);
+router.get("/api/products/", getProducts);
 
 //add products
-router.post("/api/products/add", addProduct);
+router.post("/api/products/", addProduct);
+router.post("/api/pay", verifyToken, pay);
 module.exports = router;

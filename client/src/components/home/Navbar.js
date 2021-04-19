@@ -1,34 +1,44 @@
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { CartContext } from "../context/Context";
+function Navbar({ userData }) {
+  const [cart] = useContext(CartContext);
 
-function Navbar() {
   return (
     <>
       <Header>
         <h1>Lekki Store</h1>
+        {userData.authenticated && (
+          <div className="user-message">{userData.message}</div>
+        )}
         <nav>
           <ul>
             <li>
               <Link to="/">HOME</Link>
             </li>
             <li>
-              <Link to="/products/all">ALL</Link>
+              <Link to="/all">ALL</Link>
             </li>
             <li>
-              <Link to="/products/women">WOMEN</Link>
+              <Link to="/women">WOMEN</Link>
             </li>
             <li>
               <Link to="/men">MEN</Link>
             </li>
-            <li>
+            <li className="cart">
+              {cart.length ? (
+                <span className="no-in-cart">{cart.length}</span>
+              ) : null}
               <Link to="/cart">CART</Link>
             </li>
             <li>
               <Link to="/register">REGISTER</Link>
             </li>
             <li>
-              <Link to="/login">LOGIN</Link>
+              <Link to={userData.authenticated ? "/logout" : "/login"}>
+                {userData.authenticated ? "LOGOUT" : "LOGIN"}
+              </Link>
             </li>
           </ul>
         </nav>
@@ -53,9 +63,11 @@ const Header = styled.header`
   ul {
     list-style: none;
     display: flex;
-    width: 33.333%;
     margin: 0 auto;
     justify-content: center;
+  }
+  li.cart {
+    position: relative;
   }
   li {
     border-right: 1px solid #ccc;
@@ -72,6 +84,19 @@ const Header = styled.header`
         border-bottom: 2px solid #ccc;
       }
     }
+  }
+  .no-in-cart {
+    text-align: center;
+    padding-top: 0.3rem;
+    font-weight: 500;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    border-radius: 1.5rem;
+    background-color: black;
+    bottom: 1.7rem;
+    left: 60%;
+    color: white;
   }
   @media screen and (max-width: 769px) {
     li {

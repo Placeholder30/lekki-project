@@ -1,23 +1,33 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { postData } from "../../helpers/fetch";
+import { Link, useHistory } from "react-router-dom";
+import { requestOptions } from "../../helpers/fetch";
 
-function Login() {
+function Login({ setUserData, userData }) {
   const [input, setInput] = useState({});
+  const history = useHistory();
+  const [errMsg, setErrMsg] = useState(null);
 
-  const handleSubmit = () => {
-    fetch("/login", {
-      ...postData,
+  const handleLogin = async () => {
+    const login = await fetch("/login", {
+      ...requestOptions,
       body: JSON.stringify(input),
     });
+    if (login.status === 200) {
+      const result = await login.json();
+      setUserData(result);
+      history.push("/");
+    } else {
+      const result = await login.json();
+      setErrMsg(result);
+    }
   };
 
   return (
     <Form
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit();
+        handleLogin();
       }}
     >
       <Link to="/">
@@ -29,7 +39,6 @@ function Login() {
           type="email"
           name="email"
           required
-          value={input.email}
           onChange={(e) =>
             setInput((state) => ({ ...state, email: e.target.value }))
           }
@@ -41,12 +50,14 @@ function Login() {
           type="password"
           name="password"
           required
-          value={input.password}
           onChange={(e) =>
             setInput((state) => ({ ...state, password: e.target.value }))
           }
         />
       </label>
+
+      {errMsg && <span className="err-msg">{errMsg.message}</span>}
+
       <button type="submit">Login</button>
       <Link to="/">
         <div className="back">Back</div>
@@ -105,6 +116,9 @@ export const Form = styled.form`
     &:hover {
       font-size: 1.2rem;
     }
+  }
+  .err-msg {
+    color: red;
   }
   @media screen and (max-width: 500px) {
     width: 30rem;

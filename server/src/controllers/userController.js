@@ -1,5 +1,6 @@
-const { User } = require("../models/index");
+ const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
+const { createToken } = require("../middlewares/authentication");
 
 exports.register = async function (req, res) {
   let { firstName, lastName, email, password } = req.body;
@@ -14,32 +15,38 @@ exports.register = async function (req, res) {
       email,
       password,
     });
-    res
-      .status(200)
-      .json({ message: `You've successfully registered ${user.firstName}` });
+    const UUID = user;
+    const token = createToken(UUID);
+    res.status(200).json({
+      message: `Hi, ${firstName}`,
+      token,
+      authenticated: true,
+    });
   } catch (err) {
     //handle registration errors
-    console.log(err);
-    res.status(400).json({ message: err.errors });
+    res.status(400).json({ message: err.errors[0].message });
   }
 };
 exports.login = async function (req, res) {
-  console.log(req.body);
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
+    const { UUID, firstName } = user;
     //check if user doesn't exist in db
     //render register page
-    if (user === null) {
+    if (!user) {
       res.status(400).json({ message: "create an account first" });
     }
 
     // if user exists, check password matches hashed password
     const result = await bcrypt.compare(password, user.password);
     if (result) {
-      res
-        .status(200)
-        .json({ message: `You've logged in sucessfully ${user.firstName}` });
+      const token = createToken(UUID);
+      res.status(200).json({
+        message: `Hi, ${firstName}`,
+        token,
+        authenticated: true,
+      });
     } else {
       //handle invalid password error
       res
@@ -51,4 +58,7 @@ exports.login = async function (req, res) {
     console.log(err);
     res.status(400).json({ message: "Please fill the required fields" });
   }
+};
+exports.logout = function (req, res) {
+  res.status(200).json({ authenticated: false });
 };

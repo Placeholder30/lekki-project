@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { postData } from "../../helpers/fetch";
+import { Link, useHistory } from "react-router-dom";
+import { requestOptions } from "../../helpers/fetch";
 import { Form } from "./Login";
 
-function Register() {
+function Register({ setUserData }) {
   const [input, setInput] = useState({});
+  const history = useHistory();
+  const [errMsg, setErrMsg] = useState(null);
 
-  const handleSubmit = () => {
-    fetch("/register", {
-      ...postData,
+  const handleSubmit = async () => {
+    const register = await fetch("/register", {
+      ...requestOptions,
       body: JSON.stringify(input),
     });
+    if (register.status === 200) {
+      const result = await register.json();
+      setUserData(result);
+      history.push("/");
+    } else {
+      const result = await register.json();
+      setErrMsg(result);
+    }
   };
   return (
     <Form
@@ -76,6 +86,7 @@ function Register() {
           }
         />
       </label>
+      {errMsg && <span className="err-msg">{errMsg.message}</span>}
       <button type="submit">Create your account</button>
       <Link to="/">
         <div className="back">Back</div>

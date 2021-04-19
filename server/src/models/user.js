@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       UUID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
       },
       firstName: {
         type: DataTypes.STRING,
@@ -36,13 +37,15 @@ module.exports = (sequelize, DataTypes) => {
           len: { message: "password is too short", args: [5] },
         },
       },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+      },
       address: {
         type: DataTypes.STRING,
         defaultValue: "Homeless",
       },
       lastLogin: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       },
     },
     {

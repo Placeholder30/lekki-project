@@ -1,17 +1,10 @@
 const { Product } = require("../models/index");
 
-exports.getAllProducts = async function (req, res) {
-  res.send("You'll find it all here");
-};
-exports.getAllMenProducts = async function (req, res) {
-  res.send("Welcome to the male section");
-};
-
-exports.getAllWomenProducts = async function (req, res) {
-  res.send("welcome to the female section");
-};
-exports.getAProduct = async function (req, res) {
-  res.send(`it appears you want to buy a ${req.params.id}`);
+exports.getProducts = async function (req, res) {
+  const products = await Product.findAll({
+    attributes: { exclude: ["UUID", "createdAt", "updatedAt"] },
+  });
+  res.status(200).json(products);
 };
 
 exports.addProduct = async function (req, res) {
