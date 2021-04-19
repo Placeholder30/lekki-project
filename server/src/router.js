@@ -7,7 +7,7 @@ const {
 
   addProduct,
 } = require("./controllers/productsController");
-const { cart } = require("./controllers/cartController");
+const { pay } = require("./controllers/paymentController");
 const { verifyToken } = require("./middlewares/authentication");
 
 //user login and registration routes
@@ -17,9 +17,7 @@ router.get("/api/logout", logout);
 //get products routes
 router.get("/api/products/", getProducts);
 
-router.get("/api/product/:id", getAProduct);
-
 //add products
 router.post("/api/products/", addProduct);
-router.post("/api/cart", verifyToken, cart);
+router.post("/api/pay", verifyToken, pay);
 module.exports = router;

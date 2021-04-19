@@ -1,44 +1,93 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "../home/Navbar";
 import styled from "styled-components";
-function ProductDetails({ userData, product }) {
-  const [count, setCount] = useState(0);
+import Footer from "../home/Footer";
+import FeaturedProducts from "../home/FeaturedProducts";
+import { CartContext, ProductsContext } from "../context/Context";
+import { useParams } from "react-router";
+function ProductDetails({ userData }) {
+  const [productNo, setProductNo] = useState(1);
+  const [cart, setCart] = useContext(CartContext);
+  const productsData = useContext(ProductsContext);
+  const { id } = useParams();
+  const [product] = productsData.filter((item) => {
+    if (item.id == id) {
+      return item;
+    }
+  });
+  let renderLoading;
+  !product ? (renderLoading = true) : false;
   return (
     <>
       <Navbar userData={userData} />
       <ProductContainer>
-        <div className="product">
-          <img src={product.imageUrl} alt="" />
-        </div>
-        <div className="content">
-          <h2>{product.name}</h2>
-          <div className="price">${product.price}</div>
-          <div className="story">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              odit placeat fuga.
-            </p>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-              voluptatibus expedita omnis molestias magnam molestiae quia
-              blanditiis, illum incidunt impedit.
-            </p>
-            <div className="buttons">
-              <button onClick={() => count && setCount(count - 1)}>-</button>
-              <input
-                type="number"
-                name=""
-                value={count}
-                onChange={(e) => {
-                  setCount(e.target.value);
-                }}
-              />
-              <button onClick={() => setCount(count + 1)}>+</button>
-              <button className="add-cart">Add to Cart</button>
+        {renderLoading ? (
+          <div>Loading....</div>
+        ) : (
+          <>
+            <div className="product">
+              <img src={product.imageUrl} alt="" />
             </div>
-          </div>
-        </div>
+            <div className="content">
+              <h2>{product.name}</h2>
+              <div className="price">${product.price}</div>
+              <div className="story">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Beatae odit placeat fuga.
+                </p>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Libero voluptatibus expedita omnis molestias magnam molestiae
+                  quia blanditiis, illum incidunt impedit.
+                </p>
+                <div className="buttons">
+                  <button
+                    onClick={() => productNo && setProductNo(productNo - 1)}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    min="0"
+                    value={productNo}
+                    onChange={(e) => {
+                      setProductNo(Number(e.target.value));
+                    }}
+                  />
+                  <button onClick={() => setProductNo(productNo + 1)}>+</button>
+                  <button
+                    className="add-cart"
+                    onClick={() => {
+                      let addToCart = true;
+                      cart.forEach((cartItem) => {
+                        if (cartItem.name === product.name) {
+                          addToCart = false;
+                        }
+                      });
+                      addToCart &&
+                        setCart((state) => [
+                          ...state,
+                          {
+                            id: product.id,
+                            imageUrl: product.imageUrl,
+                            name: product.name,
+                            price: product.price,
+                            quantity: productNo,
+                          },
+                        ]);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </ProductContainer>
+      <FeaturedProducts />
+      <Footer />
     </>
   );
 }
@@ -46,6 +95,7 @@ function ProductDetails({ userData, product }) {
 const ProductContainer = styled.main`
   margin-top: 2rem;
   display: flex;
+  margin-bottom: 4rem;
   .content {
     max-width: 60vw;
   }
@@ -58,6 +108,11 @@ const ProductContainer = styled.main`
   p {
     font-size: 1.4rem;
     margin-bottom: 2rem;
+  }
+  .price {
+    font-size: 2rem;
+    color: red;
+    font-weight: 500;
   }
   .buttons button {
     font-size: 1.4rem;
@@ -82,6 +137,10 @@ const ProductContainer = styled.main`
     background-color: #d96528;
     border: none;
     margin: 2rem 3rem 0;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
   }
 `;
 export default ProductDetails;

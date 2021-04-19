@@ -1,8 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { CartContext } from "../context/Context";
+function Navbar({ userData }) {
+  const [cart] = useContext(CartContext);
 
-function Navbar({ userData, setUserData }) {
   return (
     <>
       <Header>
@@ -24,8 +26,11 @@ function Navbar({ userData, setUserData }) {
             <li>
               <Link to="/men">MEN</Link>
             </li>
-            <li>
-              <Link to="">CART</Link>
+            <li className="cart">
+              {cart.length ? (
+                <span className="no-in-cart">{cart.length}</span>
+              ) : null}
+              <Link to="/cart">CART</Link>
             </li>
             <li>
               <Link to="/register">REGISTER</Link>
@@ -61,6 +66,9 @@ const Header = styled.header`
     margin: 0 auto;
     justify-content: center;
   }
+  li.cart {
+    position: relative;
+  }
   li {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
@@ -76,6 +84,19 @@ const Header = styled.header`
         border-bottom: 2px solid #ccc;
       }
     }
+  }
+  .no-in-cart {
+    text-align: center;
+    padding-top: 0.3rem;
+    font-weight: 500;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    border-radius: 1.5rem;
+    background-color: black;
+    bottom: 1.7rem;
+    left: 60%;
+    color: white;
   }
   @media screen and (max-width: 769px) {
     li {

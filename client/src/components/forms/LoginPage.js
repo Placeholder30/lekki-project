@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "../components/forms/Login";
+import Login from "./Login";
 
 function LoginPage({ setUserData, userData }) {
   return <Login setUserData={setUserData} userData={userData} />;

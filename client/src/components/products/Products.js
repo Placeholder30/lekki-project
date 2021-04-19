@@ -1,31 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CardContainer } from "../home/FeaturedProducts";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
-
-function Card({ product, setProduct }) {
-  return (
-    <CardContainer>
-      <div className="prod-image">
-        <img src={product.imageUrl} alt="" />
-      </div>
-      <p className="prod-name">{product.name}</p>
-      <p className="price">${product.price}</p>
-      <Link
-        to="/details"
-        className="view-prod"
-        onClick={() => {
-          setProduct(product);
-        }}
-      >
-        View Item {">"}
-      </Link>
-    </CardContainer>
-  );
-}
+import Card from "./Card";
 function Products({ userData, setUserData, productsData, setProduct }) {
   const location = useLocation();
   return (
@@ -37,8 +15,7 @@ function Products({ userData, setUserData, productsData, setProduct }) {
             ? productsData.map((product) => (
                 <Card
                   key={product.id}
-                  product={product}
-                  setProduct={setProduct}
+                  product={product} //local mapped product variable that you shoud rename but will you?
                 />
               ))
             : location.pathname === "/men"
@@ -47,7 +24,7 @@ function Products({ userData, setUserData, productsData, setProduct }) {
                 .map((product) => (
                   <Card
                     key={product.id}
-                    product={product}
+                    product={product} //local product variable
                     setProduct={setProduct}
                   />
                 ))
@@ -56,7 +33,7 @@ function Products({ userData, setUserData, productsData, setProduct }) {
                 .map((product) => (
                   <Card
                     key={product.id}
-                    product={product}
+                    product={product} //local product variable
                     setProduct={setProduct}
                   />
                 ))}
@@ -77,12 +54,13 @@ const ProductsMain = styled.section`
   display: flex;
   justify-content: space-between;
   .products {
+    flex: 2.8;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
   .sale {
-    max-width: 35rem;
+    flex: 1.2;
     h2 {
       margin-top: 1.8rem;
     }
@@ -92,6 +70,16 @@ const ProductsMain = styled.section`
     img {
       width: 100%;
       height: auto;
+    }
+  }
+  @media screen and (max-width: 950px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 530px) {
+    .products {
+      grid-template-columns: 1fr;
     }
   }
 `;
