@@ -11,12 +11,11 @@ exports.verifyToken = function (req, res, next) {
   try {
     const payload = req.headers.authorization;
     const token = payload.split(" ");
-    const verifiedPayload = jwt.verify(token[1], process.env.JWT_SECRET);
-    res.status(200).json({ message: "authenticated" });
+    jwt.verify(token[1], process.env.JWT_SECRET);
     next();
-  } catch (err) {
-    res.status(400).json({
-      message: "Not authenticated",
+  } catch ({ message }) {
+    res.status(401).json({
+      message,
     });
   }
 };

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { requestOptions } from "../../helpers/fetch";
+import { UserContext } from "../context/Context";
 import { Form } from "./Login";
 
-function Register({ setUserData }) {
+function Register() {
   const [input, setInput] = useState({});
+  const [userData, setUserData] = useContext(UserContext);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState(null);
 

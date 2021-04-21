@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { requestOptions } from "../../helpers/fetch";
+import { UserContext } from "../context/Context";
 
-function Login({ setUserData, userData }) {
+function Login() {
   const [input, setInput] = useState({});
+  const [userData, setUserData] = useContext(UserContext);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState(null);
 

@@ -1,14 +1,13 @@
-import React from "react";
 import Collection from "./Collection";
 import FeaturedProducts from "./FeaturedProducts";
 import Footer from "./Footer";
 import Grids from "./Grid";
 import Navbar from "./Navbar";
 
-function HomePage({ userData, setUserData }) {
+function HomePage() {
   return (
     <>
-      <Navbar userData={userData} setUserData={setUserData} />
+      <Navbar />
       <Collection photo={"firstPhoto"} />
       <Grids />
       <Collection />

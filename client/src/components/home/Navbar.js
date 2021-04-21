@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext } from "../context/Context";
-function Navbar({ userData }) {
+import { CartContext, UserContext } from "../context/Context";
+function Navbar() {
   const [cart] = useContext(CartContext);
-
+  const [userData] = useContext(UserContext);
   return (
     <>
       <Header>

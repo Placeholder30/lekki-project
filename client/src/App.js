@@ -9,7 +9,7 @@ import Products from "./components/products/Products";
 import NotFound from "./components/notfound/NotFound";
 import ProductDetails from "./components/products/ProductDetails";
 import CartPage from "./components/cart/CartPage";
-import { CartContext } from "./components/context/Context";
+import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
 function App() {
   const [userData, setUserData] = useState({});
@@ -47,37 +47,23 @@ function App() {
       <GlobalStyle />
       <Container>
         <Router>
-          <CartContext.Provider value={[cart, setCart]}>
-            <ProductsContext.Provider value={productsData}>
-              <Switch>
-                <Route exact path="/">
-                  <HomePage userData={userData} setUserData={setUserData} />
-                </Route>
-                <Route path="/login">
-                  <LoginPage userData={userData} setUserData={setUserData} />
-                </Route>
-                <Route path="/register">
-                  <RegisterPage userData={userData} setUserData={setUserData} />
-                </Route>
-                <Route path="/all">
-                  <Products userData={userData} />
-                </Route>
-                <Route path="/men">
-                  <Products userData={userData} />
-                </Route>
-                <Route exact path="/women">
-                  <Products userData={userData} />
-                </Route>
-                <Route path="/products/:id">
-                  <ProductDetails userData={userData} />
-                </Route>
-                <Route path="/cart">
-                  <CartPage userData={userData} />
-                </Route>
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </ProductsContext.Provider>
-          </CartContext.Provider>
+          <UserContext.Provider value={[userData, setUserData]}>
+            <CartContext.Provider value={[cart, setCart]}>
+              <ProductsContext.Provider value={productsData}>
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/login" component={LoginPage} />
+                  <Route path="/register" component={RegisterPage} />
+                  <Route path="/all" component={Products} />
+                  <Route path="/women" component={Products} />
+                  <Route path="/men" component={Products} />
+                  <Route path="/products/:id" component={ProductDetails} />
+                  <Route path="/cart" component={CartPage} />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </ProductsContext.Provider>
+            </CartContext.Provider>
+          </UserContext.Provider>
         </Router>
       </Container>
     </>

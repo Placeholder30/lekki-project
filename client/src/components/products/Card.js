@@ -9,7 +9,7 @@ function Card({ product }) {
       </div>
       <p className="prod-name">{product.name}</p>
       <p className="price">${product.price}</p>
-      <Link to={`products/${product.id}`} className="view-prod">
+      <Link to={`products/${product.UUID}`} className="view-prod">
         View Item {">"}
       </Link>
     </CardContainer>

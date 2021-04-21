@@ -11,7 +11,7 @@ function ProductDetails({ userData }) {
   const productsData = useContext(ProductsContext);
   const { id } = useParams();
   const [product] = productsData.filter((item) => {
-    if (item.id == id) {
+    if (item.UUID === id) {
       return item;
     }
   });
@@ -66,14 +66,7 @@ function ProductDetails({ userData }) {
                       addToCart &&
                         setCart((state) => [
                           ...state,
-                          {
-                            id: product.id,
-                            UUID: product.UUID,
-                            imageUrl: product.imageUrl,
-                            name: product.name,
-                            price: product.price,
-                            quantity: productNo,
-                          },
+                          { ...product, quantity: productNo },
                         ]);
                     }}
                   >

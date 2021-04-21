@@ -26,8 +26,8 @@ exports.populateDb = function (req, res) {
   productsJson.forEach(async ({ name, id, imageUrl, alt, category, price }) => {
     try {
       const result = await Product.create({
-        name,
         id,
+        name,
         category,
         imageUrl,
         alt,

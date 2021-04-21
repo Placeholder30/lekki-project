@@ -4,10 +4,10 @@ import Navbar from "../home/Navbar";
 import CartLogos from "./CartLogos";
 import CartTable from "./CartTable";
 
-function CartPage({ userData }) {
+function CartPage() {
   return (
     <>
-      <Navbar userData={userData} />
+      <Navbar />
       <CartLogos />
       <CartTable />
       <Grids />
