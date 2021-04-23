@@ -1,4 +1,4 @@
-const { User } = require("../models/index");
+const { User, TokenBlacklist } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const { createToken } = require("../middlewares/authentication");
 
@@ -32,11 +32,7 @@ exports.login = async function (req, res) {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
-    //check if user doesn't exist in db
-    //render register page
-    if (!user) {
-      res.status(400).json({ message: "create an account first" });
-    }
+
     const { UUID, firstName } = user;
 
     // if user exists, check password matches hashed password
@@ -52,17 +48,20 @@ exports.login = async function (req, res) {
         UUID,
       });
     } else {
-      //handle invalid password error
+      // handle invalid password error
       res
         .status(400)
         .json({ message: "invalid username, or password or both, heh" });
     }
   } catch (err) {
-    //handle login errors, send a nice message to user
-    console.log(err);
-    res.status(400).json({ message: "Please fill the required fields" });
+    // handle login errors, send a nice message to user
+    res
+      .status(400)
+      .json({ message: "invalid username, or password or both, heh" });
   }
 };
 exports.logout = function (req, res) {
+  const token = req.body;
+  TokenBlacklist.create({ token });
   res.status(200).json({ authenticated: false });
 };

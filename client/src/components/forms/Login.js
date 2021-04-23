@@ -26,101 +26,112 @@ function Login() {
   };
 
   return (
-    <Form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleLogin();
-      }}
-    >
+    <>
       <Link to="/">
-        <h1 className="heading">Lekki Store</h1>
+        <Logo>Lekki Store</Logo>
       </Link>
-      <label>
-        Email
-        <input
-          type="email"
-          name="email"
-          required
-          onChange={(e) =>
-            setInput((state) => ({ ...state, email: e.target.value }))
-          }
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          name="password"
-          required
-          onChange={(e) =>
-            setInput((state) => ({ ...state, password: e.target.value }))
-          }
-        />
-      </label>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin();
+        }}
+      >
+        <h2 className="heading">Login</h2>
 
-      {errMsg && <span className="err-msg">{errMsg.message}</span>}
+        <label>
+          Email
+          <input
+            tabIndex="0"
+            type="email"
+            name="email"
+            required
+            onChange={(e) => {
+              setErrMsg(null);
+              setInput((state) => ({ ...state, email: e.target.value }));
+            }}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            tabIndex="0"
+            type="password"
+            name="password"
+            required
+            onChange={(e) => {
+              setErrMsg(null);
+              setInput((state) => ({ ...state, password: e.target.value }));
+            }}
+          />
+        </label>
 
-      <button type="submit">Login</button>
-      <Link to="/">
-        <div className="back">Back</div>
-      </Link>
-    </Form>
+        {errMsg && <span className="err-msg">{errMsg.message}</span>}
+
+        <button type="submit">Login</button>
+        <Link to="/"></Link>
+      </Form>
+    </>
   );
 }
 
 export default Login;
 
 export const Form = styled.form`
-  width: 40rem;
+  width: 45rem;
   border: 1px solid #ccc;
-  margin: 10rem auto;
+  margin: 0 auto;
   border-radius: 1rem;
   padding: 2.5rem;
   position: relative;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
   * {
     display: block;
   }
-  h1 {
+
+  h2 {
     text-decoration: none;
-    font-size: 1.7rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 500;
-    text-decoration: none !important;
+    text-decoration: none;
   }
   label {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
+    font-weight: 500;
   }
   input {
     width: 100%;
     height: 4rem;
     margin-bottom: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     background-color: white;
+    outline: none;
+    border-radius: 3px;
+    &:focus {
+      border: 1px solid #d96528;
+      box-shadow: 1px 1px 3px 1px #d96528;
+    }
   }
+
   button {
+    width: 100%;
     border: none;
     padding: 1rem 2rem;
     text-decoration: none;
-    background-color: #e1bee7;
-    font-size: 1.3rem;
+    border-radius: 3px;
+    background-color: #d96528;
+    font-size: 1.5rem;
     color: black;
-    margin: 0 auto;
+    margin: 3rem auto;
     cursor: pointer;
     &:hover {
-      background-color: #d96528;
+      /* background-color: #d96528; */
     }
   }
-  .back {
-    position: absolute;
-    left: 18rem;
-    bottom: 0.3rem;
-    color: blueviolet;
-    &:hover {
-      font-size: 1.2rem;
-    }
-  }
+
   .err-msg {
     color: red;
+    font-size: 1.4rem;
   }
   @media screen and (max-width: 500px) {
     width: 30rem;
@@ -128,4 +139,11 @@ export const Form = styled.form`
       left: 13rem;
     }
   }
+`;
+const Logo = styled.h1`
+  width: 30rem;
+  text-align: center;
+  margin: 3.3rem auto 3rem;
+  font-size: 4rem;
+  font-weight: 400;
 `;
