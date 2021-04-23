@@ -34,16 +34,16 @@ function Payment() {
       </form>
       <div className="total-container">
         <div className="subtotal flexx">
-          <div>Subtotal</div>
-          <div>${total}</div>
+          <div className="bold">Subtotal</div>
+          <div className="bold">${total}</div>
         </div>
         <div className="shipping flexx">
           <div>Shipping</div>
           <div>Free Shipping</div>
         </div>
         <div className="total flexx">
-          <div>Total</div>
-          <div>${total}</div>
+          <div className="bold">Total</div>
+          <div className="bold">${total}</div>
         </div>
       </div>
     </PaymentContainer>
@@ -91,7 +91,10 @@ const PaymentContainer = styled.div`
     display: flex;
     justify-content: space-between;
   }
-
+  .bold {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
   @media screen and (max-width: 820px) {
     grid-template-columns: 1fr;
   }

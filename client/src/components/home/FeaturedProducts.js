@@ -20,7 +20,7 @@ function FeaturedProducts() {
               <p className="prod-name">{product.name}</p>
               <p className="price">${product.price}</p>
               <div className="view-prod" onClick={() => {}}>
-                <Link to={`/products/${product.id}`}>View Item </Link>
+                <Link to={`/products/${product.UUID}`}>View Item </Link>
                 {">"}
               </div>
             </CardContainer>

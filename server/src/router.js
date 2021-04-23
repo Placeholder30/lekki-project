@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { login, logout, register } = require("./controllers/userController");
 const { getProducts, addProduct } = require("./controllers/productsController");
-const { pay } = require("./controllers/paymentController");
+const { createOrder, showOrder } = require("./controllers/orderController");
 const { verifyToken } = require("./middlewares/authentication");
 
 //user login and registration routes
@@ -14,5 +14,6 @@ router.get("/api/products", getProducts);
 
 //add products
 router.post("/api/products", addProduct);
-router.post("/api/pay", verifyToken, pay);
+router.get("/api/order", verifyToken, showOrder);
+router.post("/api/order", verifyToken, createOrder);
 module.exports = router;

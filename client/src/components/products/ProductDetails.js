@@ -16,6 +16,17 @@ function ProductDetails({ userData }) {
     }
   });
 
+  const addToCart = () => {
+    let addToCart = true;
+    let newState = cart.map((cartItem) => {
+      if (cartItem.name === product.name) {
+        addToCart = false;
+      }
+    });
+    addToCart &&
+      setCart((state) => [...state, { ...product, quantity: productNo }]);
+  };
+
   return (
     <>
       <Navbar userData={userData} />
@@ -57,17 +68,7 @@ function ProductDetails({ userData }) {
                   <button
                     className="add-cart"
                     onClick={() => {
-                      let addToCart = true;
-                      cart.forEach((cartItem) => {
-                        if (cartItem.name === product.name) {
-                          addToCart = false;
-                        }
-                      });
-                      addToCart &&
-                        setCart((state) => [
-                          ...state,
-                          { ...product, quantity: productNo },
-                        ]);
+                      addToCart(product);
                     }}
                   >
                     Add to Cart

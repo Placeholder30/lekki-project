@@ -50,7 +50,7 @@ function Navbar() {
 const Header = styled.header`
   h1 {
     text-align: center;
-    margin-top: 5.3rem;
+    margin-top: 3.3rem;
     margin-bottom: 5.3rem;
     font-size: 4rem;
     font-weight: 500;

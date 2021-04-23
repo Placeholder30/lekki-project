@@ -44,9 +44,10 @@ const TableContainer = styled.section`
     width: 100%;
   }
   th {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     border-bottom: 1px solid #ccc;
     padding-bottom: 3px;
+    font-weight: 500;
   }
   td {
     font-size: 1.3rem;

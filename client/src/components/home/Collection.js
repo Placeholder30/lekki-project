@@ -14,7 +14,7 @@ function Collection({ photo }) {
       <div className="pic">
         <img
           src={photo ? shoe : bag}
-          alt={photo ? "a large shoe" : "a large bag"}
+          alt={photo ? "a large shoe" : "a large bag shoe and some"}
         />
       </div>
     </Container>

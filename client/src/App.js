@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import HomePage from "./components/home/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./components/forms/LoginPage";
@@ -11,6 +10,7 @@ import ProductDetails from "./components/products/ProductDetails";
 import CartPage from "./components/cart/CartPage";
 import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
+
 function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
