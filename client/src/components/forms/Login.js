@@ -90,18 +90,18 @@ export const Form = styled.form`
 
   h2 {
     text-decoration: none;
-    font-size: 3rem;
+    font-size: 2.6rem;
     margin-bottom: 1rem;
     font-weight: 500;
     text-decoration: none;
   }
   label {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 500;
   }
   input {
     width: 100%;
-    height: 4rem;
+    height: 3rem;
     margin-bottom: 1rem;
     font-size: 1.7rem;
     background-color: white;
@@ -140,7 +140,7 @@ export const Form = styled.form`
     }
   }
 `;
-const Logo = styled.h1`
+export const Logo = styled.h1`
   width: 30rem;
   text-align: center;
   margin: 3.3rem auto 3rem;

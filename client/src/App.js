@@ -10,6 +10,7 @@ import ProductDetails from "./components/products/ProductDetails";
 import CartPage from "./components/cart/CartPage";
 import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
+import Order from "./components/order/Order";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -59,6 +60,7 @@ function App() {
                   <Route path="/men" component={Products} />
                   <Route path="/products/:id" component={ProductDetails} />
                   <Route path="/cart" component={CartPage} />
+                  <Route path="/orders" component={Order} />
                   <Route path="*" component={NotFound} />
                 </Switch>
               </ProductsContext.Provider>

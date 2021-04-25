@@ -1,17 +1,28 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext, UserContext } from "../context/Context";
 function Navbar() {
   const [cart] = useContext(CartContext);
-  const [userData] = useContext(UserContext);
+  const [userData, setUserData] = useContext(UserContext);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const history = useHistory();
+  const handleLogout = () => {
+    fetch("/logout")
+      .then((res) => {
+        res.json();
+      })
+      .then((data) => {
+        setUserData(data);
+        history.push("/");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <Header>
         <h1>Lekki Store</h1>
-        {userData.authenticated && (
-          <div className="user-message">Hi, {userData.firstName}</div>
-        )}
         <nav>
           <ul>
             <li>
@@ -32,13 +43,46 @@ function Navbar() {
               ) : null}
               <Link to="/cart">CART</Link>
             </li>
-            <li>
-              <Link to="/register">REGISTER</Link>
-            </li>
-            <li>
-              <Link to={userData.authenticated ? "/logout" : "/login"}>
-                {userData.authenticated ? "LOGOUT" : "LOGIN"}
-              </Link>
+
+            <li className="user-message">
+              {userData && userData.firstName ? (
+                `Hi, ${userData.firstName}`
+              ) : (
+                <Link to="/login">LOGIN</Link>
+              )}
+              <RiArrowDropDownLine
+                className="drop-down-icon"
+                onMouseEnter={() => {
+                  setShowDropdown(true);
+                }}
+              />
+              {showDropdown && (
+                <div
+                  onMouseLeave={() => {
+                    setShowDropdown(false);
+                  }}
+                  className="drop-down"
+                >
+                  {!userData?.authenticated && (
+                    <Link to="/register">
+                      <div>Register</div>
+                    </Link>
+                  )}
+                  <Link to="/orders">
+                    <div>Orders</div>
+                  </Link>
+                  {userData?.authenticated && (
+                    <Link
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLogout();
+                      }}
+                    >
+                      <div>Logout</div>
+                    </Link>
+                  )}
+                </div>
+              )}
             </li>
           </ul>
         </nav>
@@ -72,16 +116,17 @@ const Header = styled.header`
   li {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
+    font-size: 1.3rem;
     padding: 0 2rem;
     margin-left: 0.3rem;
+    display: flex;
     a {
       font-size: 1.3rem;
       text-decoration: none;
       color: black;
       &:hover {
         color: #ea5f5f;
-        padding-bottom: 0.3rem;
-        border-bottom: 2px solid #ccc;
+        border-bottom: 1px solid #ccc;
       }
     }
   }
@@ -98,6 +143,26 @@ const Header = styled.header`
     left: 60%;
     color: white;
   }
+  li.user-message {
+    position: relative;
+    border: none;
+  }
+  li.user-message div.drop-down {
+    position: absolute;
+    top: 1.9rem;
+    width: 12rem;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    div {
+      padding: 1rem;
+      font-size: 1.4rem;
+    }
+  }
+  .drop-down-icon {
+    font-size: 2rem;
+    width: 3rem;
+  }
+
   @media screen and (max-width: 769px) {
     li {
       border: none;

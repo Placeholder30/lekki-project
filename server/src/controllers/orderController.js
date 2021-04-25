@@ -12,7 +12,7 @@ exports.createOrder = async function (req, res) {
 };
 
 exports.showOrder = async function (req, res) {
-  const { userId } = req.body;
+  const { userId } = req.params;
 
   try {
     const product = await Order.findAll({

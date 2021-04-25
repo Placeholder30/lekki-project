@@ -2,13 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const router = require("./router");
-const {
-  sequelize,
-  User,
-  Product,
-  Order,
-  TokenBlacklist,
-} = require("./models/index");
+const { sequelize, User, Product, Order } = require("./models/index");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -28,7 +22,6 @@ app.listen(process.env.PORT || port, async () => {
   await User.sync({ alter: true });
   await Product.sync({ alter: true });
   await Order.sync({ alter: true });
-  await TokenBlacklist.sync({ alter: true });
   await sequelize.authenticate();
   console.log("database connected");
 });

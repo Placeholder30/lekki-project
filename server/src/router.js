@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { login, logout, register } = require("./controllers/userController");
-const {
-  getProducts,
-  addProduct,
-  populateDb,
-} = require("./controllers/productsController");
+const { getProducts, addProduct } = require("./controllers/productsController");
 const { createOrder, showOrder } = require("./controllers/orderController");
 const { verifyToken } = require("./middlewares/authentication");
 
@@ -17,7 +13,7 @@ router.get("/api/logout", logout);
 router.get("/api/products", getProducts);
 
 //add products
-router.post("/api/products", populateDb);
-router.get("/api/order", verifyToken, showOrder);
+router.post("/api/products", addProduct);
+router.get("/api/order/:userId", showOrder);
 router.post("/api/order", verifyToken, createOrder);
 module.exports = router;

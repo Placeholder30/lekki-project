@@ -75,7 +75,7 @@ export const CardContainer = styled.div`
   border-radius: 2rem;
   margin-top: 2rem;
   font-size: 1.4rem;
-  padding: 1rem;
+  padding: 2rem;
 
   .price {
     font-size: inherit;
@@ -84,6 +84,9 @@ export const CardContainer = styled.div`
   }
   .prod-name {
     font-size: inherit;
+  }
+  .prod-image {
+    width: 100%;
   }
   .view-prod {
     font-size: inherit;
