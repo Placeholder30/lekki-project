@@ -97,6 +97,9 @@ const PaymentContainer = styled.div`
   }
   @media screen and (max-width: 820px) {
     grid-template-columns: 1fr;
+    .total-container {
+      padding-right: 0;
+    }
   }
 `;
 

@@ -1,16 +1,19 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CartContext } from "../context/Context";
 
 function CartLogos() {
+  const [cart] = useContext(CartContext);
   return (
     <CartMain>
       <div className="shopping-cart square">
-        <div className="circle">
+        <div className={!cart.length ? "circle active" : "circle"}>
           <p>01</p>
         </div>
         <h3>Shopping Cart</h3>
       </div>
       <div className="checkout square">
-        <div className="circle">
+        <div className={cart.length ? "circle active" : "circle"}>
           <p>02</p>
         </div>
         <h3>Check Out</h3>
@@ -44,13 +47,16 @@ const CartMain = styled.main`
     height: 10rem;
     border-radius: 5rem;
     border: 1px solid #ccc;
-    background-color: white;
     margin: 2rem auto;
     text-align: center;
     p {
       font-size: 1.7rem;
       margin: 4rem auto;
     }
+  }
+  .active {
+    background-color: #d96528;
+    color: white;
   }
 `;
 

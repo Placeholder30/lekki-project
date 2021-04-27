@@ -19,10 +19,9 @@ function FeaturedProducts() {
               </div>
               <p className="prod-name">{product.name}</p>
               <p className="price">${product.price}</p>
-              <div className="view-prod" onClick={() => {}}>
-                <Link to={`/products/${product.UUID}`}>View Item </Link>
-                {">"}
-              </div>
+              <Link to={`/products/${product.UUID}`} className="view-prod">
+                View Item{">"}
+              </Link>
             </CardContainer>
           ))}
       </div>
@@ -56,6 +55,7 @@ const ProductContainer = styled.section`
     display: flex;
     justify-content: space-around;
   }
+
   .view-prod:hover {
     background-color: #383131;
     color: white;
@@ -87,9 +87,12 @@ export const CardContainer = styled.div`
   }
   .prod-image {
     width: 100%;
+    img {
+      width: 100%;
+    }
   }
   .view-prod {
-    font-size: inherit;
+    font-size: 1.4rem;
     border: 1px solid #ccc;
     padding: 0.5rem;
     &:hover {
@@ -102,7 +105,7 @@ export const CardContainer = styled.div`
     margin: 0.5rem 0;
   }
   @media screen and (max-width: 769px) {
-    margin-top: 2rem;
+    margin: 2rem auto 0;
   }
 `;
 

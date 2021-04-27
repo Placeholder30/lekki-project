@@ -135,5 +135,11 @@ const ProductContainer = styled.main`
       opacity: 0.9;
     }
   }
+  @media screen and (max-width: 769px) {
+    flex-direction: column;
+    .cards {
+      justify-content: center;
+    }
+  }
 `;
 export default ProductDetails;

@@ -13,12 +13,12 @@ exports.createOrder = async function (req, res) {
 
 exports.showOrder = async function (req, res) {
   const { userId } = req.params;
-
   try {
     const product = await Order.findAll({
       where: { userId },
       include: [Product],
     });
+
     res.status(200).json({ message: product });
   } catch (error) {
     res.status(401).json({ message: error });

@@ -16,12 +16,12 @@ app.get("/api", (req, res) => {
 
 app.use(router);
 
-const port = 5000;
-app.listen(process.env.PORT || port, async () => {
+const port = 5000 || process.env.PORT;
+app.listen(port, async () => {
   console.log(` App is listening on port ${port} `);
-  await User.sync({ alter: true });
-  await Product.sync({ alter: true });
-  await Order.sync({ alter: true });
+  // await User.sync({ alter: true });
+  // await Product.sync({ alter: true });
+  // await Order.sync({ alter: true });
   await sequelize.authenticate();
   console.log("database connected");
 });

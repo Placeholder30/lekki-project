@@ -20,7 +20,6 @@ function Order() {
       if (result.status === 200) {
         const orders = await result.json();
         setOrders(orders);
-        console.log(result.status);
       }
     };
     userData && fetchOrders();
@@ -30,13 +29,13 @@ function Order() {
       <Navbar />
       <Container>
         <Sidebar>
-          <Link>
+          <Link to="/orders">
             <li>Orders</li>
           </Link>
-          <Link>
+          <Link to="/account">
             <li>Account</li>
           </Link>
-          <Link>
+          <Link to="/settings">
             <li>Orders</li>
           </Link>
         </Sidebar>

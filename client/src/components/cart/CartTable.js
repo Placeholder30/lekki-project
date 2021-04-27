@@ -67,6 +67,7 @@ const TableContainer = styled.section`
       cursor: pointer;
     }
   }
+
   .flex {
     padding: 0.6rem;
     display: flex;
@@ -119,6 +120,11 @@ const TableContainer = styled.section`
     }
     a {
       font-size: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .flex {
+      display: block;
     }
   }
 `;

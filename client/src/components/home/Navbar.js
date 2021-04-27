@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext, UserContext } from "../context/Context";
+import Dropdown from "./Dropdown";
 function Navbar() {
   const [cart] = useContext(CartContext);
   const [userData, setUserData] = useContext(UserContext);
@@ -22,7 +23,9 @@ function Navbar() {
   return (
     <>
       <Header>
-        <h1>Lekki Store</h1>
+        <Link to="/">
+          <h1>Lekki Store</h1>
+        </Link>
         <nav>
           <ul>
             <li>
@@ -57,31 +60,10 @@ function Navbar() {
                 }}
               />
               {showDropdown && (
-                <div
-                  onMouseLeave={() => {
-                    setShowDropdown(false);
-                  }}
-                  className="drop-down"
-                >
-                  {!userData?.authenticated && (
-                    <Link to="/register">
-                      <div>Register</div>
-                    </Link>
-                  )}
-                  <Link to="/orders">
-                    <div>Orders</div>
-                  </Link>
-                  {userData?.authenticated && (
-                    <Link
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleLogout();
-                      }}
-                    >
-                      <div>Logout</div>
-                    </Link>
-                  )}
-                </div>
+                <Dropdown
+                  setShowDropdown={setShowDropdown}
+                  handleLogout={handleLogout}
+                />
               )}
             </li>
           </ul>
