@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { RiArrowRightSLine } from "react-icons/ri";
+
 import { ProductsContext } from "../context/Context";
 function FeaturedProducts() {
   const productsData = useContext(ProductsContext);
@@ -13,16 +15,19 @@ function FeaturedProducts() {
         {productsData
           .filter((product) => product.id < 4)
           .map((product, index) => (
-            <CardContainer key={index}>
-              <div className="prod-image">
-                <img src={product.imageUrl} alt="watch" />
-              </div>
-              <p className="prod-name">{product.name}</p>
-              <p className="price">${product.price}</p>
-              <Link to={`/products/${product.UUID}`} className="view-prod">
-                View Item{">"}
-              </Link>
-            </CardContainer>
+            <Link to={`/products/${product.UUID}`} key={index}>
+              <CardContainer>
+                <div className="prod-image">
+                  <img src={product.imageUrl} alt="watch" />
+                </div>
+                <p className="prod-name">{product.name}</p>
+                <p className="price">${product.price}</p>
+                <div className="view-prod">
+                  <div>View Item</div>{" "}
+                  <RiArrowRightSLine className="right-arrow" />
+                </div>
+              </CardContainer>
+            </Link>
           ))}
       </div>
     </ProductContainer>
@@ -55,10 +60,20 @@ const ProductContainer = styled.section`
     display: flex;
     justify-content: space-around;
   }
-
+  .view-prod {
+    display: flex;
+    align-items: center;
+    div {
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+  }
   .view-prod:hover {
     background-color: #383131;
     color: white;
+  }
+  .right-arrow {
+    font-size: 1.4rem;
   }
   @media screen and (max-width: 769px) {
     .cards {

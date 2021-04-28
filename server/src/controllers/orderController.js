@@ -1,6 +1,6 @@
 const { Order, Product } = require("../models/index");
 
-exports.createOrder = async function (req, res) {
+const createOrder = async function (req, res) {
   const { productId, userId } = req.body;
 
   try {
@@ -11,16 +11,25 @@ exports.createOrder = async function (req, res) {
   }
 };
 
-exports.showOrder = async function (req, res) {
+const showOrder = async function (req, res) {
   const { userId } = req.params;
   try {
-    const product = await Order.findAll({
+    const products = [];
+    const orders = await Order.findAll({
       where: { userId },
       include: [Product],
     });
+    orders.map((product) => {
+      const { orderId, orderDate, Product } = product;
+      const { dataValues } = Product;
+      const newObj = { orderId, orderDate, ...dataValues };
+      products.push(newObj);
+    });
 
-    res.status(200).json({ message: product });
+    res.status(200).json({ message: products });
   } catch (error) {
     res.status(401).json({ message: error });
   }
 };
+
+module.exports = { showOrder, createOrder };

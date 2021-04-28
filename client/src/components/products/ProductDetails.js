@@ -18,7 +18,7 @@ function ProductDetails({ userData }) {
 
   const addToCart = () => {
     let addToCart = true;
-    let newState = cart.map((cartItem) => {
+    cart.map((cartItem) => {
       if (cartItem.name === product.name) {
         addToCart = false;
       }
@@ -90,10 +90,10 @@ const ProductContainer = styled.main`
   display: flex;
   margin-bottom: 4rem;
   .content {
-    max-width: 60vw;
+    max-width: 40vw;
   }
   .product {
-    margin-right: 5rem;
+    margin-right: 7rem;
   }
   h2 {
     font-size: 3rem;
@@ -129,7 +129,7 @@ const ProductContainer = styled.main`
     width: 10rem;
     background-color: #d96528;
     border: none;
-    margin: 2rem 3rem 0;
+    margin: 2rem 0;
     &:hover {
       cursor: pointer;
       opacity: 0.9;
@@ -140,6 +140,12 @@ const ProductContainer = styled.main`
     .cards {
       justify-content: center;
     }
+    /* .product {
+      margin: 0 auto;
+    }
+    .content {
+      margin: 0 auto;
+    } */
   }
 `;
 export default ProductDetails;

@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
 
-exports.createToken = function (id) {
+const createToken = function (id) {
   const token = jwt.sign({ data: id }, process.env.JWT_SECRET, {
     expiresIn: "12h",
   });
   return token;
 };
 
-exports.verifyToken = function (req, res, next) {
+const verifyToken = function (req, res, next) {
   try {
     const payload = req.headers.authorization;
     const token = payload.split(" ");
@@ -19,3 +19,5 @@ exports.verifyToken = function (req, res, next) {
     });
   }
 };
+
+module.exports = { createToken, verifyToken };

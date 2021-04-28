@@ -45,14 +45,12 @@ function Order() {
             orders.message.map((item, index) => (
               <Card key={index}>
                 <div className="image">
-                  <img src={item[0]?.Product.imageUrl} alt="" />
+                  <img src={item.imageUrl} alt={item.alt} />
                 </div>
                 <div className="details">
-                  <h4>{item[0]?.Product.name}</h4>
-                  <div>order id</div>
-                  <div className="price">
-                    {item[0]?.orderDate.toLocaleString()}
-                  </div>
+                  <h4>{item.name}</h4>
+                  <div>{item.orderId}</div>
+                  <div className="price">{item.orderDate}</div>
                   <div>order date</div>
                 </div>
               </Card>

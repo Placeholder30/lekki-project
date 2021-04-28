@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../context/Context";
 
 function Dropdown({ setShowDropdown, handleLogout }) {
-  const userData = useContext(UserContext);
+  const [userData] = useContext(UserContext);
   return (
     <div
       onMouseLeave={() => {
@@ -11,7 +11,7 @@ function Dropdown({ setShowDropdown, handleLogout }) {
       }}
       className="drop-down"
     >
-      {!userData?.authenticated && (
+      {!userData.authenticated && (
         <Link to="/register">
           <div>Register</div>
         </Link>
@@ -19,7 +19,7 @@ function Dropdown({ setShowDropdown, handleLogout }) {
       <Link to="/orders">
         <div>Orders</div>
       </Link>
-      {userData?.authenticated && (
+      {userData.authenticated && (
         <Link
           to="/logout"
           onClick={(e) => {

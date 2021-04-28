@@ -11,10 +11,9 @@ function Navbar() {
   const history = useHistory();
   const handleLogout = () => {
     fetch("/logout")
-      .then((res) => {
-        res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setUserData(data);
         history.push("/");
       })
@@ -131,7 +130,8 @@ const Header = styled.header`
   }
   li.user-message div.drop-down {
     position: absolute;
-    top: 1.9rem;
+    top: 2.9rem;
+    left: 1.2rem;
     width: 12rem;
     background-color: whitesmoke;
     border-radius: 2px;

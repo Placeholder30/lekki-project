@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
 import { ProductsContext } from "../context/Context";
@@ -8,6 +8,16 @@ import Card from "./Card";
 function Products({ userData, setUserData }) {
   const location = useLocation();
   const productsData = useContext(ProductsContext);
+  const [filterProducts, setFilterProducts] = useState(productsData);
+
+  const handleFilter = (e) => {
+    const filtered = productsData.filter((item) => {
+      item.price <= e.target.value;
+    });
+    setFilterProducts(filtered);
+    console.log(filtered);
+  };
+
   return (
     <>
       <Navbar userData={userData} setUserData={setUserData} />
@@ -30,6 +40,7 @@ function Products({ userData, setUserData }) {
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae,
           laboriosam cumque blanditiis quia quis doloremque voluptas pariatur
           omnis reiciendis quod!
+          <input type="range" id="" max="50" onChange={handleFilter} />
         </div>
       </ProductsMain>
       <Footer />
@@ -57,6 +68,14 @@ const ProductsMain = styled.section`
     img {
       width: 100%;
       height: auto;
+    }
+  }
+  .view-prod {
+    display: flex;
+    align-items: center;
+    div {
+      font-size: 1.4rem;
+      font-weight: 500;
     }
   }
   @media screen and (max-width: 950px) {
