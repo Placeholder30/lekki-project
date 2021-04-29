@@ -88,9 +88,10 @@ export const CardContainer = styled.div`
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 2rem;
-  margin-top: 2rem;
+  margin-top: 5rem;
   font-size: 1.4rem;
   padding: 2rem;
+  max-width: 25rem;
 
   .price {
     font-size: inherit;

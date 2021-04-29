@@ -13,7 +13,6 @@ function Navbar() {
     fetch("/logout")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setUserData(data);
         history.push("/");
       })
@@ -55,6 +54,9 @@ function Navbar() {
               <RiArrowDropDownLine
                 className="drop-down-icon"
                 onMouseEnter={() => {
+                  setShowDropdown(true);
+                }}
+                onClick={() => {
                   setShowDropdown(true);
                 }}
               />
@@ -161,6 +163,9 @@ const Header = styled.header`
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
+    }
+    nav {
+      justify-content: space-between;
     }
   }
 `;

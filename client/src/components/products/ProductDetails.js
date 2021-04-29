@@ -109,7 +109,7 @@ const ProductContainer = styled.main`
   }
   .buttons button {
     font-size: 1.4rem;
-    width: 5rem;
+    width: 4rem;
     min-height: 4rem;
     text-align: center;
     background-color: black;
@@ -118,7 +118,7 @@ const ProductContainer = styled.main`
   }
   .buttons input {
     margin: 0 0.3rem;
-    width: 5rem;
+    width: 4rem;
     height: 4rem;
     text-align: center;
     outline: none;
@@ -140,12 +140,9 @@ const ProductContainer = styled.main`
     .cards {
       justify-content: center;
     }
-    /* .product {
-      margin: 0 auto;
-    }
     .content {
-      margin: 0 auto;
-    } */
+      max-width: 60vw;
+    }
   }
 `;
 export default ProductDetails;

@@ -32,11 +32,10 @@ const login = async function (req, res) {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
-
     const { UUID, firstName } = user;
-
     // if user exists, check password matches hashed password
     const result = await bcrypt.compare(password, user.password);
+
     if (result) {
       User.update({ lastLogin: Date.now() }, { where: { UUID } });
       const token = createToken(UUID);

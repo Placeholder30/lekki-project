@@ -8,14 +8,15 @@ import Card from "./Card";
 function Products({ userData, setUserData }) {
   const location = useLocation();
   const productsData = useContext(ProductsContext);
-  const [filterProducts, setFilterProducts] = useState(productsData);
+  const [filteredProducts, setFilteredProducts] = useState(productsData);
+  const [price, setPrice] = useState(25);
 
-  const handleFilter = (e) => {
-    const filtered = productsData.filter((item) => {
-      item.price <= e.target.value;
-    });
-    setFilterProducts(filtered);
-    console.log(filtered);
+  const filterByPrice = (e) => {
+    setPrice(e.target.value);
+    const filtered = productsData.filter(
+      (item) => item.price <= e.target.value
+    );
+    setFilteredProducts(filtered);
   };
 
   return (
@@ -24,23 +25,35 @@ function Products({ userData, setUserData }) {
       <ProductsMain>
         <div className="products">
           {location.pathname === "/all"
-            ? productsData.map((product) => (
+            ? filteredProducts.map((product) => (
                 <Card key={product.id} product={product} />
               ))
             : location.pathname === "/men"
-            ? productsData
+            ? filteredProducts
                 .filter((product) => product.category === "men")
                 .map((product) => <Card key={product.id} product={product} />)
-            : productsData
+            : filteredProducts
                 .filter((product) => product.category === "women")
                 .map((product) => <Card key={product.id} product={product} />)}
         </div>
         <div className="sale">
           <h2>Special Sale</h2>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae,
-          laboriosam cumque blanditiis quia quis doloremque voluptas pariatur
-          omnis reiciendis quod!
-          <input type="range" id="" max="50" onChange={handleFilter} />
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae,
+            laboriosam cumque blanditiis quia quis doloremque voluptas pariatur
+            omnis reiciendis quod!
+          </p>
+          <div className="filter-by-price">
+            <label htmlFor="range">Filter by price:</label>
+            <div className="max-price">Max price: ${price}</div>
+          </div>
+          <input
+            type="range"
+            value={price}
+            id="range"
+            max="25"
+            onChange={filterByPrice}
+          />
         </div>
       </ProductsMain>
       <Footer />
@@ -59,8 +72,31 @@ const ProductsMain = styled.section`
   }
   .sale {
     flex: 1.2;
+    margin-left: 3.4rem;
+    padding: 2rem;
     h2 {
-      margin-top: 1.8rem;
+      margin: 2.8rem 0;
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1.4rem;
+      text-justify: auto;
+    }
+    input[type="range"] {
+      font-size: 2rem;
+      width: 100%;
+      color: red;
+    }
+    label {
+      display: block;
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      font-weight: 400;
+    }
+    .max-price {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin: 1rem 0;
     }
   }
   .prod-image {
