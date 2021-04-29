@@ -16,7 +16,7 @@ app.get("/api", (req, res) => {
 
 app.use(router);
 
-const port = 5000 || process.env.PORT;
+const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   console.log(` App is listening on port ${port} `);
   // await User.sync({ alter: true });
