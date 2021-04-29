@@ -9,9 +9,10 @@ function Login() {
   const [userData, setUserData] = useContext(UserContext);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState(null);
+  const { REACT_APP_BACKEND } = process.env;
 
   const handleLogin = async () => {
-    const login = await fetch("/login", {
+    const login = await fetch(`${REACT_APP_BACKEND}/login`, {
       ...requestOptions,
       body: JSON.stringify(input),
     });

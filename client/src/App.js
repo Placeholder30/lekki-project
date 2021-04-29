@@ -16,10 +16,12 @@ function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
+  const { REACT_APP_BACKEND } = process.env;
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const products = await fetch("/products");
+        const products = await fetch(`${REACT_APP_BACKEND}/products`);
         if (products.status === 200) {
           const result = await products.json();
           setProductsData(result);

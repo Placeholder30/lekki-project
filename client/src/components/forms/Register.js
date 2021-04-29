@@ -10,9 +10,10 @@ function Register() {
   const [userData, setUserData] = useContext(UserContext);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState(null);
+  const { REACT_APP_BACKEND } = process.env;
 
   const handleSubmit = async () => {
-    const register = await fetch("/register", {
+    const register = await fetch(`${REACT_APP_BACKEND}/register`, {
       ...requestOptions,
       body: JSON.stringify(input),
     });
