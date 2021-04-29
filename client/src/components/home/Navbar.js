@@ -109,7 +109,7 @@ const Header = styled.header`
       color: black;
       &:hover {
         color: #ea5f5f;
-        border-bottom: 1px solid #ccc;
+        /* border-bottom: 1px solid #ccc; */
       }
     }
   }
