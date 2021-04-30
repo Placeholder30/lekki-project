@@ -16,6 +16,7 @@ function App() {
   const [userData, setUserData] = useState({});
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
+  // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
 
   useEffect(() => {
