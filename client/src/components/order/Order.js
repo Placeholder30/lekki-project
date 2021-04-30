@@ -1,22 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { requestOptions } from "../../helpers/fetch";
 import { UserContext } from "../context/Context";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 function Order() {
   const [userData] = useContext(UserContext);
   const [orders, setOrders] = useState(null);
+  // eslint-disable-next-line no-undef
+  const { REACT_APP_BACKEND } = process.env;
   useEffect(() => {
     const fetchOrders = async () => {
-      const result = await fetch(`order/${userData.UUID}`, {
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${userData.token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const result = await fetch(
+        `${REACT_APP_BACKEND}/order/${userData.UUID}`,
+        {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (result.status === 200) {
         const orders = await result.json();
         setOrders(orders);

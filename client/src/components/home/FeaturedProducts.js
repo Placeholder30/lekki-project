@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RiArrowRightSLine } from "react-icons/ri";
-
 import { ProductsContext } from "../context/Context";
+
 function FeaturedProducts() {
   const productsData = useContext(ProductsContext);
   return (

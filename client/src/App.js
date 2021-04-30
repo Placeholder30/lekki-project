@@ -11,6 +11,7 @@ import CartPage from "./components/cart/CartPage";
 import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
 import Order from "./components/order/Order";
+import Scroll from "./components/home/Scroll";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -54,6 +55,7 @@ function App() {
           <UserContext.Provider value={[userData, setUserData]}>
             <CartContext.Provider value={[cart, setCart]}>
               <ProductsContext.Provider value={productsData}>
+                <Scroll />
                 <Switch>
                   <Route exact path="/" component={HomePage} />
                   <Route path="/login" component={LoginPage} />

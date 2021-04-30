@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
 import { ProductsContext } from "../context/Context";
@@ -8,7 +8,7 @@ import Card from "./Card";
 function Products({ userData, setUserData }) {
   const location = useLocation();
   const productsData = useContext(ProductsContext);
-  const [filteredProducts, setFilteredProducts] = useState(productsData);
+  const [filteredProducts, setFilteredProducts] = useState();
   const [price, setPrice] = useState(25);
 
   const filterByPrice = (e) => {
@@ -18,22 +18,24 @@ function Products({ userData, setUserData }) {
     );
     setFilteredProducts(filtered);
   };
-
+  useEffect(() => {
+    setFilteredProducts(productsData);
+  }, [productsData]);
   return (
     <>
       <Navbar userData={userData} setUserData={setUserData} />
       <ProductsMain>
         <div className="products">
           {location.pathname === "/all"
-            ? filteredProducts.map((product) => (
+            ? filteredProducts?.map((product) => (
                 <Card key={product.id} product={product} />
               ))
             : location.pathname === "/men"
             ? filteredProducts
-                .filter((product) => product.category === "men")
+                ?.filter((product) => product.category === "men")
                 .map((product) => <Card key={product.id} product={product} />)
             : filteredProducts
-                .filter((product) => product.category === "women")
+                ?.filter((product) => product.category === "women")
                 .map((product) => <Card key={product.id} product={product} />)}
         </div>
         <div className="sale">
@@ -85,7 +87,6 @@ const ProductsMain = styled.section`
     input[type="range"] {
       font-size: 2rem;
       width: 100%;
-      color: red;
     }
     label {
       display: block;
@@ -119,7 +120,7 @@ const ProductsMain = styled.section`
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media screen and (max-width: 530px) {
+  @media screen and (max-width: 650px) {
     .products {
       grid-template-columns: 1fr;
     }

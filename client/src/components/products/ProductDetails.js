@@ -90,7 +90,7 @@ const ProductContainer = styled.main`
   display: flex;
   margin-bottom: 4rem;
   .content {
-    max-width: 40vw;
+    max-width: 35vw;
   }
   .product {
     margin-right: 7rem;
@@ -135,8 +135,9 @@ const ProductContainer = styled.main`
       opacity: 0.9;
     }
   }
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 600px) {
     flex-direction: column;
+    align-items: center;
     .cards {
       justify-content: center;
     }

@@ -43,12 +43,15 @@ const CartMain = styled.main`
     }
   }
   .circle {
-    width: 10rem;
-    height: 10rem;
+    width: 8rem;
+    height: 8rem;
     border-radius: 5rem;
     border: 1px solid #ccc;
     margin: 2rem auto;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     p {
       font-size: 1.7rem;
       margin: 4rem auto;
@@ -57,6 +60,13 @@ const CartMain = styled.main`
   .active {
     background-color: #d96528;
     color: white;
+  }
+  @media screen and (max-width: 500px) {
+    .square {
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
   }
 `;
 

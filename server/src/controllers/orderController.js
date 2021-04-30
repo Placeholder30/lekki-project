@@ -19,14 +19,14 @@ const showOrder = async function (req, res) {
       where: { userId },
       include: [Product],
     });
-    const product = orders.map((product) => {
+    orders.map((product) => {
       const { orderId, orderDate, Product } = product;
       const { dataValues } = Product;
       const newObj = { orderId, orderDate, ...dataValues };
       products.push(newObj);
     });
 
-    res.status(200).json({ message: product });
+    res.status(200).json({ message: products });
   } catch (error) {
     res.status(401).json({ message: error });
   }

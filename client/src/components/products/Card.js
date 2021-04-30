@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { CardContainer } from "../home/FeaturedProducts";
 import { RiArrowRightSLine } from "react-icons/ri";
-
+import styled from "styled-components";
 function Card({ product }) {
   return (
     <Link to={`/products/${product.UUID}`}>
-      <CardContainer>
+      <Container>
         <div className="prod-image">
           <img src={product.imageUrl} alt={product.alt} />
         </div>
@@ -14,9 +14,12 @@ function Card({ product }) {
         <div className="view-prod">
           <div>View Item</div> <RiArrowRightSLine className="right-arrow" />
         </div>
-      </CardContainer>
+      </Container>
     </Link>
   );
 }
 
+const Container = styled(CardContainer)`
+  border: none;
+`;
 export default Card;

@@ -9,6 +9,7 @@ function Login() {
   const [userData, setUserData] = useContext(UserContext);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState(null);
+  // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
 
   const handleLogin = async () => {
