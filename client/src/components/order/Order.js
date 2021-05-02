@@ -55,7 +55,7 @@ function Order() {
                   <h4>{item.name}</h4>
                   <div>{item.orderId}</div>
                   <div className="price">{item.orderDate}</div>
-                  <div>order date</div>
+                  <div>{item.orderQuantity}</div>
                 </div>
               </Card>
             ))

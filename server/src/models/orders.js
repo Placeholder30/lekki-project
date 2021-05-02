@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: UUIDV4,
         primaryKey: true,
       },
+      orderQuantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       orderDate: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,

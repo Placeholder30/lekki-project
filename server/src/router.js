@@ -20,6 +20,7 @@ router.get("/api/products", getProducts);
 //add products
 // router.post("/api/products", populateDb);
 router.post("/api/products", addProduct);
+//place and view orders
 router.get("/api/order/:userId", verifyToken, showOrder);
 router.post("/api/order", verifyToken, createOrder);
 module.exports = router;

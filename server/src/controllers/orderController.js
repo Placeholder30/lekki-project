@@ -1,14 +1,21 @@
 const { Order, Product } = require("../models/index");
 
+//use bulkCreate Illi
 const createOrder = async function (req, res) {
-  const { productId, userId } = req.body;
+  const { cart } = req.body;
 
-  try {
-    const order = await Order.create({ productId, userId });
-    res.status(201).json({ message: order });
-  } catch (error) {
-    res.status(401).json({ message: error });
-  }
+  cart.forEach(async (item) => {
+    try {
+      const order = await Order.create({
+        productId: item.UUID,
+        userId: item.userId,
+        orderQuantity: item.quantity,
+      });
+    } catch (error) {
+      res.status(401).json({ message: error });
+    }
+  });
+  res.status(201).json({ message: "orders created" });
 };
 
 const showOrder = async function (req, res) {
@@ -20,9 +27,9 @@ const showOrder = async function (req, res) {
       include: [Product],
     });
     orders.map((product) => {
-      const { orderId, orderDate, Product } = product;
+      const { orderId, orderDate, orderQuantity, Product } = product;
       const { dataValues } = Product;
-      const newObj = { orderId, orderDate, ...dataValues };
+      const newObj = { orderId, orderDate, orderQuantity, ...dataValues };
       products.push(newObj);
     });
 

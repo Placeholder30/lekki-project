@@ -1,8 +1,27 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { CartContext } from "../context/Context";
+import { requestOptions } from "../../helpers/fetch";
+import { CartContext, UserContext } from "../context/Context";
 function Payment() {
   const [cart] = useContext(CartContext);
+  const [userData] = useContext(UserContext);
+  // eslint-disable-next-line no-undef
+  const { REACT_APP_BACKEND } = process.env;
+  const handleOrder = (e) => {
+    e.preventDefault();
+    const placeOrder = fetch(`${REACT_APP_BACKEND}/order`, {
+      ...requestOptions,
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: userData.UUID, cart: cart }),
+    });
+    if (placeOrder.status === 200) {
+      console.log("order placed sucessfully");
+    }
+  };
+  console.log(userData.token);
 
   const total = cart
     .map((item) => {
@@ -12,9 +31,10 @@ function Payment() {
       return accumulator + currentValue;
     })
     .toFixed(2);
+
   return (
     <PaymentContainer>
-      <form action="">
+      <form onSubmit={handleOrder}>
         <label htmlFor="address">Address</label>
         <input
           type="address"

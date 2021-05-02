@@ -3,12 +3,13 @@ import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-import { CartContext, ProductsContext } from "../context/Context";
+import { CartContext, ProductsContext, UserContext } from "../context/Context";
 import { useParams } from "react-router";
-function ProductDetails({ userData }) {
+function ProductDetails() {
   const [productNo, setProductNo] = useState(1);
   const [cart, setCart] = useContext(CartContext);
   const productsData = useContext(ProductsContext);
+  const [userData] = useContext(UserContext);
   const { id } = useParams();
   const [product] = productsData.filter((item) => {
     if (item.UUID === id) {
@@ -24,12 +25,15 @@ function ProductDetails({ userData }) {
       }
     });
     addToCart &&
-      setCart((state) => [...state, { ...product, quantity: productNo }]);
+      setCart((state) => [
+        ...state,
+        { ...product, quantity: productNo, userId: userData.UUID },
+      ]);
   };
 
   return (
     <>
-      <Navbar userData={userData} />
+      <Navbar />
       <ProductContainer>
         {!product ? (
           <div>Loading....</div>
