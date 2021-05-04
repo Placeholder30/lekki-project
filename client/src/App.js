@@ -14,7 +14,7 @@ import Order from "./components/order/Order";
 import Scroll from "./components/home/Scroll";
 
 function App() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(getUserDataFromLocalStorage());
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
   // eslint-disable-next-line no-undef
@@ -43,6 +43,18 @@ function App() {
     saveCartToLocalStorage();
   }, [cart]);
 
+  useEffect(() => {
+    const saveUserDataToLocalStorage = () => {
+      const data = JSON.stringify(userData);
+      localStorage.setItem("userData", data);
+    };
+    saveUserDataToLocalStorage();
+  }, [userData]);
+
+  function getUserDataFromLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("userData"));
+    return !data ? {} : data;
+  }
   function getCartFromLocalStorage() {
     const items = JSON.parse(localStorage.getItem("cart"));
     return !items ? [] : items;

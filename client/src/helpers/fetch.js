@@ -1,6 +1,6 @@
 export const requestOptions = {
   method: "POST",
-  mode: "no-cors",
+  mode: "cors",
   cache: "no-cache",
   credentials: "same-origin",
   headers: {

@@ -1,9 +1,8 @@
 const { Order, Product } = require("../models/index");
 
 //use bulkCreate Illi
-const createOrder = function (req, res) {
+const createOrder = function async(req, res) {
   const { cart } = req.body;
-  console.log(cart);
   cart.forEach(async (item) => {
     try {
       const order = await Order.create({
