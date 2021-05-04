@@ -21,7 +21,6 @@ function Payment() {
       console.log("order placed sucessfully");
     }
   };
-  console.log(userData.token);
 
   const total = cart
     .map((item) => {

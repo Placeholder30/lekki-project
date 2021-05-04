@@ -32,17 +32,6 @@ function Order() {
     <>
       <Navbar />
       <Container>
-        <Sidebar>
-          <Link to="/orders">
-            <li>Orders</li>
-          </Link>
-          <Link to="/account">
-            <li>Account</li>
-          </Link>
-          <Link to="/settings">
-            <li>Orders</li>
-          </Link>
-        </Sidebar>
         <Main>
           <h2>Orders</h2>
           {orders && orders.message ? (
@@ -53,9 +42,10 @@ function Order() {
                 </div>
                 <div className="details">
                   <h4>{item.name}</h4>
-                  <div>{item.orderId}</div>
-                  <div className="price">{item.orderDate}</div>
-                  <div>{item.orderQuantity}</div>
+                  <div> Order id: {item.orderId.split("-")[0]}</div>
+                  <div> Order date: {item.orderDate.split("T")[0]}</div>
+                  <div>items: {item.orderQuantity}</div>
+                  <div className="price">price: {item.price}</div>
                 </div>
               </Card>
             ))
@@ -80,11 +70,11 @@ const Sidebar = styled.ul`
   flex: 1;
 `;
 const Main = styled.main`
-  width: 40vw;
+  width: 50vw;
   margin: 0 auto;
-  flex: 3;
+
   h2 {
-    font-size: 1.7rem;
+    font-size: 2rem;
   }
   h3 {
     font-size: 1.4rem;

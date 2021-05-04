@@ -12,6 +12,7 @@ import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
 import Order from "./components/order/Order";
 import Scroll from "./components/home/Scroll";
+import useLocalStorage from "./helpers/useLocalStorage";
 
 function App() {
   const [userData, setUserData] = useState(getUserDataFromLocalStorage());
@@ -35,21 +36,8 @@ function App() {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    const saveCartToLocalStorage = () => {
-      const items = JSON.stringify(cart);
-      localStorage.setItem("cart", items);
-    };
-    saveCartToLocalStorage();
-  }, [cart]);
-
-  useEffect(() => {
-    const saveUserDataToLocalStorage = () => {
-      const data = JSON.stringify(userData);
-      localStorage.setItem("userData", data);
-    };
-    saveUserDataToLocalStorage();
-  }, [userData]);
+  useLocalStorage(cart, "cart");
+  useLocalStorage(userData, "userData");
 
   function getUserDataFromLocalStorage() {
     const data = JSON.parse(localStorage.getItem("userData"));

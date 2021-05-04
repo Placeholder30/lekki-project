@@ -9,14 +9,10 @@ function Navbar() {
   const [userData, setUserData] = useContext(UserContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const history = useHistory();
+  // eslint-disable-next-line no-undef
+  const { REACT_APP_BACKEND } = process.env;
   const handleLogout = () => {
-    fetch("/logout")
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData(data);
-        history.push("/");
-      })
-      .catch((err) => console.log(err));
+    setUserData({});
   };
   return (
     <>
