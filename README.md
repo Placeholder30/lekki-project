@@ -50,6 +50,6 @@ add products to cart and create an order.
 - Seller should be able to add products
 - Seller should be able to view sales made
 
-### Payment Intergration
+#### Payment Intergration
 
 Integrate a payment API.
