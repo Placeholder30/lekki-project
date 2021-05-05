@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import Payment from "./Payment";
 import { Link } from "react-router-dom";
@@ -6,16 +6,27 @@ import { CartContext } from "../context/Context";
 import CartItem from "./CartItem";
 function CartTable() {
   const [cart] = useContext(CartContext);
+  const [orderMessage, setOrderMessage] = useState(false);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setOrderMessage(false);
+    }, 3000);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [orderMessage]);
 
   return (
     <TableContainer>
+      {orderMessage && <h3>You've successfully placed your order</h3>}
       <h2>Your Cart</h2>
       {cart && cart.length ? (
         <>
           <table>
             <CartItem />
           </table>
-          <Payment />
+          <Payment setOrderMessage={setOrderMessage} />
         </>
       ) : (
         <>
@@ -39,6 +50,16 @@ const TableContainer = styled.section`
     font-weight: 400;
     margin: 1rem 0;
     padding-top: 1.3rem;
+  }
+  h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 1rem auto;
+    padding: 1rem;
+    background-color: #d96528;
+    width: 40vw;
+    color: white;
   }
   table {
     width: 100%;

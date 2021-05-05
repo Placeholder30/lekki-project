@@ -18,6 +18,7 @@ function App() {
   const [userData, setUserData] = useState(getUserDataFromLocalStorage());
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
+  const [error, setError] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
 
@@ -30,7 +31,7 @@ function App() {
           setProductsData(result);
         }
       } catch (error) {
-        console.log(error);
+        setError(true);
       }
     };
     fetchProducts();

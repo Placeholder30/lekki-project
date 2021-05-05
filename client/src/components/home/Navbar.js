@@ -1,6 +1,6 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext, UserContext } from "../context/Context";
 import Dropdown from "./Dropdown";
@@ -8,7 +8,6 @@ function Navbar() {
   const [cart] = useContext(CartContext);
   const [userData, setUserData] = useContext(UserContext);
   const [showDropdown, setShowDropdown] = useState(false);
-  const history = useHistory();
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
   const handleLogout = () => {

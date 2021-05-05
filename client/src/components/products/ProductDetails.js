@@ -5,6 +5,7 @@ import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
 import { CartContext, ProductsContext, UserContext } from "../context/Context";
 import { useParams } from "react-router";
+
 function ProductDetails() {
   const [productNo, setProductNo] = useState(1);
   const [cart, setCart] = useContext(CartContext);
@@ -16,7 +17,6 @@ function ProductDetails() {
       return item;
     }
   });
-
   const addToCart = () => {
     let addToCart = true;
     cart.map((cartItem) => {
@@ -36,7 +36,7 @@ function ProductDetails() {
       <Navbar />
       <ProductContainer>
         {!product ? (
-          <div>Loading....</div>
+          <div>Loading</div>
         ) : (
           <>
             <div className="product">

@@ -2,14 +2,15 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { requestOptions } from "../../helpers/fetch";
 import { CartContext, UserContext } from "../context/Context";
-function Payment() {
-  const [cart] = useContext(CartContext);
+function Payment({ setOrderMessage }) {
+  const [cart, setCart] = useContext(CartContext);
   const [userData] = useContext(UserContext);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
-  const handleOrder = (e) => {
+  const handleOrder = async (e) => {
     e.preventDefault();
-    const placeOrder = fetch(`${REACT_APP_BACKEND}/order`, {
+
+    const placeOrder = await fetch(`${REACT_APP_BACKEND}/order`, {
       ...requestOptions,
       headers: {
         Authorization: `Bearer ${userData.token}`,
@@ -17,11 +18,11 @@ function Payment() {
       },
       body: JSON.stringify({ userId: userData.UUID, cart: cart }),
     });
-    if (placeOrder.status === 200) {
-      console.log("order placed sucessfully");
+    if (placeOrder.status === 201) {
+      setOrderMessage(true);
+      setCart([]);
     }
   };
-
   const total = cart
     .map((item) => {
       return item.price * item.quantity;
@@ -96,10 +97,10 @@ const PaymentContainer = styled.div`
   }
   button {
     margin-top: 1.3rem;
-    background-color: #999;
+    background-color: #d96528;
     color: white;
     border: none;
-    text-decoration: none;
+    /* text-decoration: none; */
     text-align: center;
     &:hover {
       cursor: pointer;

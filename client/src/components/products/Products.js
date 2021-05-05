@@ -66,6 +66,7 @@ function Products({ userData, setUserData }) {
 const ProductsMain = styled.section`
   display: flex;
   justify-content: space-between;
+  min-height: 70vh;
   .products {
     flex: 2.8;
     display: grid;

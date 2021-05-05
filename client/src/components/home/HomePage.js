@@ -8,13 +8,22 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <Collection photo={"firstPhoto"} />
+      <Collection photo={"firstPhoto"} data={femaleData} />
       <Grids />
-      <Collection />
+      <Collection data={maleData} />
       <FeaturedProducts />
       <Footer />
     </>
   );
 }
-
+const femaleData = {
+  fashion: "WOMEN'S FASHION",
+  off: "40% OFF",
+  season: "HOT GIRL SUMMER",
+};
+const maleData = {
+  fashion: "MEN'S FASHION ",
+  off: "35% OFF",
+  season: " STREET STYLE",
+};
 export default HomePage;
