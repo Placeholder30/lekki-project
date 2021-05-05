@@ -1,20 +1,22 @@
 const { Order, Product } = require("../models/index");
 
-//use bulkCreate Illi
-const createOrder = function async(req, res) {
+const createOrder = async function (req, res) {
   const { cart } = req.body;
-  cart.forEach(async (item) => {
-    try {
-      const order = await Order.create({
-        productId: item.UUID,
-        userId: item.userId,
-        orderQuantity: item.quantity,
-      });
-    } catch (error) {
-      res.status(401).json({ message: error });
-    }
+  const items = cart.map((item) => {
+    let tempObj = {
+      productId: item.UUID,
+      userId: item.userId,
+      orderQuantity: item.quantity,
+    };
+    return tempObj;
   });
-  res.status(201).json({ message: "orders created" });
+
+  try {
+    const orders = await Order.bulkCreate(items);
+    res.status(201).json({ message: orders });
+  } catch (error) {
+    res.status(401).json({ message: error });
+  }
 };
 
 const showOrder = async function (req, res) {

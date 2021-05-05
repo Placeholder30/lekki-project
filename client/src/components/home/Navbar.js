@@ -1,24 +1,39 @@
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiMenuLine } from "react-icons/ri";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext, UserContext } from "../context/Context";
 import Dropdown from "./Dropdown";
+import MobileNav from "./MobileNav";
 function Navbar() {
   const [cart] = useContext(CartContext);
   const [userData, setUserData] = useContext(UserContext);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
   const handleLogout = () => {
     setUserData({});
   };
+
   return (
     <>
+      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
+
       <Header>
         <Link to="/">
           <h1>Lekki Store</h1>
         </Link>
+
+        <div
+          className="hamburger-menu"
+          onClick={() => {
+            setShowSideBar(true);
+          }}
+        >
+          <RiMenuLine />
+        </div>
+
         <nav>
           <ul>
             <li>
@@ -104,7 +119,6 @@ const Header = styled.header`
       color: black;
       &:hover {
         color: #ea5f5f;
-        /* border-bottom: 1px solid #ccc; */
       }
     }
   }
@@ -141,7 +155,14 @@ const Header = styled.header`
     font-size: 2rem;
     width: 3rem;
   }
+.hamburger-menu{
+  display: none;
+  margin-left: 90%;
+  &:hover{
+    cursor: pointer
+  }
 
+}
   @media screen and (max-width: 769px) {
     li {
       border: none;
@@ -151,8 +172,14 @@ const Header = styled.header`
       margin-bottom: 2rem;
     }
   }
-  @media screen and (max-width: 480px) {
-    li {
+  @media screen and (max-width: 503px) {
+    .hamburger-menu{
+      display: block
+      }
+    nav{
+      display: none
+    }
+    /* li {
       padding: 0.3rem;
     }
     h1 {
@@ -162,7 +189,7 @@ const Header = styled.header`
     nav {
       justify-content: space-between;
     }
-  }
+  } */
 `;
 
 export default Navbar;
