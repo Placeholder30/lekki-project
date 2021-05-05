@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import HomePage from "./components/home/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./components/forms/LoginPage";
@@ -9,35 +8,42 @@ import Products from "./components/products/Products";
 import NotFound from "./components/notfound/NotFound";
 import ProductDetails from "./components/products/ProductDetails";
 import CartPage from "./components/cart/CartPage";
-import { CartContext } from "./components/context/Context";
+import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
+import Order from "./components/order/Order";
+import Scroll from "./components/home/Scroll";
+import useLocalStorage from "./helpers/useLocalStorage";
+
 function App() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(getUserDataFromLocalStorage());
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
+  const [error, setError] = useState(false);
+  // eslint-disable-next-line no-undef
+  const { REACT_APP_BACKEND } = process.env;
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const products = await fetch("/products");
+        const products = await fetch(`${REACT_APP_BACKEND}/products`);
         if (products.status === 200) {
           const result = await products.json();
           setProductsData(result);
         }
       } catch (error) {
-        console.log(error);
+        setError(true);
       }
     };
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    const saveCartToLocalStorage = () => {
-      const items = JSON.stringify(cart);
-      localStorage.setItem("cart", items);
-    };
-    saveCartToLocalStorage();
-  }, [cart]);
+  useLocalStorage(cart, "cart");
+  useLocalStorage(userData, "userData");
 
+  function getUserDataFromLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("userData"));
+    return !data ? {} : data;
+  }
   function getCartFromLocalStorage() {
     const items = JSON.parse(localStorage.getItem("cart"));
     return !items ? [] : items;
@@ -47,37 +53,25 @@ function App() {
       <GlobalStyle />
       <Container>
         <Router>
-          <CartContext.Provider value={[cart, setCart]}>
-            <ProductsContext.Provider value={productsData}>
-              <Switch>
-                <Route exact path="/">
-                  <HomePage userData={userData} setUserData={setUserData} />
-                </Route>
-                <Route path="/login">
-                  <LoginPage userData={userData} setUserData={setUserData} />
-                </Route>
-                <Route path="/register">
-                  <RegisterPage userData={userData} setUserData={setUserData} />
-                </Route>
-                <Route path="/all">
-                  <Products userData={userData} />
-                </Route>
-                <Route path="/men">
-                  <Products userData={userData} />
-                </Route>
-                <Route exact path="/women">
-                  <Products userData={userData} />
-                </Route>
-                <Route path="/products/:id">
-                  <ProductDetails userData={userData} />
-                </Route>
-                <Route path="/cart">
-                  <CartPage userData={userData} />
-                </Route>
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </ProductsContext.Provider>
-          </CartContext.Provider>
+          <UserContext.Provider value={[userData, setUserData]}>
+            <CartContext.Provider value={[cart, setCart]}>
+              <ProductsContext.Provider value={productsData}>
+                <Scroll />
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/login" component={LoginPage} />
+                  <Route path="/register" component={RegisterPage} />
+                  <Route path="/all" component={Products} />
+                  <Route path="/women" component={Products} />
+                  <Route path="/men" component={Products} />
+                  <Route path="/products/:id" component={ProductDetails} />
+                  <Route path="/cart" component={CartPage} />
+                  <Route path="/orders" component={Order} />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </ProductsContext.Provider>
+            </CartContext.Provider>
+          </UserContext.Provider>
         </Router>
       </Container>
     </>

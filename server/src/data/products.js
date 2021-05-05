@@ -64,7 +64,7 @@ module.exports = [
     name: "Historia Reiss",
     category: "women",
     imageUrl:
-      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/7.jpg",
+      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617395372/lekki-store/frontend-assets/products/women/7.jpg",
     price: 10.99,
     alt: "Not a picture of Histria Reiss",
   },
@@ -74,7 +74,7 @@ module.exports = [
     name: "Mikasa Ackerman",
     category: "women",
     imageUrl:
-      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,w_244/v1617395372/lekki-store/frontend-assets/products/women/8.jpg",
+      "https://res.cloudinary.com/placeholder30/image/upload/c_scale,h_244,w_244/v1617395350/lekki-store/frontend-assets/products/women/8.jpg",
     price: 19.99,
     alt: "if Mikasa Ackerman wore flats",
   },

@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "https://github.com/Placeholder30/lekki-project.git",
   "license": "MIT",
-  "devDependencies": {}
+  "scripts": {
+    "heroku-prebuild": "cd server && yarn install",
+    "start": "node server/src/app.js"
+  },
+  "dependencies": {}
 }

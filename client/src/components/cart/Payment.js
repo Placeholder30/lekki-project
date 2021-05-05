@@ -1,9 +1,28 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { CartContext } from "../context/Context";
-function Payment() {
-  const [cart] = useContext(CartContext);
+import { requestOptions } from "../../helpers/fetch";
+import { CartContext, UserContext } from "../context/Context";
+function Payment({ setOrderMessage }) {
+  const [cart, setCart] = useContext(CartContext);
+  const [userData] = useContext(UserContext);
+  // eslint-disable-next-line no-undef
+  const { REACT_APP_BACKEND } = process.env;
+  const handleOrder = async (e) => {
+    e.preventDefault();
 
+    const placeOrder = await fetch(`${REACT_APP_BACKEND}/order`, {
+      ...requestOptions,
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: userData.UUID, cart: cart }),
+    });
+    if (placeOrder.status === 201) {
+      setOrderMessage(true);
+      setCart([]);
+    }
+  };
   const total = cart
     .map((item) => {
       return item.price * item.quantity;
@@ -12,9 +31,10 @@ function Payment() {
       return accumulator + currentValue;
     })
     .toFixed(2);
+
   return (
     <PaymentContainer>
-      <form action="">
+      <form onSubmit={handleOrder}>
         <label htmlFor="address">Address</label>
         <input
           type="address"
@@ -34,16 +54,16 @@ function Payment() {
       </form>
       <div className="total-container">
         <div className="subtotal flexx">
-          <div>Subtotal</div>
-          <div>${total}</div>
+          <div className="bold">Subtotal</div>
+          <div className="bold">${total}</div>
         </div>
         <div className="shipping flexx">
           <div>Shipping</div>
           <div>Free Shipping</div>
         </div>
         <div className="total flexx">
-          <div>Total</div>
-          <div>${total}</div>
+          <div className="bold">Total</div>
+          <div className="bold">${total}</div>
         </div>
       </div>
     </PaymentContainer>
@@ -77,10 +97,10 @@ const PaymentContainer = styled.div`
   }
   button {
     margin-top: 1.3rem;
-    background-color: #999;
+    background-color: #d96528;
     color: white;
     border: none;
-    text-decoration: none;
+    /* text-decoration: none; */
     text-align: center;
     &:hover {
       cursor: pointer;
@@ -91,9 +111,15 @@ const PaymentContainer = styled.div`
     display: flex;
     justify-content: space-between;
   }
-
+  .bold {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
   @media screen and (max-width: 820px) {
     grid-template-columns: 1fr;
+    .total-container {
+      padding-right: 0;
+    }
   }
 `;
 

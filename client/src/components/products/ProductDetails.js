@@ -3,25 +3,40 @@ import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-import { CartContext, ProductsContext } from "../context/Context";
+import { CartContext, ProductsContext, UserContext } from "../context/Context";
 import { useParams } from "react-router";
-function ProductDetails({ userData }) {
+
+function ProductDetails() {
   const [productNo, setProductNo] = useState(1);
   const [cart, setCart] = useContext(CartContext);
   const productsData = useContext(ProductsContext);
+  const [userData] = useContext(UserContext);
   const { id } = useParams();
   const [product] = productsData.filter((item) => {
-    if (item.id == id) {
+    if (item.UUID === id) {
       return item;
     }
   });
+  const addToCart = () => {
+    let addToCart = true;
+    cart.map((cartItem) => {
+      if (cartItem.name === product.name) {
+        addToCart = false;
+      }
+    });
+    addToCart &&
+      setCart((state) => [
+        ...state,
+        { ...product, quantity: productNo, userId: userData.UUID },
+      ]);
+  };
 
   return (
     <>
-      <Navbar userData={userData} />
+      <Navbar />
       <ProductContainer>
         {!product ? (
-          <div>Loading....</div>
+          <div>Loading</div>
         ) : (
           <>
             <div className="product">
@@ -57,23 +72,7 @@ function ProductDetails({ userData }) {
                   <button
                     className="add-cart"
                     onClick={() => {
-                      let addToCart = true;
-                      cart.forEach((cartItem) => {
-                        if (cartItem.name === product.name) {
-                          addToCart = false;
-                        }
-                      });
-                      addToCart &&
-                        setCart((state) => [
-                          ...state,
-                          {
-                            id: product.id,
-                            imageUrl: product.imageUrl,
-                            name: product.name,
-                            price: product.price,
-                            quantity: productNo,
-                          },
-                        ]);
+                      addToCart(product);
                     }}
                   >
                     Add to Cart
@@ -95,10 +94,10 @@ const ProductContainer = styled.main`
   display: flex;
   margin-bottom: 4rem;
   .content {
-    max-width: 60vw;
+    max-width: 35vw;
   }
   .product {
-    margin-right: 5rem;
+    margin-right: 7rem;
   }
   h2 {
     font-size: 3rem;
@@ -114,7 +113,7 @@ const ProductContainer = styled.main`
   }
   .buttons button {
     font-size: 1.4rem;
-    width: 5rem;
+    width: 4rem;
     min-height: 4rem;
     text-align: center;
     background-color: black;
@@ -123,7 +122,7 @@ const ProductContainer = styled.main`
   }
   .buttons input {
     margin: 0 0.3rem;
-    width: 5rem;
+    width: 4rem;
     height: 4rem;
     text-align: center;
     outline: none;
@@ -134,10 +133,20 @@ const ProductContainer = styled.main`
     width: 10rem;
     background-color: #d96528;
     border: none;
-    margin: 2rem 3rem 0;
+    margin: 2rem 0;
     &:hover {
       cursor: pointer;
       opacity: 0.9;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    .cards {
+      justify-content: center;
+    }
+    .content {
+      max-width: 60vw;
     }
   }
 `;

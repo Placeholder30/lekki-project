@@ -2,13 +2,18 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
-    // static associate(models) {}
+    static associate(models) {
+      this.hasOne(models.Order, {
+        foreignKey: "productId",
+      });
+    }
   }
   Product.init(
     {
       UUID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
       },
       id: {
         type: DataTypes.INTEGER,
@@ -23,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { message: "Product name cannot be empty" },
         },
       },
+
       category: {
         type: DataTypes.STRING,
         allowNull: false,

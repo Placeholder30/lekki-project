@@ -1,17 +1,39 @@
-import { useContext } from "react";
+import { RiArrowDropDownLine, RiMenuLine } from "react-icons/ri";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext } from "../context/Context";
-function Navbar({ userData }) {
+import { CartContext, UserContext } from "../context/Context";
+import Dropdown from "./Dropdown";
+import MobileNav from "./MobileNav";
+function Navbar() {
   const [cart] = useContext(CartContext);
+  const [userData, setUserData] = useContext(UserContext);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false);
+  // eslint-disable-next-line no-undef
+  const { REACT_APP_BACKEND } = process.env;
+  const handleLogout = () => {
+    setUserData({});
+  };
 
   return (
     <>
+      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
+
       <Header>
-        <h1>Lekki Store</h1>
-        {userData.authenticated && (
-          <div className="user-message">Hi, {userData.firstName}</div>
-        )}
+        <Link to="/">
+          <h1>Lekki Store</h1>
+        </Link>
+
+        <div
+          className="hamburger-menu"
+          onClick={() => {
+            setShowSideBar(true);
+          }}
+        >
+          <RiMenuLine />
+        </div>
+
         <nav>
           <ul>
             <li>
@@ -32,13 +54,28 @@ function Navbar({ userData }) {
               ) : null}
               <Link to="/cart">CART</Link>
             </li>
-            <li>
-              <Link to="/register">REGISTER</Link>
-            </li>
-            <li>
-              <Link to={userData.authenticated ? "/logout" : "/login"}>
-                {userData.authenticated ? "LOGOUT" : "LOGIN"}
-              </Link>
+
+            <li className="user-message">
+              {userData && userData.firstName ? (
+                `Hi, ${userData.firstName}`
+              ) : (
+                <Link to="/login">LOGIN</Link>
+              )}
+              <RiArrowDropDownLine
+                className="drop-down-icon"
+                onMouseEnter={() => {
+                  setShowDropdown(true);
+                }}
+                onClick={() => {
+                  setShowDropdown(true);
+                }}
+              />
+              {showDropdown && (
+                <Dropdown
+                  setShowDropdown={setShowDropdown}
+                  handleLogout={handleLogout}
+                />
+              )}
             </li>
           </ul>
         </nav>
@@ -50,7 +87,7 @@ function Navbar({ userData }) {
 const Header = styled.header`
   h1 {
     text-align: center;
-    margin-top: 5.3rem;
+    margin-top: 3.3rem;
     margin-bottom: 5.3rem;
     font-size: 4rem;
     font-weight: 500;
@@ -72,16 +109,16 @@ const Header = styled.header`
   li {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
+    font-size: 1.3rem;
     padding: 0 2rem;
     margin-left: 0.3rem;
+    display: flex;
     a {
       font-size: 1.3rem;
       text-decoration: none;
       color: black;
       &:hover {
         color: #ea5f5f;
-        padding-bottom: 0.3rem;
-        border-bottom: 2px solid #ccc;
       }
     }
   }
@@ -98,6 +135,34 @@ const Header = styled.header`
     left: 60%;
     color: white;
   }
+  li.user-message {
+    position: relative;
+    border: none;
+  }
+  li.user-message div.drop-down {
+    position: absolute;
+    top: 2.9rem;
+    left: 1.2rem;
+    width: 12rem;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    div {
+      padding: 1rem;
+      font-size: 1.4rem;
+    }
+  }
+  .drop-down-icon {
+    font-size: 2rem;
+    width: 3rem;
+  }
+.hamburger-menu{
+  display: none;
+  margin-left: 90%;
+  &:hover{
+    cursor: pointer
+  }
+
+}
   @media screen and (max-width: 769px) {
     li {
       border: none;
@@ -107,15 +172,24 @@ const Header = styled.header`
       margin-bottom: 2rem;
     }
   }
-  @media screen and (max-width: 480px) {
-    li {
+  @media screen and (max-width: 503px) {
+    .hamburger-menu{
+      display: block
+      }
+    nav{
+      display: none
+    }
+    /* li {
       padding: 0.3rem;
     }
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
     }
-  }
+    nav {
+      justify-content: space-between;
+    }
+  } */
 `;
 
 export default Navbar;

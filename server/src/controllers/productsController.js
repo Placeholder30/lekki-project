@@ -1,14 +1,14 @@
 const { Product } = require("../models/index");
 const productsJson = require("../data/products");
 
-exports.getProducts = async function (req, res) {
+const getProducts = async function (req, res) {
   const products = await Product.findAll({
-    attributes: { exclude: ["UUID", "createdAt", "updatedAt"] },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
   });
   res.status(200).json(products);
 };
 
-exports.addProduct = async function (req, res) {
+const addProduct = async function (req, res) {
   const { name, category, imageUrl, alt } = req.body;
   try {
     const product = await Product.create({ name, category, imageUrl, alt });
@@ -21,13 +21,13 @@ exports.addProduct = async function (req, res) {
   }
 };
 
-//secure this end point with some sort of auth
-exports.populateDb = function (req, res) {
+// secure this end point with some sort of auth
+const populateDb = function (req, res) {
   productsJson.forEach(async ({ name, id, imageUrl, alt, category, price }) => {
     try {
       const result = await Product.create({
-        name,
         id,
+        name,
         category,
         imageUrl,
         alt,
@@ -42,3 +42,5 @@ exports.populateDb = function (req, res) {
     }
   });
 };
+
+module.exports = { getProducts, addProduct, populateDb };
