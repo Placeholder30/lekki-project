@@ -1,7 +1,7 @@
 # lekki-Store
 
 https://lekki-store.netlify.app/
-##Introduction
+## Introduction
 An eCommerce website that lets users create an Account, view available products,
 add products to cart and create an order.
 

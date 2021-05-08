@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { RiCloseLine } from "react-icons/ri";
 function MobileNav({ setShowSideBar }) {
   return (
     <List>
@@ -9,12 +9,16 @@ function MobileNav({ setShowSideBar }) {
           setShowSideBar(false);
         }}
       >
-        X
+        <span className="close-icon">
+          <RiCloseLine />
+        </span>
       </li>
       <Link to="/">
         <li>Home</li>
       </Link>
-
+      <Link to="/cart">
+        <li>Cart</li>
+      </Link>
       <Link to="/all">
         <li>All</li>
       </Link>
@@ -41,18 +45,29 @@ function MobileNav({ setShowSideBar }) {
 }
 
 const List = styled.ul`
-  width: 30vw;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   background-color: gray;
+  opacity: 0.8;
   color: white;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  li {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  transition: 0.5s;
+  a {
+    li {
+      font-size: 2rem;
+      margin: 2rem auto;
+      text-align: center;
+    }
+  }
+  li span.close-icon svg {
+    font-size: 3rem;
+    width: 5rem;
+    color: black;
   }
 `;
 

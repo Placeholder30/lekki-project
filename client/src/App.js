@@ -12,7 +12,9 @@ import { CartContext, UserContext } from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
 import Order from "./components/order/Order";
 import Scroll from "./components/home/Scroll";
-import useLocalStorage from "./helpers/useLocalStorage";
+import useLocalStorage from './helpers/useLocalStorage';
+import { getUserDataFromLocalStorage, getCartFromLocalStorage} from "./helpers/useLocalStorage";
+
 
 function App() {
   const [userData, setUserData] = useState(getUserDataFromLocalStorage());
@@ -40,14 +42,7 @@ function App() {
   useLocalStorage(cart, "cart");
   useLocalStorage(userData, "userData");
 
-  function getUserDataFromLocalStorage() {
-    const data = JSON.parse(localStorage.getItem("userData"));
-    return !data ? {} : data;
-  }
-  function getCartFromLocalStorage() {
-    const items = JSON.parse(localStorage.getItem("cart"));
-    return !items ? [] : items;
-  }
+  
   return (
     <>
       <GlobalStyle />

@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext, UserContext } from "../context/Context";
 import Dropdown from "./Dropdown";
-import MobileNav from "./MobileNav";
-function Navbar() {
+function Navbar({ setShowSideBar }) {
   const [cart] = useContext(CartContext);
   const [userData, setUserData] = useContext(UserContext);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
   const handleLogout = () => {
@@ -18,8 +16,6 @@ function Navbar() {
 
   return (
     <>
-      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
-
       <Header>
         <Link to="/">
           <h1>Lekki Store</h1>
@@ -85,6 +81,7 @@ function Navbar() {
 }
 
 const Header = styled.header`
+
   h1 {
     text-align: center;
     margin-top: 3.3rem;
