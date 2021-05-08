@@ -158,6 +158,9 @@ const Header = styled.header`
   &:hover{
     cursor: pointer
   }
+  svg{
+    font-size: 3rem;
+  }
 
 }
   @media screen and (max-width: 769px) {

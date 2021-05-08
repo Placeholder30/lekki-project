@@ -29,7 +29,7 @@ function Footer() {
 const Container = styled.div`
   margin-top: 4rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   ul {
     list-style: none;
@@ -40,7 +40,7 @@ const Container = styled.div`
     margin-left: 8rem;
   }
   .news-letter {
-    width: 33.333%;
+    /* width: 33.333%; */
     align-self: end;
   }
   label {
