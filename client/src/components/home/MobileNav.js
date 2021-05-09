@@ -8,6 +8,7 @@ function MobileNav() {
   const [userData] = useContext(UserContext);
   const handleLogout = useContext(LogoutContext);
   const [showSideBar, setShowSideBar] = useContext(SideBarContext);
+
   return (
     <List>
       <li
@@ -28,14 +29,7 @@ function MobileNav() {
       >
         <li>Home</li>
       </Link>
-      <Link
-        to="/cart"
-        onClick={() => {
-          setShowSideBar(false);
-        }}
-      >
-        <li>Cart</li>
-      </Link>
+
       <Link
         to="/all"
         onClick={() => {

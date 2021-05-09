@@ -58,6 +58,7 @@ function App() {
     if (logout.status === 200) {
       const result = await logout.json();
       setUserData(result);
+      setCart([]);
     }
   };
   return (

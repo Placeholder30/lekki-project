@@ -21,17 +21,12 @@ function Navbar() {
         <Link to="/">
           <h1>Lekki Store</h1>
         </Link>
-        <div
-          className="hamburger-menu"
-          onClick={() => {
-            setShowSideBar(true);
-          }}
-        >
-          <RiMenuLine />
-        </div>
 
         <nav>
           <ul>
+            {userData.authenticated && (
+              <li className="user">{`Hi, ${userData.firstName}`}</li>
+            )}
             <li>
               <Link to="/">HOME</Link>
             </li>
@@ -50,7 +45,14 @@ function Navbar() {
               ) : null}
               <Link to="/cart">CART</Link>
             </li>
-
+            <div
+              className="hamburger-menu"
+              onClick={() => {
+                setShowSideBar(true);
+              }}
+            >
+              <RiMenuLine />
+            </div>
             <li className="user-message">
               {userData && userData.firstName ? (
                 `Hi, ${userData.firstName}`
@@ -136,6 +138,9 @@ const Header = styled.header`
     position: relative;
     /* border: none; */
   }
+  li.user{
+    display:none;
+  }
   li.user-message div.drop-down {
     position: absolute;
     top: 2.9rem;
@@ -154,7 +159,6 @@ const Header = styled.header`
   }
 .hamburger-menu{
   display: none;
-  margin-left: 90%;
   &:hover{
     cursor: pointer
   }
@@ -176,8 +180,29 @@ const Header = styled.header`
     .hamburger-menu{
       display: block
       }
-    nav{
+      nav{
+        border: none;
+        display: flex;
+      }
+      ul{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    li{
       display: none
+    }
+    li.cart{
+      padding-top: 0.5rem;
+      display: block
+    }
+    li.user{
+      display: block;
+      font-size: 1.3rem;
+      color: black;
+    }
+    .no-in-cart {
+      bottom: 2.7rem;
     }
     /* li {
       padding: 0.3rem;
