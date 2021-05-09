@@ -30,6 +30,8 @@ function Order() {
         const orders = await result.json();
         setOrders(orders);
         setLoading(false);
+      } else {
+        setLoading(false);
       }
     };
     userData.authenticated && fetchOrders();
