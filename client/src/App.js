@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import HomePage from "./components/home/HomePage";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import LoginPage from "./components/forms/LoginPage";
 import RegisterPage from "./components/forms/RegisterPage";
 import Products from "./components/products/Products";
@@ -28,7 +33,6 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
   const [showSideBar, setShowSideBar] = useState(false);
-
   const [error, setError] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
