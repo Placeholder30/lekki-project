@@ -41,7 +41,7 @@ const Container = styled.div`
   }
   .news-letter {
     /* width: 33.333%; */
-    align-self: end;
+    /* align-self: end; */
   }
   label {
     font-size: 1.5rem;

@@ -3,7 +3,13 @@ import Navbar from "../home/Navbar";
 import styled from "styled-components";
 import Footer from "../home/Footer";
 import FeaturedProducts from "../home/FeaturedProducts";
-import { CartContext, ProductsContext, UserContext } from "../context/Context";
+import {
+  CartContext,
+  ProductsContext,
+  UserContext,
+  SideBarContext,
+} from "../context/Context";
+import MobileNav from "../home/MobileNav";
 import { useParams } from "react-router";
 
 function ProductDetails() {
@@ -11,6 +17,8 @@ function ProductDetails() {
   const [cart, setCart] = useContext(CartContext);
   const productsData = useContext(ProductsContext);
   const [userData] = useContext(UserContext);
+  const [showSideBar, setShowSideBar] = useContext(SideBarContext);
+
   const { id } = useParams();
   const [product] = productsData.filter((item) => {
     if (item.UUID === id) {
@@ -33,7 +41,9 @@ function ProductDetails() {
 
   return (
     <>
-      <Navbar />
+      <Navbar setShowSideBar={setShowSideBar} />
+      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
+
       <ProductContainer>
         {!product ? (
           <div>Loading</div>

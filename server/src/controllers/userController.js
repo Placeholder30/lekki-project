@@ -60,8 +60,8 @@ const login = async function (req, res) {
   }
 };
 const logout = function (req, res) {
-  const token = req.body;
-  TokenBlacklist.create({ token });
+  // const token = req.body;
+  // TokenBlacklist.create({ token });
   res.status(200).json({ authenticated: false });
 };
 

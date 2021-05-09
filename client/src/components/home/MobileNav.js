@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RiCloseLine } from "react-icons/ri";
-function MobileNav({ setShowSideBar }) {
+import { UserContext } from "../context/Context";
+import { LogoutContext, SideBarContext } from "../context/Context";
+function MobileNav() {
+  const [userData] = useContext(UserContext);
+  const handleLogout = useContext(LogoutContext);
+  const [showSideBar, setShowSideBar] = useContext(SideBarContext);
   return (
     <List>
       <li
+        className="close"
         onClick={() => {
           setShowSideBar(false);
         }}
@@ -13,33 +20,87 @@ function MobileNav({ setShowSideBar }) {
           <RiCloseLine />
         </span>
       </li>
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
         <li>Home</li>
       </Link>
-      <Link to="/cart">
+      <Link
+        to="/cart"
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
         <li>Cart</li>
       </Link>
-      <Link to="/all">
+      <Link
+        to="/all"
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
         <li>All</li>
       </Link>
 
-      <Link to="/women">
+      <Link
+        to="/women"
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
         <li>Women</li>
       </Link>
 
-      <Link to="/men">
+      <Link
+        to="/men"
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
         <li>Men</li>
       </Link>
 
-      <Link to="/orders">
+      <Link
+        to="/orders"
+        onClick={() => {
+          setShowSideBar(false);
+        }}
+      >
         <li>Orders</li>
       </Link>
-      <Link to="/register">
-        <li>Register</li>
-      </Link>
-      <Link to="/login">
-        <li>Login</li>
-      </Link>
+      {userData.authenticated && (
+        <Link
+          to="/register"
+          onClick={() => {
+            setShowSideBar(false);
+          }}
+        >
+          <li>Register</li>
+        </Link>
+      )}
+      {userData.authenticated ? (
+        <Link
+          // to="/logout"
+          onClick={() => {
+            handleLogout();
+            setShowSideBar(false);
+          }}
+        >
+          <li>Logout</li>
+        </Link>
+      ) : (
+        <Link
+          to="/login"
+          onClick={() => {
+            setShowSideBar(false);
+          }}
+        >
+          <li>Login</li>
+        </Link>
+      )}
     </List>
   );
 }
@@ -49,7 +110,7 @@ const List = styled.ul`
   height: 100%;
   z-index: 2;
   background-color: gray;
-  opacity: 0.8;
+  opacity: 0.97;
   color: white;
   display: flex;
   flex-direction: column;
@@ -57,6 +118,10 @@ const List = styled.ul`
   top: 0;
   right: 0;
   transition: 0.5s;
+
+  li {
+    list-style: none;
+  }
   a {
     li {
       font-size: 2rem;
@@ -68,6 +133,10 @@ const List = styled.ul`
     font-size: 3rem;
     width: 5rem;
     color: black;
+  }
+  li.close {
+    align-self: flex-end;
+    margin-top: 2rem;
   }
 `;
 

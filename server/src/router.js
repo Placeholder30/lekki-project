@@ -13,7 +13,7 @@ const { verifyInputs } = require("./middlewares/errorHandler");
 //user login and registration routes
 router.post("/api/register", verifyInputs, register);
 router.post("/api/login", login);
-router.get("/api/logout", logout);
+router.post("/api/logout", logout);
 //get products routes
 router.get("/api/products", getProducts);
 

@@ -39,18 +39,18 @@ const Container = styled.div`
 `;
 
 const WomenFashion = styled.div`
-  font-size: 3vmin;
+  font-size: 5vmin;
   color: #d96528;
   letter-spacing: 0.5rem;
 `;
 const FourtyPercent = styled.div`
-  font-size: 3vmin;
-  letter-spacing: 0.7rem;
+  font-size: 5vmin;
+  letter-spacing: 0.5rem;
 `;
 const HotSummer = styled.div`
-  font-size: 3vmin;
+  font-size: 5vmin;
   color: #d96528;
-  letter-spacing: 0.7rem;
+  letter-spacing: 0.5rem;
 `;
 
 export default Collection;

@@ -3,16 +3,18 @@ import FeaturedProducts from "./FeaturedProducts";
 import Footer from "./Footer";
 import Grids from "./Grid";
 import Navbar from "./Navbar";
-import { useState } from "react";
+import { useContext } from "react";
 import MobileNav from "../home/MobileNav";
 import styled from "styled-components";
+import { SideBarContext } from "../context/Context";
+
 function HomePage() {
-  const [showSideBar, setShowSideBar] = useState(false);
+  const [showSideBar] = useContext(SideBarContext);
 
   return (
     <Home>
-      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
-      <Navbar setShowSideBar={setShowSideBar} />
+      {showSideBar && <MobileNav />}
+      <Navbar />
       <Collection photo={"firstPhoto"} data={femaleData} />
       <Grids />
       <Collection data={maleData} />

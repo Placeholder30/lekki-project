@@ -147,6 +147,9 @@ const TableContainer = styled.section`
     .flex {
       display: block;
     }
+    h3 {
+      font-size: 1.3rem;
+    }
   }
 `;
 export default CartTable;

@@ -2,25 +2,25 @@ import { RiArrowDropDownLine, RiMenuLine } from "react-icons/ri";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext, UserContext } from "../context/Context";
+import {
+  CartContext,
+  UserContext,
+  LogoutContext,
+  SideBarContext,
+} from "../context/Context";
 import Dropdown from "./Dropdown";
-function Navbar({ setShowSideBar }) {
+function Navbar() {
   const [cart] = useContext(CartContext);
-  const [userData, setUserData] = useContext(UserContext);
   const [showDropdown, setShowDropdown] = useState(false);
-  // eslint-disable-next-line no-undef
-  const { REACT_APP_BACKEND } = process.env;
-  const handleLogout = () => {
-    setUserData({});
-  };
-
+  const [userData] = useContext(UserContext);
+  const [showSideBar, setShowSideBar] = useContext(SideBarContext);
+  const handleLogout = useContext(LogoutContext);
   return (
     <>
       <Header>
         <Link to="/">
           <h1>Lekki Store</h1>
         </Link>
-
         <div
           className="hamburger-menu"
           onClick={() => {
@@ -134,7 +134,7 @@ const Header = styled.header`
   }
   li.user-message {
     position: relative;
-    border: none;
+    /* border: none; */
   }
   li.user-message div.drop-down {
     position: absolute;

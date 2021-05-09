@@ -3,4 +3,12 @@ import { createContext } from "react";
 const UserContext = createContext({});
 const CartContext = createContext();
 const ProductsContext = createContext();
-export { UserContext, CartContext, ProductsContext };
+const SideBarContext = createContext();
+const LogoutContext = createContext();
+export {
+  UserContext,
+  CartContext,
+  ProductsContext,
+  SideBarContext,
+  LogoutContext,
+};
