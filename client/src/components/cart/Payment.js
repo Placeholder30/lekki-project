@@ -1,15 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { requestOptions } from "../../helpers/fetch";
 import { CartContext, UserContext } from "../context/Context";
 function Payment({ setOrderMessage }) {
   const [cart, setCart] = useContext(CartContext);
   const [userData] = useContext(UserContext);
+  const [error, setError] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
   const handleOrder = async (e) => {
     e.preventDefault();
-
+    if (!userData.authenticated) {
+      setError(true);
+      return;
+    }
     const placeOrder = await fetch(`${REACT_APP_BACKEND}/order`, {
       ...requestOptions,
       headers: {
@@ -31,7 +35,10 @@ function Payment({ setOrderMessage }) {
       return accumulator + currentValue;
     })
     .toFixed(2);
-
+  //hack for when user saves item to cart before login, userId has to be updated before sending to server to avoid sending undefined.
+  cart.forEach((item) => {
+    item.userId = userData.UUID;
+  });
   return (
     <PaymentContainer>
       <form onSubmit={handleOrder}>
@@ -50,6 +57,7 @@ function Payment({ setOrderMessage }) {
         </p>
         <label htmlFor="card">Credit Card</label>
         <input type="text" name="" id="card" />
+        {error && <div className="error"> Please login to place an order</div>}
         <button type="submit">Pay with credit card</button>
       </form>
       <div className="total-container">
@@ -79,7 +87,11 @@ const PaymentContainer = styled.div`
     font-size: 1.2rem;
     margin-bottom: 1rem;
   }
-
+  div.error {
+    color: red;
+    text-align: center;
+    margin: 0;
+  }
   .total-container {
     padding-right: 10rem;
   }

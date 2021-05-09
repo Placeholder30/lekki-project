@@ -1,6 +1,7 @@
 const { Order, Product } = require("../models/index");
 
 const createOrder = async function (req, res) {
+  console.log(req.body);
   const { cart } = req.body;
   const items = cart.map((item) => {
     let tempObj = {
