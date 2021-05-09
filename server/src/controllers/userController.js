@@ -22,6 +22,7 @@ const register = async function (req, res) {
       token,
       authenticated: true,
       email,
+      UUID,
     });
   } catch (err) {
     //handle registration errors
