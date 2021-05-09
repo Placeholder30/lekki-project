@@ -34,7 +34,6 @@ function Order() {
     };
     userData.authenticated && fetchOrders();
   }, []);
-  console.log(setShowSideBar, setShowSideBar);
   return (
     <>
       {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
@@ -96,10 +95,13 @@ const Main = styled.main`
     font-size: 1.4rem;
     text-align: center;
   }
+  @media screen and (max-width: 800px) {
+    width: 100vw;
+  }
 `;
 const Card = styled.div`
   width: 100%;
-  height: 12rem;
+  /* height: 12rem; */
   padding: 1rem;
   display: flex;
   border: 1px solid #ccc;

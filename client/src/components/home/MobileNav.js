@@ -71,7 +71,7 @@ function MobileNav() {
       >
         <li>Orders</li>
       </Link>
-      {userData.authenticated && (
+      {!userData.authenticated && (
         <Link
           to="/register"
           onClick={() => {
