@@ -8,16 +8,27 @@ import Products from "./components/products/Products";
 import NotFound from "./components/notfound/NotFound";
 import ProductDetails from "./components/products/ProductDetails";
 import CartPage from "./components/cart/CartPage";
-import { CartContext, UserContext } from "./components/context/Context";
+import {
+  CartContext,
+  LogoutContext,
+  SideBarContext,
+  UserContext,
+} from "./components/context/Context";
 import { ProductsContext } from "./components/context/Context";
 import Order from "./components/order/Order";
 import Scroll from "./components/home/Scroll";
 import useLocalStorage from "./helpers/useLocalStorage";
+import {
+  getUserDataFromLocalStorage,
+  getCartFromLocalStorage,
+} from "./helpers/useLocalStorage";
 
 function App() {
   const [userData, setUserData] = useState(getUserDataFromLocalStorage());
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
+  const [showSideBar, setShowSideBar] = useState(false);
+
   const [error, setError] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
@@ -39,15 +50,17 @@ function App() {
 
   useLocalStorage(cart, "cart");
   useLocalStorage(userData, "userData");
-
-  function getUserDataFromLocalStorage() {
-    const data = JSON.parse(localStorage.getItem("userData"));
-    return !data ? {} : data;
-  }
-  function getCartFromLocalStorage() {
-    const items = JSON.parse(localStorage.getItem("cart"));
-    return !items ? [] : items;
-  }
+  const handleLogout = async () => {
+    const logout = await fetch(`${REACT_APP_BACKEND}/logout`, {
+      method: "post",
+      Authorization: `Bearer ${userData.token}`,
+    });
+    if (logout.status === 200) {
+      const result = await logout.json();
+      setUserData(result);
+      setCart([]);
+    }
+  };
   return (
     <>
       <GlobalStyle />
@@ -56,19 +69,23 @@ function App() {
           <UserContext.Provider value={[userData, setUserData]}>
             <CartContext.Provider value={[cart, setCart]}>
               <ProductsContext.Provider value={productsData}>
-                <Scroll />
-                <Switch>
-                  <Route exact path="/" component={HomePage} />
-                  <Route path="/login" component={LoginPage} />
-                  <Route path="/register" component={RegisterPage} />
-                  <Route path="/all" component={Products} />
-                  <Route path="/women" component={Products} />
-                  <Route path="/men" component={Products} />
-                  <Route path="/products/:id" component={ProductDetails} />
-                  <Route path="/cart" component={CartPage} />
-                  <Route path="/orders" component={Order} />
-                  <Route path="*" component={NotFound} />
-                </Switch>
+                <SideBarContext.Provider value={[showSideBar, setShowSideBar]}>
+                  <LogoutContext.Provider value={handleLogout}>
+                    <Scroll />
+                    <Switch>
+                      <Route exact path="/" component={HomePage} />
+                      <Route path="/login" component={LoginPage} />
+                      <Route path="/register" component={RegisterPage} />
+                      <Route path="/all" component={Products} />
+                      <Route path="/women" component={Products} />
+                      <Route path="/men" component={Products} />
+                      <Route path="/products/:id" component={ProductDetails} />
+                      <Route path="/cart" component={CartPage} />
+                      <Route path="/orders" component={Order} />
+                      <Route path="*" component={NotFound} />
+                    </Switch>
+                  </LogoutContext.Provider>
+                </SideBarContext.Provider>
               </ProductsContext.Provider>
             </CartContext.Provider>
           </UserContext.Provider>

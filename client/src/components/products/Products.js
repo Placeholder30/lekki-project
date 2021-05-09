@@ -1,16 +1,17 @@
 import { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
-import { ProductsContext } from "../context/Context";
+import { ProductsContext, SideBarContext } from "../context/Context";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 import Card from "./Card";
+import MobileNav from "../home/MobileNav";
 function Products({ userData, setUserData }) {
   const location = useLocation();
   const productsData = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState();
   const [price, setPrice] = useState(25);
-
+  const [showSideBar, setShowSideBar] = useContext(SideBarContext);
   const filterByPrice = (e) => {
     setPrice(e.target.value);
     const filtered = productsData.filter(
@@ -23,7 +24,12 @@ function Products({ userData, setUserData }) {
   }, [productsData]);
   return (
     <>
-      <Navbar userData={userData} setUserData={setUserData} />
+      <Navbar
+        userData={userData}
+        setUserData={setUserData}
+        setShowSideBar={setShowSideBar}
+      />
+      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
       <ProductsMain>
         <div className="products">
           {location.pathname === "/all"

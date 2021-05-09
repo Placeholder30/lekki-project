@@ -2,40 +2,31 @@ import { RiArrowDropDownLine, RiMenuLine } from "react-icons/ri";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext, UserContext } from "../context/Context";
+import {
+  CartContext,
+  UserContext,
+  LogoutContext,
+  SideBarContext,
+} from "../context/Context";
 import Dropdown from "./Dropdown";
-import MobileNav from "./MobileNav";
 function Navbar() {
   const [cart] = useContext(CartContext);
-  const [userData, setUserData] = useContext(UserContext);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(false);
-  // eslint-disable-next-line no-undef
-  const { REACT_APP_BACKEND } = process.env;
-  const handleLogout = () => {
-    setUserData({});
-  };
-
+  const [userData] = useContext(UserContext);
+  const [showSideBar, setShowSideBar] = useContext(SideBarContext);
+  const handleLogout = useContext(LogoutContext);
   return (
     <>
-      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
-
       <Header>
         <Link to="/">
           <h1>Lekki Store</h1>
         </Link>
 
-        <div
-          className="hamburger-menu"
-          onClick={() => {
-            setShowSideBar(true);
-          }}
-        >
-          <RiMenuLine />
-        </div>
-
         <nav>
           <ul>
+            {userData.authenticated && (
+              <li className="user">{`Hi, ${userData.firstName}`}</li>
+            )}
             <li>
               <Link to="/">HOME</Link>
             </li>
@@ -54,7 +45,14 @@ function Navbar() {
               ) : null}
               <Link to="/cart">CART</Link>
             </li>
-
+            <div
+              className="hamburger-menu"
+              onClick={() => {
+                setShowSideBar(true);
+              }}
+            >
+              <RiMenuLine />
+            </div>
             <li className="user-message">
               {userData && userData.firstName ? (
                 `Hi, ${userData.firstName}`
@@ -85,6 +83,7 @@ function Navbar() {
 }
 
 const Header = styled.header`
+
   h1 {
     text-align: center;
     margin-top: 3.3rem;
@@ -137,7 +136,10 @@ const Header = styled.header`
   }
   li.user-message {
     position: relative;
-    border: none;
+    /* border: none; */
+  }
+  li.user{
+    display:none;
   }
   li.user-message div.drop-down {
     position: absolute;
@@ -157,9 +159,11 @@ const Header = styled.header`
   }
 .hamburger-menu{
   display: none;
-  margin-left: 90%;
   &:hover{
     cursor: pointer
+  }
+  svg{
+    font-size: 3rem;
   }
 
 }
@@ -176,8 +180,33 @@ const Header = styled.header`
     .hamburger-menu{
       display: block
       }
-    nav{
+      nav{
+        padding: 0;
+        border: none;
+        display: flex;
+      }
+      ul{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    li{
       display: none
+    }
+    li.cart{
+      padding: 0.5rem 0 0;
+      
+      display: block
+    }
+    li.user{
+      display: block;
+      font-size: 1.3rem;
+      color: black;
+      margin: 0;
+      padding: 0.5rem 0 0;
+    }
+    .no-in-cart {
+      bottom: 2.7rem;
     }
     /* li {
       padding: 0.3rem;

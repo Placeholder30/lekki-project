@@ -4,10 +4,14 @@ import { UserContext } from "../context/Context";
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 import spinner from "../assets/Spinner.svg";
+import MobileNav from "../home/MobileNav";
+import { SideBarContext } from "../context/Context";
 function Order() {
   const [userData] = useContext(UserContext);
   const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showSideBar, setShowSideBar] = useContext(SideBarContext);
+
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
   useEffect(() => {
@@ -32,7 +36,8 @@ function Order() {
   }, []);
   return (
     <>
-      <Navbar />
+      {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
+      <Navbar setShowSideBar={setShowSideBar} />
       <Container>
         <Main>
           <h2>Orders</h2>
@@ -90,10 +95,13 @@ const Main = styled.main`
     font-size: 1.4rem;
     text-align: center;
   }
+  @media screen and (max-width: 800px) {
+    width: 100vw;
+  }
 `;
 const Card = styled.div`
   width: 100%;
-  height: 12rem;
+  /* height: 12rem; */
   padding: 1rem;
   display: flex;
   border: 1px solid #ccc;

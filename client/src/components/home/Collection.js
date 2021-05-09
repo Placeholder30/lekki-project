@@ -26,10 +26,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   .text {
-    flex: 1;
+    /* flex: 1; */
   }
   .pic {
-    flex: 2;
+    /* flex: 2; */
     margin-bottom: 2rem;
   }
   img {
@@ -39,18 +39,18 @@ const Container = styled.div`
 `;
 
 const WomenFashion = styled.div`
-  font-size: 3rem;
+  font-size: 5vmin;
   color: #d96528;
-  letter-spacing: 0.7rem;
+  letter-spacing: 0.5rem;
 `;
 const FourtyPercent = styled.div`
-  font-size: 3rem;
-  letter-spacing: 0.7rem;
+  font-size: 5vmin;
+  letter-spacing: 0.5rem;
 `;
 const HotSummer = styled.div`
-  font-size: 3rem;
+  font-size: 5vmin;
   color: #d96528;
-  letter-spacing: 0.7rem;
+  letter-spacing: 0.5rem;
 `;
 
 export default Collection;
