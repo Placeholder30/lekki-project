@@ -181,6 +181,7 @@ const Header = styled.header`
       display: block
       }
       nav{
+        padding: 0;
         border: none;
         display: flex;
       }
@@ -193,13 +194,16 @@ const Header = styled.header`
       display: none
     }
     li.cart{
-      padding-top: 0.5rem;
+      padding: 0.5rem 0 0;
+      
       display: block
     }
     li.user{
       display: block;
       font-size: 1.3rem;
       color: black;
+      margin: 0;
+      padding: 0.5rem 0 0;
     }
     .no-in-cart {
       bottom: 2.7rem;
