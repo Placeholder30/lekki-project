@@ -33,6 +33,7 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState(getCartFromLocalStorage());
   const [showSideBar, setShowSideBar] = useState(false);
+  const history = useHistory();
   const [error, setError] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
@@ -61,6 +62,7 @@ function App() {
     });
     if (logout.status === 200) {
       const result = await logout.json();
+      // history.push("/");
       setUserData(result);
       setCart([]);
     }

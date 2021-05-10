@@ -20,7 +20,7 @@ function Login() {
     if (login.status === 200) {
       const result = await login.json();
       setUserData(result);
-      history.push("/");
+      history.goBack();
     } else {
       const result = await login.json();
       setErrMsg(result);

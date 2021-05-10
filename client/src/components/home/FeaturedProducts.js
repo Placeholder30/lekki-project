@@ -13,7 +13,9 @@ function FeaturedProducts() {
       </h2>
       <div className="cards">
         {productsData
-          .filter((product) => product.id < 4)
+          .filter(
+            (product) => product.id > 2 && product.id < 7 && product.id != 4
+          )
           .map((product, index) => (
             <Link to={`/products/${product.UUID}`} key={index}>
               <CardContainer>

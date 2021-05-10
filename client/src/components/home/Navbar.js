@@ -1,4 +1,8 @@
-import { RiArrowDropDownLine, RiMenuLine } from "react-icons/ri";
+import {
+  RiArrowDropDownLine,
+  RiMenuLine,
+  RiShoppingCart2Line,
+} from "react-icons/ri";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -43,7 +47,12 @@ function Navbar() {
               {cart && cart.length ? (
                 <span className="no-in-cart">{cart.length}</span>
               ) : null}
-              <Link to="/cart">CART</Link>
+              <Link to="/cart">
+                <div className="cart-logo">
+                  <RiShoppingCart2Line />
+                </div>
+                <span className="cart-text">CART</span>
+              </Link>
             </li>
             <div
               className="hamburger-menu"
@@ -83,7 +92,6 @@ function Navbar() {
 }
 
 const Header = styled.header`
-
   h1 {
     text-align: center;
     margin-top: 3.3rem;
@@ -134,12 +142,18 @@ const Header = styled.header`
     left: 60%;
     color: white;
   }
+  .cart-logo {
+    display: none;
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
   li.user-message {
     position: relative;
-    /* border: none; */
   }
-  li.user{
-    display:none;
+  li.user {
+    display: none;
   }
   li.user-message div.drop-down {
     position: absolute;
@@ -155,18 +169,16 @@ const Header = styled.header`
   }
   .drop-down-icon {
     font-size: 2rem;
-    width: 3rem;
   }
-.hamburger-menu{
-  display: none;
-  &:hover{
-    cursor: pointer
+  .hamburger-menu {
+    display: none;
+    &:hover {
+      cursor: pointer;
+    }
+    svg {
+      font-size: 3rem;
+    }
   }
-  svg{
-    font-size: 3rem;
-  }
-
-}
   @media screen and (max-width: 769px) {
     li {
       border: none;
@@ -177,28 +189,34 @@ const Header = styled.header`
     }
   }
   @media screen and (max-width: 503px) {
-    .hamburger-menu{
-      display: block
-      }
-      nav{
-        padding: 0;
-        border: none;
-        display: flex;
-      }
-      ul{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-      }
-    li{
-      display: none
+    .hamburger-menu {
+      display: block;
     }
-    li.cart{
+    .cart-logo {
+      display: block;
+    }
+    .cart-text {
+      display: none;
+    }
+    nav {
+      padding: 0;
+      border: none;
+      display: flex;
+    }
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    li {
+      display: none;
+    }
+    li.cart {
       padding: 0.5rem 0 0;
-      
-      display: block
+
+      display: block;
     }
-    li.user{
+    li.user {
       display: block;
       font-size: 1.3rem;
       color: black;
@@ -208,17 +226,7 @@ const Header = styled.header`
     .no-in-cart {
       bottom: 2.7rem;
     }
-    /* li {
-      padding: 0.3rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-    nav {
-      justify-content: space-between;
-    }
-  } */
+  }
 `;
 
 export default Navbar;

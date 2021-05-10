@@ -20,7 +20,7 @@ function Register() {
     if (register.status === 200) {
       const result = await register.json();
       setUserData(result);
-      history.push("/");
+      history.goBack();
     } else {
       const result = await register.json();
       setErrMsg(result);
