@@ -46,6 +46,7 @@ const Container = styled.div`
   label {
     font-size: 1.5rem;
     margin-left: 8rem;
+    font-weight: 400;
   }
   input {
     display: block;
@@ -55,11 +56,13 @@ const Container = styled.div`
   }
   @media screen and (max-width: 650px) {
     li {
-      margin-left: 4rem;
+      font-size: 1.3rem;
+      margin-left: 2rem;
     }
     input,
     label {
       margin-left: 2rem;
+      font-size: 1.3rem;
     }
   }
 `;

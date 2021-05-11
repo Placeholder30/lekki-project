@@ -74,14 +74,13 @@ const ProductsMain = styled.section`
   justify-content: space-between;
   min-height: 70vh;
   .products {
-    flex: 2.8;
+    flex: 3;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
   .sale {
     flex: 1.2;
-    margin-left: 3.4rem;
     padding: 2rem;
     h2 {
       margin: 2.8rem 0;
@@ -122,12 +121,12 @@ const ProductsMain = styled.section`
       font-weight: 500;
     }
   }
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 833px) {
     .products {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 550px) {
     .products {
       grid-template-columns: 1fr;
     }

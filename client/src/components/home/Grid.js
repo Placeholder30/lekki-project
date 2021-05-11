@@ -7,7 +7,7 @@ import iconService from "../assets/icon-service.svg";
 function Grids() {
   return (
     <Container>
-      <Grid>
+      <Grid className="first">
         <img src={iconCal} alt="calender" />
         <h5>24/7 Customer Service</h5>
         <p>Call us anytime</p>
@@ -16,37 +16,34 @@ function Grids() {
       <Grid className="mid">
         <img src={iconService} alt="laptop " />
         <h5> Easy online returns </h5>
-        <p>Send Within 30 Days</p>
+        <p>Return Within 30 Days</p>
       </Grid>
 
       <Grid className="last">
         <img src={iconPackage} alt="delivery truck" />
         <h5>Free Shipping Globally</h5>
-        <p>Delivery in 4 Days</p>
+        <p>Same Day Delivery</p>
       </Grid>
     </Container>
   );
 }
 const Container = styled.div`
-  display: flex;
-  width: 85%;
-  justify-content: space-around;
-  margin: 3rem auto;
-
-  @media screen and (max-width: 680px) {
-    flex-wrap: wrap;
-    .last,
-    .mid {
-      margin-top: 2rem;
-    }
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 25% 25% 25%;
+  gap: 12.5%;
+  @media screen and (max-width: 780px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  @media screen and (max-width: 670px) {
+    grid-template-columns: 1fr;
   }
 `;
 
 const Grid = styled.div`
-  flex: 1;
   border: 1px solid #ccc;
-  padding: 2rem 4rem;
-  margin-right: 2rem;
+  padding: 2rem;
   line-height: 1.4;
   display: flex;
   flex-direction: column;
@@ -56,13 +53,14 @@ const Grid = styled.div`
     font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 400;
   }
   p {
     font-size: 1.3rem;
     margin-top: 1.3rem;
   }
   img {
-    width: 13rem;
+    width: 10rem;
   }
 `;
 export default Grids;

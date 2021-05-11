@@ -129,6 +129,7 @@ const PaymentContainer = styled.div`
   }
   @media screen and (max-width: 820px) {
     grid-template-columns: 1fr;
+    gap: 2rem;
     .total-container {
       padding-right: 0;
     }

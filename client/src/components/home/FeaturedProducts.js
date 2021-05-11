@@ -89,11 +89,12 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 2rem;
+  border-radius: 3rem;
+  box-shadow: 0 3px 10px 0 #eee;
   margin-top: 5rem;
   font-size: 1.4rem;
   padding: 2rem;
-  max-width: 25rem;
+  max-width: 23rem;
 
   .price {
     font-size: inherit;
@@ -104,7 +105,7 @@ export const CardContainer = styled.div`
     font-size: inherit;
   }
   .prod-image {
-    width: 100%;
+    width: 18rem;
     img {
       width: 100%;
     }

@@ -149,6 +149,9 @@ const Header = styled.header`
       height: 3rem;
     }
   }
+  .cart-text {
+    font-size: 1.3rem;
+  }
   li.user-message {
     position: relative;
   }
@@ -185,6 +188,7 @@ const Header = styled.header`
       padding: 0 1rem;
     }
     h1 {
+      font-size: 3rem;
       margin-bottom: 2rem;
     }
   }
