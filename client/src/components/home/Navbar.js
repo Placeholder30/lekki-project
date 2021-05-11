@@ -54,6 +54,9 @@ function Navbar() {
                 <span className="cart-text">CART</span>
               </Link>
             </li>
+            <Link to="/">
+              <h1 className="show">Lekki Store</h1>
+            </Link>
             <div
               className="hamburger-menu"
               onClick={() => {
@@ -98,6 +101,9 @@ const Header = styled.header`
     margin-bottom: 5.3rem;
     font-size: 4rem;
     font-weight: 500;
+  }
+  h1.show {
+    display: none;
   }
   nav {
     border-top: 1px solid #ccc;
@@ -193,11 +199,19 @@ const Header = styled.header`
     }
   }
   @media screen and (max-width: 503px) {
+    h1 {
+      display: none;
+    }
+    h1.show {
+      display: block;
+    }
     .hamburger-menu {
       display: block;
+      margin-top: 4rem;
     }
     .cart-logo {
       display: block;
+      margin-top: 3.8rem;
     }
     .cart-text {
       display: none;
@@ -228,7 +242,7 @@ const Header = styled.header`
       padding: 0.5rem 0 0;
     }
     .no-in-cart {
-      bottom: 2.7rem;
+      bottom: 4.5rem;
     }
   }
 `;
