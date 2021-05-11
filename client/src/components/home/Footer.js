@@ -8,7 +8,6 @@ function Footer() {
         <li>Company</li>
         <li>Locations</li>
         <li>Contact</li>
-        <li>Hours</li>
       </ul>
       <ul className="socials">
         <li>Twitter</li>
@@ -39,10 +38,7 @@ const Container = styled.div`
     font-size: 1.5rem;
     margin-left: 8rem;
   }
-  .news-letter {
-    /* width: 33.333%; */
-    /* align-self: end; */
-  }
+
   label {
     font-size: 1.5rem;
     margin-left: 8rem;
