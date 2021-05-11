@@ -25,7 +25,7 @@ function FeaturedProducts() {
                 <p className="prod-name">{product.name}</p>
                 <p className="price">${product.price}</p>
                 <div className="view-prod">
-                  <div>View Item</div>{" "}
+                  <div>View Item</div>
                   <RiArrowRightSLine className="right-arrow" />
                 </div>
               </CardContainer>

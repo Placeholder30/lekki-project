@@ -121,7 +121,7 @@ const ProductsMain = styled.section`
       font-weight: 500;
     }
   }
-  @media screen and (max-width: 833px) {
+  @media screen and (max-width: 1024px) {
     .products {
       grid-template-columns: repeat(2, 1fr);
     }

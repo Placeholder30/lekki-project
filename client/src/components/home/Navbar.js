@@ -199,6 +199,9 @@ const Header = styled.header`
     }
   }
   @media screen and (max-width: 503px) {
+    .user {
+      display: none;
+    }
     h1 {
       display: none;
     }
@@ -234,13 +237,13 @@ const Header = styled.header`
 
       display: block;
     }
-    li.user {
+    /* li.user {
       display: block;
       font-size: 1.3rem;
       color: black;
       margin: 0;
       padding: 0.5rem 0 0;
-    }
+    } */
     .no-in-cart {
       bottom: 4.5rem;
     }
