@@ -124,13 +124,13 @@ const List = styled.ul`
     }
   }
   li span.close-icon svg {
-    font-size: 3rem;
-    width: 5rem;
+    font-size: 4rem;
     color: black;
+    margin-right: 3.5rem;
   }
   li.close {
     align-self: flex-end;
-    margin-top: 2rem;
+    margin-top: 4.2rem;
   }
 `;
 
