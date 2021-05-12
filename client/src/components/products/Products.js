@@ -25,7 +25,7 @@ function Products({ userData, setUserData }) {
   useEffect(() => {
     setFilteredProducts(productsData);
     setLoading(false);
-  }, [productsData]);
+  }, [productsData, filteredProducts]);
   return (
     <>
       <Navbar
