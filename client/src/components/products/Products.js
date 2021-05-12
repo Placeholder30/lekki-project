@@ -6,12 +6,15 @@ import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
 import Card from "./Card";
 import MobileNav from "../home/MobileNav";
+import spinner from "../assets/Spinner.svg";
+
 function Products({ userData, setUserData }) {
   const location = useLocation();
   const productsData = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState();
   const [price, setPrice] = useState(25);
   const [showSideBar, setShowSideBar] = useContext(SideBarContext);
+  const [loading, setLoading] = useState(true);
   const filterByPrice = (e) => {
     setPrice(e.target.value);
     const filtered = productsData.filter(
@@ -21,6 +24,7 @@ function Products({ userData, setUserData }) {
   };
   useEffect(() => {
     setFilteredProducts(productsData);
+    setLoading(false);
   }, [productsData]);
   return (
     <>
@@ -30,40 +34,48 @@ function Products({ userData, setUserData }) {
         setShowSideBar={setShowSideBar}
       />
       {showSideBar && <MobileNav setShowSideBar={setShowSideBar} />}
-      <ProductsMain>
-        <div className="products">
-          {location.pathname === "/all"
-            ? filteredProducts?.map((product) => (
-                <Card key={product.id} product={product} />
-              ))
-            : location.pathname === "/men"
-            ? filteredProducts
-                ?.filter((product) => product.category === "men")
-                .map((product) => <Card key={product.id} product={product} />)
-            : filteredProducts
-                ?.filter((product) => product.category === "women")
-                .map((product) => <Card key={product.id} product={product} />)}
+      {loading ? (
+        <div className="loading-icon">
+          <img src={spinner} alt="" />
         </div>
-        <div className="sale">
-          <h2>Special Sale</h2>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae,
-            laboriosam cumque blanditiis quia quis doloremque voluptas pariatur
-            omnis reiciendis quod!
-          </p>
-          <div className="filter-by-price">
-            <label htmlFor="range">Filter by price:</label>
-            <div className="max-price">Max price: ${price}</div>
+      ) : (
+        <ProductsMain>
+          <div className="products">
+            {location.pathname === "/all"
+              ? filteredProducts?.map((product) => (
+                  <Card key={product.id} product={product} />
+                ))
+              : location.pathname === "/men"
+              ? filteredProducts
+                  ?.filter((product) => product.category === "men")
+                  .map((product) => <Card key={product.id} product={product} />)
+              : filteredProducts
+                  ?.filter((product) => product.category === "women")
+                  .map((product) => (
+                    <Card key={product.id} product={product} />
+                  ))}
           </div>
-          <input
-            type="range"
-            value={price}
-            id="range"
-            max="25"
-            onChange={filterByPrice}
-          />
-        </div>
-      </ProductsMain>
+          <div className="sale">
+            <h2>Special Sale</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae,
+              laboriosam cumque blanditiis quia quis doloremque voluptas
+              pariatur omnis reiciendis quod!
+            </p>
+            <div className="filter-by-price">
+              <label htmlFor="range">Filter by price:</label>
+              <div className="max-price">Max price: ${price}</div>
+            </div>
+            <input
+              type="range"
+              value={price}
+              id="range"
+              max="25"
+              onChange={filterByPrice}
+            />
+          </div>
+        </ProductsMain>
+      )}
       <Footer />
     </>
   );
@@ -119,6 +131,10 @@ const ProductsMain = styled.section`
     div {
       font-size: 1.4rem;
       font-weight: 500;
+    }
+    .loading-icon {
+      margin: 0 auto;
+      width: 10rem;
     }
   }
   @media screen and (max-width: 1024px) {
