@@ -25,18 +25,25 @@ function ProductDetails() {
       return item;
     }
   });
-  const addToCart = () => {
-    let addToCart = true;
-    cart.map((cartItem) => {
-      if (cartItem.name === product.name) {
-        addToCart = false;
+  const addToCart = (product) => {
+    if (!cart.length)
+      return [{ ...product, userId: userData.UUID, quantity: productNo }];
+    let run = true;
+    let store = cart.map((cartItem) => {
+      if (cartItem.UUID === product.UUID) {
+        run = false;
+        cartItem = { ...cartItem, quantity: productNo };
       }
+      return cartItem;
     });
-    addToCart &&
-      setCart((state) => [
-        ...state,
-        { ...product, quantity: productNo, userId: userData.UUID },
-      ]);
+    if (run) {
+      store = [
+        ...cart,
+        { ...product, userId: userData.UUID, quantity: productNo },
+      ];
+    }
+
+    return store;
   };
 
   return (
@@ -82,7 +89,8 @@ function ProductDetails() {
                   <button
                     className="add-cart"
                     onClick={() => {
-                      addToCart(product);
+                      setCart(addToCart(product));
+                      setProductNo(0);
                     }}
                   >
                     Add to Cart

@@ -58,7 +58,7 @@ function Payment({ setOrderMessage }) {
         <label htmlFor="card">Credit Card</label>
         <input type="text" name="" id="card" />
         {error && <div className="error"> Please login to place an order</div>}
-        <button type="submit">Pay with credit card</button>
+        <button type="submit">Place your order!</button>
       </form>
       <div className="total-container">
         <div className="subtotal flexx">

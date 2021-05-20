@@ -147,6 +147,9 @@ const TableContainer = styled.section`
     .flex {
       display: block;
     }
+    td.flex {
+      width: 8rem;
+    }
     h3 {
       font-size: 1.3rem;
     }
