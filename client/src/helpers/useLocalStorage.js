@@ -9,7 +9,7 @@ function useLocalStorage(item, name) {
     saveToLocalStorage();
   }, [item]);
 }
-console.log('Hello World')
+
 function getUserDataFromLocalStorage() {
   const data = JSON.parse(localStorage.getItem("userData"));
   return !data ? {} : data;
