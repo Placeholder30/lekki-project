@@ -7,20 +7,28 @@ import { useContext } from "react";
 import MobileNav from "../home/MobileNav";
 import styled from "styled-components";
 import { SideBarContext } from "../context/Context";
-
-function HomePage() {
+import spinner from "../assets/Spinner.svg";
+function HomePage({ loading }) {
   const [showSideBar] = useContext(SideBarContext);
 
   return (
-    <Home>
-      {showSideBar && <MobileNav />}
-      <Navbar />
-      <Collection photo={"firstPhoto"} data={femaleData} />
-      <Grids />
-      <Collection data={maleData} />
-      <FeaturedProducts />
-      <Footer />
-    </Home>
+    <>
+      {loading ? (
+        <div className="loading-icon">
+          <img src={spinner} alt="" />
+        </div>
+      ) : (
+        <Home>
+          {showSideBar && <MobileNav />}
+          <Navbar />
+          <Collection photo={"firstPhoto"} data={femaleData} />
+          <Grids />
+          <Collection data={maleData} />
+          <FeaturedProducts />
+          <Footer />
+        </Home>
+      )}
+    </>
   );
 }
 const femaleData = {

@@ -69,6 +69,7 @@ const TableContainer = styled.section`
     border-bottom: 1px solid #ccc;
     padding-bottom: 3px;
     font-weight: 500;
+    text-align: center;
   }
   td {
     font-size: 1.3rem;

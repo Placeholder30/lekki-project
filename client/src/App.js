@@ -29,18 +29,22 @@ function App() {
   const [cart, setCart] = useState(getCartFromLocalStorage());
   const [showSideBar, setShowSideBar] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   // eslint-disable-next-line no-undef
   const { REACT_APP_BACKEND } = process.env;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const products = await fetch(`${REACT_APP_BACKEND}/products`);
         if (products.status === 200) {
+          setLoading(false);
           const result = await products.json();
           setProductsData(result);
         }
       } catch (error) {
+        setLoading(false);
         setError(true);
       }
     };
@@ -73,7 +77,11 @@ function App() {
                   <LogoutContext.Provider value={handleLogout}>
                     <Scroll />
                     <Switch>
-                      <Route exact path="/" component={HomePage} />
+                      <Route
+                        exact
+                        path="/"
+                        render={() => <HomePage loading={loading} />}
+                      />
                       <Route path="/login" component={LoginPage} />
                       <Route path="/register" component={RegisterPage} />
                       <Route path="/all" component={Products} />
@@ -112,6 +120,12 @@ const GlobalStyle = createGlobalStyle`
       text-decoration: none;
       color: inherit
     }
+
+    .loading-icon {
+      margin-top: 27vh;
+    display: grid;
+    place-items: center;
+  }
     
   `;
 const Container = styled.div`
